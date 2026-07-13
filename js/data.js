@@ -555,7 +555,24 @@ const PRL_DATA = {
               usefulLinks: [
                 { text: "ISO 45001:2018 - Página INSST (explicada en español)", url: "https://www.insst.es/normativa/normas-internacionales/iso-450012018/" }
               ],
-              comoLoUso: "Cuando una empresa te contrate para implementar un sistema de gestión, vas a seguir esta norma paso a paso. Primero analizás la empresa (contexto), después evaluás los riesgos, después planificás las medidas, después verificás que funcionen, y después mejorás. Es el ciclo que se repite siempre."
+              comoLoUso: "Cuando una empresa te contrate para implementar un sistema de gestión, vas a seguir esta norma paso a paso. Primero analizás la empresa (contexto), después evaluás los riesgos, después planificás las medidas, después verificás que funcionen, y después mejorás. Es el ciclo que se repite siempre.",
+              expanded: {
+                cicloPDCA: true,
+                checklistAuditoria: [
+                  "¿La dirección está comprometida y participa activamente?",
+                  "¿Se identificaron TODOS los peligros del centro de trabajo?",
+                  "¿La valoración de riesgos está actualizada?",
+                  "¿Los trabajadores fueron consultados en la evaluación?",
+                  "¿Hay formación registrada para cada trabajador?",
+                  "¿El plan de emergencia está actualizado y se hicieron simulacros?",
+                  "¿Las auditorías internas se hacen según programa?",
+                  "¿Se cumplen todos los requisitos legales aplicables?",
+                  "¿Los proveedores y subcontratistas están evaluados?",
+                  "¿Se manejan no conformidades con acciones correctivas?",
+                  "¿Hay indicadores de SST medidos y revisados?",
+                  "¿Se hizo la revisión por la dirección este año?"
+                ]
+              }
             },
             {
               id: "iso-45002",
@@ -595,7 +612,17 @@ const PRL_DATA = {
               relations: ["Complementa ISO 45001", "Muy relevante para saneamiento"],
               usefulLinks: [
                 { text: "ISO 14001:2018", url: "https://www.iso.org/standard/14847.html" }
-              ]
+              ],
+              expanded: {
+                aspectosAmbientales: [
+                  { aspecto: "Vertidos de aguas residuales", impacto: "Contaminación de ríos, suelo y acuíferos", control: "Tratamiento previo, control de parámetros (DBO, COT, pH, metales), registro de vertidos", norma: "RD 849/1986" },
+                  { aspecto: "Residuos peligrosos", impacto: "Contaminación del suelo y agua", control: "Clasificación, almacenamiento, transporte, gestión documental", norma: "RD 833/2015" },
+                  { aspecto: "Emisiones a la atmósfera", impacto: "Contaminación del aire, olores", control: "Control de olores, emisiones de H₂S, filtros, treatment de gases", norma: "Ley 34/2007" },
+                  { aspecto: "Ruido y vibraciones", impacto: "Molestias a vecinos y trabajadores", control: "Medición, barreras acústicas, horarios de trabajo", norma: "RD 1299/2006" },
+                  { aspecto: "Consumo de recursos", impacto: "Agotamiento de recursos naturales", control: "Eficiencia energética, reciclaje de agua, optimización de procesos", norma: "ISO 50001" },
+                  { aspecto: "Gestión de lodos", impacto: "Contaminación si no se gestiona correctamente", control: "Aprovechamiento energético, compostaje, vertido controlado", norma: "RD 849/1986" }
+                ]
+              }
             }
           ]
         },

@@ -144,7 +144,42 @@ const CATALA_VOCABULARIO = [
   { catala: "Perill: Productes químics", castella: "Peligro: Productos químicos", pron: "pe-RILY pro-DUK-tes KI-miks", categoria: "Señales" },
   { catala: "Sortida d'emergència", castella: "Salida de emergencia", pron: "sor-TI-da de-me-RJEN-si-a", categoria: "Señales" },
   { catala: "Extintor", castella: "Extintor", pron: "eks-TIN-tor", categoria: "Señales" },
-  { catala: "Primer auxili", castella: "Primer auxilio", pron: "pri-MER au-SI-li", categoria: "Señales" }
+  { catala: "Primer auxili", castella: "Primer auxilio", pron: "pri-MER au-SI-li", categoria: "Señales" },
+
+  // OBRA I SANEAMENT
+  { catala: "Obra", castella: "Obra", pron: "OB-ra", categoria: "Obra y Saneamiento" },
+  { catala: "Obra civil", castella: "Obra civil", pron: "OB-ra si-VIL", categoria: "Obra y Saneamiento" },
+  { catala: "Xarxa de sanejament", castella: "Red de saneamiento", pron: "SHAR-ka de sa-ne-DAMENT", categoria: "Obra y Saneamiento", nota: "Muy usado en Cataluña" },
+  { catala: "Col·lector", castella: "Colector", pron: "ko-lek-TOR", categoria: "Obra y Saneamiento" },
+  { catala: "Pou de visita", castella: "Pozo de visita", pron: "PU de BI-si-ta", categoria: "Obra y Saneamiento", nota: "El más común en saneamiento" },
+  { catala: "Tapa de pou", castella: "Tapa de pozo", pron: "TA-pa de PU", categoria: "Obra y Saneamiento" },
+  { catala: "Tub d'aigües residuals", castella: "Tubería de aguas residuales", pron: "TUB dai-GU-es re-ZI-dwals", categoria: "Obra y Saneamiento" },
+  { catala: "Tub de clavegueram", castella: "Tubería de alcantarillado", pron: "TUB de kla-we-GUE-ram", categoria: "Obra y Saneamiento" },
+  { catala: "Estació de bombament", castella: "Estación de bombeo", pron: "es-ta-SIÓ de bom-BAMENT", categoria: "Obra y Saneamiento" },
+  { catala: "Fossa sèptica", castella: "Fosa séptica", pron: "FO-sa SEP-ti-ka", categoria: "Obra y Saneamiento", nota: "¡Cuidado! Espacio confinado mortal" },
+  { catala: "Fossa negra", castella: "Fosa negra (pozo séptico)", pron: "FO-sa NE-gra", categoria: "Obra y Saneamiento" },
+  { catala: "Desguàs", castella: "Desagüe", pron: "des-GUAS", categoria: "Obra y Saneamiento" },
+  { catala: "Aigua residual", castella: "Agua residual", pron: "ai-GUA re-zi-DWAL", categoria: "Obra y Saneamiento" },
+  { catala: "Aigua pluvial", castella: "Agua pluvial", pron: "ai-GUA plu-BIAL", categoria: "Obra y Saneamiento" },
+  { catala: "Llot", castella: "Lodo", pron: "LYOT", categoria: "Obra y Saneamiento" },
+  { catala: "Tractament d'aigües", castella: "Tratamiento de aguas", pron: "trak-TA-MENT dai-GU-es", categoria: "Obra y Saneamiento" },
+
+  // COMUNICACIÓ A L'OBRA
+  { catala: "Bon dia, company!", castella: "¡Buenos días, compañero!", pron: "BON dia, kom-pa-NYI!", categoria: "Comunicación en Obra" },
+  { catala: "Que tal?", castella: "¿Qué tal?", pron: "KE tal?", categoria: "Comunicación en Obra" },
+  { catala: "Com es diu això?", castella: "¿Cómo se dice esto?", pron: "KOM es DIU a-SHÓ?", categoria: "Comunicación en Obra" },
+  { catala: "No ho entenc", castella: "No lo entiendo", pron: "no u e-NENG", categoria: "Comunicación en Obra" },
+  { catala: "M'ho pot explicar?", castella: "¿Me lo puede explicar?", pron: "MO pot eks-pli-KAR?", categoria: "Comunicación en Obra" },
+  { catala: "On és el cap d'obra?", castella: "¿Dónde está el jefe de obra?", pron: "ON es el KAP DOB-ra?", categoria: "Comunicación en Obra" },
+  { catala: "Necessito ajuda", castella: "Necesito ayuda", pron: "ne-SSI-to a-DJU-da", categoria: "Comunicación en Obra" },
+  { catala: "Soc tècnic de sanejament", castella: "Soy técnico de saneamiento", pron: "SOK TEK-nik de sa-ne-DAMENT", categoria: "Comunicación en Obra" },
+  { catala: "Treballo en prevenció de riscos", castella: "Trabajo en prevención de riesgos", pron: "tre-BAL-yo en pre-ven-SIÓ de RIS-kos", categoria: "Comunicación en Obra" },
+  { catala: "Cal revisar l'equipament", castella: "Hay que revisar el equipamiento", pron: "KAL re-bi-SAR le-ki-pa-MENT", categoria: "Comunicación en Obra" },
+  { catala: "Això és perillós!", castella: "¡Esto es peligroso!", pron: "a-SHÓ es pe-ri-LIÓS!", categoria: "Comunicación en Obra" },
+  { catala: "Espereu un moment, si us plau", castella: "Espere un momento, por favor", pron: "es-PE-reu un mo-MENT, si us PLOU", categoria: "Comunicación en Obra" },
+  { catala: "Ja ho faig", castella: "Ya lo hago", pron: "YA u FAIG", categoria: "Comunicación en Obra" },
+  { catala: "Estic d'acord", castella: "Estoy de acuerdo", pron: "es-TIK da-KORD", categoria: "Comunicación en Obra" },
+  { catala: "No estic d'acord", castella: "No estoy de acuerdo", pron: "no es-TIK da-KORD", categoria: "Comunicación en Obra" }
 ];
 
 const CATALA_CONCEPTES = [

@@ -77,6 +77,10 @@ const PRLStorage = {
     return total === 0 ? 0 : Math.round((completed / total) * 100);
   },
 
+  getGlobalCompletion() {
+    return this.getOverallProgress();
+  },
+
   getNotes(itemId) {
     const notes = this.get("notes") || {};
     return notes[itemId] || "";

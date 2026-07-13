@@ -219,6 +219,83 @@ const CASOS_ACCIDENTES = [
     ],
     leccion: "Una tapa de fibra de vidrio puede parecer sólida pero estar podrida por dentro. NUNCA camines sobre una tapa sin verificar. Si hay una fosa séptica cerca, tratá como espacio confinado: medí gases antes de acercarte.",
     gravedad: "MORTAL"
+  },
+  {
+    titulo: "Intoxicación por metano en estación de bombeo (Bilbao, 2021)",
+    fecha: "Marzo 2021",
+    ubicacion: "Bilbao, País Vasco",
+    victimas: "1 muerto, 1 intoxicado grave",
+    contexto: "Dos operarios bajaron a una estación de bombeo subterránea sin medir gases. El pozo acumulaba metano (CH₄) por la descomposición de residuos orgánicos. El primer operario perdió el conocimiento al bajar. El segundo bajó a rescatarlo sin EPI y también cayó.",
+    causa: "Ausencia de medición atmosférica previa. No se aplicó el permiso de trabajo para espacio confinado. El metano desplazó el oxígeno (nivel de O₂ bajo).",
+    normaIncumplida: "RD 604/2006 - Espacios confinados",
+    leccion: "El metano no huele ni irrita. Podés estar en una atmósfera letal sin sentir nada. SIEMPRE medí O₂, CH₄, H₂S y CO antes de entrar a cualquier espacio confinado. Y SIEMPRE con equipo de rescate esperando arriba.",
+    gravedad: "MORTAL"
+  },
+  {
+    titulo: "Caída de trabajador desde altura en obra de saneamiento (Málaga, 2023)",
+    fecha: "Septiembre 2023",
+    ubicacion: "Málaga, Andalucía",
+    victimas: "1 muerto",
+    contexto: "Un instalador de tuberías de saneamiento trabajaba en una obra de nueva construcción a 8 metros de altura sobre un andamio tubular. El andamio no tenía barandilla completa (solo tenía barandilla por un lado). El trabajador se inclinó para alcanzar una herramienta y cayó al vacío. Llevaba arnés pero NO estaba enganchado.",
+    causa: "Andamio sin barandilla completa. Trabajador sin arnés enganchado. Falta de supervisión del encargado. No se hizo plan de trabajo en altura.",
+    normaIncumplida: "RD 217/2004 - Protección contra caídas en trabajo temporal de altura",
+    leccion: "Un arnés que no está enganchado es un arnés que no existe. Si trabajás a más de 2 metros, necesitás barandilla en TODOS los lados del andamio Y arnés enganchado al punto de anclaje. No hay excusa.",
+    gravedad: "MORTAL"
+  },
+  {
+    titulo: "Electrocución en limpieza de canal de riego (Valencia, 2022)",
+    fecha: "Junio 2022",
+    ubicacion: "Valencia, Comunidad Valenciana",
+    victimas: "1 muerto",
+    contexto: "Un operario de saneamiento limpiaba un canal de riego abierto con una manguera de alta presión. El canal cruzaba bajo una línea eléctrica aérea de media tensión (20 kV). La manguera mojada hizo contacto con la línea y la corriente bajó por el agua hasta el operario.",
+    causa: "Trabajo bajo línea eléctrica aérea sin permiso. No se hizo replanteamiento de riesgos eléctricos. El operario no usaba guantes dieléctricos.",
+    normaIncumplida: "RD 840/2003 - Trabajos con riesgo eléctrico",
+    leccion: "SIEMPRE mirá arriba antes de trabajar. Si hay líneas eléctricas a menos de 10 metros, NO trabajes sin permiso de la compañía eléctrica y sin EPI dieléctrico. El agua conduce electricidad perfectamente.",
+    gravedad: "MORTAL"
+  },
+  {
+    titulo: "Explosión de gas en pozo de inspección (Alicante, 2023)",
+    fecha: "Noviembre 2023",
+    ubicacion: "Alicante, Comunidad Valenciana",
+    victimas: "2 heridos graves (quemaduras)",
+    contexto: "Dos técnicos inspeccionaban un pozo de saneamiento conectado a una industria química. Un escape de disolvente orgánico había generado vapores inflamables dentro del pozo. Al abrir la tapa y sacar la linterna, la chispa provocó una explosión de vapor. Ambos técnicos sufrieron quemaduras de segundo grado en cara y brazos.",
+    causa: "No se verificó si el pozo estaba conectado a la industria química. No se midieron vapores inflamables antes de abrir la tapa. Se usó linterna no certificada como Ex (ATEX).",
+    normaIncumplida: "RD 216/2004 - Atmosferas explosivas (ATEX). Regla: si la linterna no tiene la marca Ex, no entrés.",
+    leccion: "Antes de abrir cualquier pozo cerca de una industria, verificá a qué está conectado. Si puede haber vapores inflamables, medí LEL (Límite Inferior de Explosión) y usá SIEMPRE equipos certificados ATEX (Ex). Una chispa en un pozo con gas = explosión.",
+    gravedad: "GRAVE"
+  },
+  {
+    titulo: "Caida mortal por grieta en fosa séptica (Murcia, 2024)",
+    fecha: "Enero 2024",
+    ubicacion: "Murcia, Región de Murcia",
+    victimas: "1 muerto",
+    contexto: "Un trabajador agrícola caminó por encima de una fosa séptica enterrada cuya tapa de hormigón estaba agrietada. La tapa cedió bajo su peso y cayó 3 metros dentro de la fosa. El trabajador murió por asfixia por gases tóxicos (H₂S y CH₄) acumulados en el fondo.",
+    causa: "La tapa de hormigón tenía grietas visibles pero no fue reemplazada. No había señalización que indicara la presencia de la fosa séptica. El trabajador desconocía que debajo había un espacio confinado.",
+    normaIncumplida: "RD 604/2006 - Espacios confinados. Art. 4: Identificación y señalización de espacios confinados.",
+    leccion: "Una fosa séptica ES un espacio confinado aunque esté enterrada. Si ves una tapa agrietada, NUNCA camines encima. Señalizá y cerrá el acceso hasta que se repare. Los gases de las fosas matan en minutos.",
+    gravedad: "MORTAL"
+  },
+  {
+    titulo: "Intoxicación por cloro en planta de potabilización (Bilbao, 2023)",
+    fecha: "Abril 2023",
+    ubicacion: "Bilbao, País Vasco",
+    victimas: "3 intoxicados (1 grave, 2 leves)",
+    contexto: "Durante una intervención de mantenimiento en una planta de potabilización, un técnico manipuló una bomba dosificadora de cloro sin cerrar la válvula de bloqueo. El cloro líquido se vaporizó al contacto con el aire húmedo y llenó la zona de trabajo. Tres trabajadores inhalan el gas y fueron hospitalizados.",
+    causa: "No se siguió el procedimiento de bloqueo y etiquetado (LOTO). La válvula de bloqueo estaba disponible pero no se usó. No había detector de cloro en la zona.",
+    normaIncumplida: "RD 299/2006 - Equipos de trabajo. Procedimiento de bloqueo y etiquetado (LOTO).",
+    leccion: "El cloro a 10 ppm ya irrita. A 100 ppm puede matar. SIEMPRE cerrá la válvula de bloqueo antes de manipular cualquier equipo con químicos. Y si trabajás con cloro, el detector de gas debe estar encendido y cerca tuyo.",
+    gravedad: "GRAVE"
+  },
+  {
+    titulo: "Atrapamiento por inundación en túnel de saneamiento (Zaragoza, 2024)",
+    fecha: "Marzo 2024",
+    ubicacion: "Zaragoza, Aragón",
+    victimas: "1 muerto",
+    contexto: "Un operario trabajaba dentro de un túnel de saneamiento en construcción cuando una lluvia torrencial provocó una avenida de agua desde un colector conectado. El agua inundó el túnel en menos de 5 minutos. El operario no pudo salir a tiempo y murió ahogado. No había sistema de alerta por lluvia.",
+    causa: "No se monitorearon las condiciones meteorológicas. No había sistema de alarma por avenidas de agua. El túnel no tenía puntos de escape elevados. No se hizo plan de emergencia específico.",
+    normaIncumplida: "RD 604/2006 - Espacios confinados. Art. 6: Trabajos con riesgo de inundación.",
+    leccion: "Si trabajás en un túnel o espacio confinado conectado a redes de drenaje, SIEMPRE revisá el pronóstico del tiempo. Si hay lluvia prevista, NO trabajes. Y si trabajás, necesitás sistema de alarma y puntos de escape elevados.",
+    gravedad: "MORTAL"
   }
 ];
 

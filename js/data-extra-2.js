@@ -718,6 +718,306 @@ const QUIZZES_EXTRA = {
       ],
       correct: 1,
       explanation: "El programa Parla de la Generalitat de Catalunya ofrece cursos gratuitos de catalán para adultos."
+    },
+    {
+      id: "q-sane-01",
+      question: "¿Cuál es el límite de DBO en vertidos al dominio público hidráulico?",
+      options: [
+        "100 mg/l",
+        "250 mg/l",
+        "500 mg/l",
+        "No hay límite"
+      ],
+      correct: 1,
+      explanation: "Según el RD 849/1986, el límite habitual de DBO5 en vertidos al dominio público hidráulico es de 250 mg/l, aunque puede variar según la confederación hidrográfica."
+    },
+    {
+      id: "q-sane-02",
+      question: "¿Cuándo se debe medir la atmósfera antes de entrar a un pozo de saneamiento?",
+      options: [
+        "Solo cuando huele mal",
+        "SIEMPRE, antes de cada entrada",
+        "Solo si hay más de 2 trabajadores",
+        "Solo los lunes"
+      ],
+      correct: 1,
+      explanation: "La medición atmosférica debe realizarse SIEMPRE antes de cada entrada a un espacio confinado, sin importar las condiciones. Puede cambiar en minutos."
+    },
+    {
+      id: "q-sane-03",
+      question: "¿Qué gas es el más peligroso en pozos de saneamiento?",
+      options: [
+        "Oxígeno (O₂)",
+        "Sulfuro de hidrógeno (H₂S)",
+        "Nitrógeno (N₂)",
+        "Dióxido de carbono (CO₂)"
+      ],
+      correct: 1,
+      explanation: "El H₂S es extremadamente peligroso: a 100 ppm puede causar la muerte en minutos. Además, a bajas concentraciones anula el olfato, lo que impide detectarlo."
+    },
+    {
+      id: "q-sane-04",
+      question: "¿Cuál es el nivel mínimo de oxígeno aceptable para trabajar en un espacio confinado?",
+      options: [
+        "18%",
+        "19.5%",
+        "21%",
+        "15%"
+      ],
+      correct: 1,
+      explanation: "El nivel mínimo de O₂ aceptable es 19.5%. Por debajo de este nivel, el espacio se considera inseguro para la respiración."
+    },
+    {
+      id: "q-sane-05",
+      question: "¿Qué certificado necesitan los camiones cisterna de residuos peligrosos?",
+      options: [
+        "CDI (Certificado de Dominio Imprudente)",
+        "ADR (Acuerdo Europeo sobre Transporte de Mercancías Peligrosas por Carretera)",
+        "ISO 14001",
+        "CE marking"
+      ],
+      correct: 1,
+      explanation: "El ADR es el acuerdo europeo que regula el transporte de mercancías peligrosas por carretera. Los camiones deben cumplir sus requisitos."
+    },
+    {
+      id: "q-sane-06",
+      question: "¿Cuál es la multa máxima por trabajar en espacio confinado sin permiso en España?",
+      options: [
+        "1.000€",
+        "6.000€",
+        "60.000€",
+        "300.000€"
+      ],
+      correct: 3,
+      explanation: "Las infracciones muy graves pueden alcanzar los 300.000€. Trabajar en espacio confinado sin permiso se considera infracción muy grave."
+    },
+    {
+      id: "q-sane-07",
+      question: "¿Qué significa 'Loto' en el contexto de PRL?",
+      options: [
+        "Límite de Trabajo Operativo",
+        "Lockout/Tagout - Bloqueo y Etiquetado",
+        "Listado de Operaciones Técnicas Obligatorias",
+        "Logística de Transporte y Operaciones"
+      ],
+      correct: 1,
+      explanation: "LOTO = Lockout/Tagout (Bloqueo y Etiquetado). Es el procedimiento para asegurar que los equipos estén desenergizados antes de trabajar en ellos."
+    },
+    {
+      id: "q-sane-08",
+      question: "¿Cada cuánto tiempo se debe revisar un extintor en España?",
+      options: [
+        "Cada mes",
+        "Cada 6 meses",
+        "Cada año",
+        "Cada 2 años"
+      ],
+      correct: 1,
+      explanation: "Los extintores deben pasar revisión semestral (cada 6 meses) por un mantenedor autorizado, según el Reglamento de Instalaciones Contra Incendios."
+    },
+    {
+      id: "q-sane-09",
+      question: "¿Qué es un 'trabajador autónomo' en el contexto de PRL española?",
+      options: [
+        "Un empleado con contrato temporal",
+        "Una persona que trabaja por cuenta propia y se responsabiliza de su propia seguridad",
+        "Un jefe de equipo",
+        "Un inspector de trabajo"
+      ],
+      correct: 1,
+      explanation: "El trabajador autónomo es responsable de su propia prevención. Debe cumplir las mismas normas de PRL que una empresa, incluyendo evaluación de riesgos y formación."
+    },
+    {
+      id: "q-sane-10",
+      question: "¿Qué temperatura máxima se debe garantizar en un puesto de trabajo en verano?",
+      options: [
+        "25°C",
+        "30°C",
+        "No hay límite legal",
+        "33°C como máximo"
+      ],
+      correct: 3,
+      explanation: "El RD 1620/2011 establece que en puestos de trabajo con exposición a altas temperaturas, no se debe superar los 33°C. En trabajo moderado, el límite son 33°C de temperatura globo."
+    },
+    {
+      id: "q-sane-11",
+      question: "¿Cuál es la distancia mínima de seguridad frente a una línea eléctrica aérea de media tensión?",
+      options: [
+        "1 metro",
+        "3 metros",
+        "5 metros",
+        "10 metros"
+      ],
+      correct: 3,
+      explanation: "Según el RD 840/2003, la distancia mínima frente a líneas de media tensión (1-36 kV) es de 3 metros. Para alta tensión (>36 kV) es mayor."
+    },
+    {
+      id: "q-sane-12",
+      question: "¿Qué documentos debe llevar consigo un trabajador de saneamiento en una obra?",
+      options: [
+        "Solo el DNI",
+        "DNI/NIE, tarjeta sanitaria, certificado de formación PRL, permiso de conducción (si aplica)",
+        "Solo la nómina",
+        "No necesita nada"
+      ],
+      correct: 1,
+      explanation: "El trabajador debe llevar: documento de identidad, tarjeta sanitaria, certificado de formación en PRL (si la tiene), y permiso de conducción si conduce vehículos."
+    },
+    {
+      id: "q-sane-13",
+      question: "¿Qué es un 'plan de emergencia' en el contexto de PRL?",
+      options: [
+        "Un contrato de seguros",
+        "Un documento que define actuaciones ante incendios, accidentes y catástrofes",
+        "Un presupuesto anual",
+        "Un manual de usuario"
+      ],
+      correct: 1,
+      explanation: "El plan de emergencia define los protocolos de actuación ante situaciones de riesgo grave: incendios, accidentes, explosiones, fugas de químicos, etc."
+    },
+    {
+      id: "q-sane-14",
+      question: "¿Cuántas horas de formación en PRL debe recibir un trabajador nuevo?",
+      options: [
+        "4 horas",
+        "10 horas como mínimo",
+        "20 horas",
+        "40 horas"
+      ],
+      correct: 1,
+      explanation: "La Ley 31/1995 establece un mínimo de 10 horas de formación para trabajadores nuevos, adaptada al puesto de trabajo. En saneamiento suele ser más."
+    },
+    {
+      id: "q-sane-15",
+      question: "¿Qué es el 'register de vertidos'?",
+      options: [
+        "Un diario personal",
+        "Un documento oficial donde se registran los vertidos de aguas residuales",
+        "Un certificado de calidad",
+        "Un contrato de suministro"
+      ],
+      correct: 1,
+      explanation: "El registro de vertidos es obligatorio y debe contener: fecha, hora, volumen vertido, resultados de análisis, destino del vertido y cualquier incidencia."
+    },
+    {
+      id: "q-sane-16",
+      question: "¿Qué marca debe tener un equipo eléctrico para usarlo en atmósfera explosiva?",
+      options: [
+        "Marca CE",
+        "Marca ATEX (Ex)",
+        "Marca ISO",
+        "No necesita marca especial"
+      ],
+      correct: 1,
+      explanation: "En atmósferas explosivas (ATEX), los equipos deben tener la marca Ex (certificación ATEX) para garantizar que no generan chispas ni temperaturas que puedan provocar ignición."
+    },
+    {
+      id: "q-sane-17",
+      question: "¿Qué es un 'trabajador designado' en PRL?",
+      options: [
+        "Un empleado despedido",
+        "Un trabajador con formación específica para actuar en caso de emergencia",
+        "El gerente de la empresa",
+        "El inspector de trabajo"
+      ],
+      correct: 1,
+      explanation: "El trabajador designado es uno o más trabajadores que han recibido formación específica para actuar en caso de emergencia: primeros auxilios, lucha contra incendios, evacuación."
+    },
+    {
+      id: "q-sane-18",
+      question: "¿Cada cuánto se debe renovar la formación en PRL?",
+      options: [
+        "Nunca se renueva",
+        "Cada 3 años",
+        "Cada 5 años",
+        "Depende de la empresa"
+      ],
+      correct: 1,
+      explanation: "La formación en PRL debe renovarse cada 3 años como mínimo, con actualizaciones anuales. En puestos de riesgo especial, puede ser más frecuente."
+    },
+    {
+      id: "q-sane-19",
+      question: "¿Qué es un 'protocolo de actuación' en saneamiento?",
+      options: [
+        "Un manual de instrucciones",
+        "Un procedimiento escrito que define los pasos a seguir ante una situación de riesgo",
+        "Un contrato de mantenimiento",
+        "Un informe de accidente"
+      ],
+      correct: 1,
+      explanation: "El protocolo de actuación es un documento que define paso a paso qué hacer ante situaciones específicas: inundación, incendio, escape de gas, accidente, etc."
+    },
+    {
+      id: "q-sane-20",
+      question: "¿Qué temperatura de combustión se requiere para incinerar residuos peligrosos en España?",
+      options: [
+        "500°C",
+        "850°C como mínimo",
+        "1200°C",
+        "No se pueden incinerar"
+      ],
+      correct: 1,
+      explanation: "Según la normativa europea, los residuos peligrosos orgánicos deben incinerarse a una temperatura mínima de 850°C durante al menos 2 segundos para asegurar la destrucción de compuestos orgánicos."
+    },
+    {
+      id: "q-conv-01",
+      question: "¿Cuántos días de vacaciones mínimo tiene un trabajador en España?",
+      options: [
+        "15 días naturales",
+        "20 días laborables",
+        "30 días naturales",
+        "Depende del convenio"
+      ],
+      correct: 2,
+      explanation: "El Estatuto de los Trabajadores establece un mínimo de 30 días naturales de vacaciones al año (equivalente a 22 días laborables en la mayoría de convenios)."
+    },
+    {
+      id: "q-conv-02",
+      question: "¿Cuántas pagas extras tiene un trabajador de saneamiento en España?",
+      options: [
+        "1 paga extra",
+        "2 pagas extras (junio y diciembre)",
+        "Ninguna",
+        "Depende del contrato"
+      ],
+      correct: 1,
+      explanation: "El convenio colectivo del sector de saneamiento establece 2 pagas extras al año: una en junio y otra en diciembre."
+    },
+    {
+      id: "q-conv-03",
+      question: "¿Cuántas horas extraordinarias máximo se pueden hacer al año en España?",
+      options: [
+        "40 horas",
+        "80 horas",
+        "120 horas",
+        "No hay límite"
+      ],
+      correct: 1,
+      explanation: "El Estatuto de los Trabajadores establece un máximo de 80 horas extraordinarias al año. No computan las realizadas por necesidades perentorias."
+    },
+    {
+      id: "q-conv-04",
+      question: "¿Cuánto es el recargo por trabajar de noche en España?",
+      options: [
+        "10% sobre el salario base",
+        "30% sobre el salario base",
+        "50% sobre el salario base",
+        "75% sobre el salario base"
+      ],
+      correct: 1,
+      explanation: "El trabajo nocturno (22:00 a 06:00) tiene un recargo del 30% sobre el salario base, según el convenio colectivo del sector."
+    },
+    {
+      id: "q-conv-05",
+      question: "¿Cuánto es el recargo por trabajar en festivo en España?",
+      options: [
+        "30% sobre el salario base",
+        "50% sobre el salario base",
+        "75% sobre el salario base",
+        "100% sobre el salario base"
+      ],
+      correct: 2,
+      explanation: "El trabajo en festivo tiene un recargo del 75% sobre el salario base, según el convenio colectivo del sector de saneamiento."
     }
   ]
 };

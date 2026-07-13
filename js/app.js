@@ -183,6 +183,12 @@ const App = {
         viewReg.classList.add("active");
         this.renderRegistroProfesional(viewReg);
         break;
+      case "cuadernillo":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewCuad = document.getElementById("sectionView");
+        viewCuad.classList.add("active");
+        this.renderCuadernillo(viewCuad);
+        break;
       default:
         if (data) {
           this.showItemDetail(view, data);
@@ -387,6 +393,85 @@ const App = {
         <div class="detail-section" style="background: linear-gradient(135deg, var(--accent-light), var(--bg-card)); border: 1px solid var(--accent); border-radius: var(--radius); padding: 20px;">
           <h3>🛠️ Cómo lo uso yo como técnico</h3>
           <p style="font-size: 0.92rem; line-height: 1.7; color: var(--text-primary);">${item.comoLoUso}</p>
+        </div>
+      ` : ""}
+
+      ${item.expanded && item.expanded.cicloPDCA ? `
+        <div class="detail-section">
+          <h3>🔄 Ciclo PDCA Aplicado</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+            <div style="background: #d5f5e3; padding: 14px; border-radius: var(--radius-sm); border-left: 4px solid #27ae60;">
+              <h4 style="color: #27ae60; margin-bottom: 6px;">📋 PLAN (Cap 4 y 6)</h4>
+              <ul style="font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 18px;">
+                <li>Analizar el contexto de la organización</li>
+                <li>Identificar partes interesadas</li>
+                <li>Definir alcance del sistema de gestión</li>
+                <li>Identificar peligros y evaluar riesgos</li>
+                <li>Establecer objetivos SMART de SST</li>
+                <li>Cumplir requisitos legales aplicables</li>
+              </ul>
+            </div>
+            <div style="background: #d6eaf8; padding: 14px; border-radius: var(--radius-sm); border-left: 4px solid #3498db;">
+              <h4 style="color: #3498db; margin-bottom: 6px;">⚙️ DO (Cap 7 y 8)</h4>
+              <ul style="font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 18px;">
+                <li>Proporcionar recursos (humanos, materiales)</li>
+                <li>Desarrollar competencias del personal</li>
+                <li>Comunicar interna y externamente sobre SST</li>
+                <li>Crear y mantener documentación</li>
+                <li>Controlar operaciones (procedimientos)</li>
+                <li>Gestionar proveedores y subcontratistas</li>
+              </ul>
+            </div>
+            <div style="background: #fdebd0; padding: 14px; border-radius: var(--radius-sm); border-left: 4px solid #f39c12;">
+              <h4 style="color: #f39c12; margin-bottom: 6px;">🔍 CHECK (Cap 9)</h4>
+              <ul style="font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 18px;">
+                <li>Medir y monitorear desempeño de SST</li>
+                <li>Realizar auditorías internas</li>
+                <li>Revisión por la dirección</li>
+                <li>Analizar no conformidades y acciones correctivas</li>
+                <li>Evaluar cumplimiento legal</li>
+              </ul>
+            </div>
+            <div style="background: #fadbd8; padding: 14px; border-radius: var(--radius-sm); border-left: 4px solid #e74c3c;">
+              <h4 style="color: #e74c3c; margin-bottom: 6px;">🚀 ACT (Cap 10)</h4>
+              <ul style="font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 18px;">
+                <li>Identificar oportunidades de mejora</li>
+                <li>Implementar acciones correctivas</li>
+                <li>Actualización continua del sistema</li>
+                <li>Transferir buenas prácticas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      ` : ""}
+
+      ${item.expanded && item.expanded.checklistAuditoria ? `
+        <div class="detail-section">
+          <h3>✅ Checklist de Auditoría ISO 45001</h3>
+          <p style="margin-bottom: 10px; font-size: 0.92rem;">Marca cada pregunta para auditar tu sistema:</p>
+          <div class="checklist-grid">
+            ${item.expanded.checklistAuditoria.map((c, i) => `
+              <label class="checklist-item" style="display: flex; gap: 10px; padding: 8px 12px; background: var(--bg-secondary); border-radius: var(--radius-sm); margin-bottom: 6px; cursor: pointer; align-items: center;">
+                <input type="checkbox" class="checklist-check" data-checklist-id="iso-audit-${i}" style="width: 18px; height: 18px; accent-color: #27ae60;">
+                <span style="font-size: 0.92rem;">${c}</span>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      ` : ""}
+
+      ${item.expanded && item.expanded.aspectosAmbientales ? `
+        <div class="detail-section">
+          <h3>🌍 Aspectos Ambientales para Saneamiento</h3>
+          <p style="margin-bottom: 12px; font-size: 0.92rem;">Estos son los aspectos ambientales que debés controlar como técnico de saneamiento:</p>
+          ${item.expanded.aspectosAmbientales.map(a => `
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); margin-bottom: 10px; border-left: 4px solid #27ae60;">
+              <div style="font-weight: 700; color: #27ae60; margin-bottom: 4px;">${a.aspecto}</div>
+              <div style="font-size: 0.9rem; margin-bottom: 4px;"><strong>Impacto:</strong> ${a.impacto}</div>
+              <div style="font-size: 0.9rem; margin-bottom: 4px;"><strong>Control:</strong> ${a.control}</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">Norma: ${a.norma}</div>
+            </div>
+          `).join("")}
         </div>
       ` : ""}
 
@@ -2674,6 +2759,122 @@ IMPORTANTE: Sin el registro, tu título vale pero no podés ejercer plenamente. 
       </div>
     </div>`;
     container.innerHTML = html;
+  },
+
+  renderCuadernillo(container) {
+    const c = CUADERNILLO;
+    let html = `<div class="profesor-container">
+      <div class="profesor-hero" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+        <div class="profesor-avatar">📓</div>
+        <h1 class="profesor-title">${c.titulo}</h1>
+        <p style="margin-top: 8px; opacity: 0.95; font-size: 1.05rem;">${c.subtitulo}</p>
+        <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <button onclick="App.imprimirCuadernillo()" style="padding: 10px 24px; background: white; color: #e67e22; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 1rem;">🖨️ Imprimir / Guardar PDF</button>
+          <button onclick="App.descargarCuadernillo()" style="padding: 10px 24px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 1rem;">📥 Descargar HTML</button>
+        </div>
+      </div>`;
+
+    c.secciones.forEach((sec, i) => {
+      html += `<div class="leccion-concepto" style="margin-top: 24px; page-break-inside: avoid;">
+        <h3 style="color: var(--accent); margin-bottom: 8px;">${sec.icono} ${sec.titulo}</h3>
+        <div style="white-space: pre-line; line-height: 1.8; font-size: 0.95rem; background: var(--bg-secondary); padding: 16px; border-radius: var(--radius-sm); border-left: 4px solid var(--accent);">${sec.contenido}</div>
+        ${sec.notasEspacio ? `
+          <div style="margin-top: 12px;">
+            <h4 style="margin-bottom: 6px;">📝 Mis notas:</h4>
+            <textarea class="notes-area" id="cuad-notas-${i}" placeholder="Escribí tus notas personales aquí..." style="min-height: 100px;">${PRLStorage.get("cuad-notas-" + i) || ""}</textarea>
+            <button onclick="PRLStorage.set('cuad-notas-${i}', document.getElementById('cuad-notas-${i}').value)" class="btn btn-primary" style="margin-top: 6px; padding: 6px 14px;">💾 Guardar</button>
+          </div>
+        ` : ""}
+      </div>`;
+    });
+
+    html += `
+      <div style="text-align: center; margin-top: 32px; padding: 24px; background: var(--bg-secondary); border-radius: var(--radius);">
+        <h3>📋 Tu progreso de estudio</h3>
+        <p style="margin-top: 8px;">Completá las secciones de la app para avanzar en tu preparación.</p>
+        <div class="progress-bar" style="margin-top: 12px;"><div class="progress-fill" style="width: ${PRLStorage.getGlobalCompletion()}%"></div></div>
+        <p style="margin-top: 8px;">${PRLStorage.getGlobalCompletion()}% del contenido completado</p>
+      </div>
+      <div style="text-align: center; margin-top: 16px; padding: 20px;">
+        <button onclick="App.imprimirCuadernillo()" style="padding: 14px 32px; background: #e67e22; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 1.1rem;">🖨️ Imprimir todo el cuadernillo</button>
+      </div>
+    </div>`;
+    container.innerHTML = html;
+  },
+
+  imprimirCuadernillo() {
+    const printWindow = window.open("", "_blank");
+    let printHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Cuadernillo PRL</title>
+    <style>
+      @page { margin: 1.5cm; size: A4; }
+      body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #222; max-width: 100%; }
+      h1 { text-align: center; font-size: 20pt; margin-bottom: 4px; }
+      h2 { text-align: center; font-size: 13pt; color: #555; margin-top: 0; }
+      h3 { font-size: 14pt; color: #e67e22; margin-top: 24px; border-bottom: 2px solid #e67e22; padding-bottom: 4px; }
+      .seccion { page-break-inside: avoid; margin-bottom: 24px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+      .contenido { white-space: pre-line; font-size: 10.5pt; line-height: 1.5; }
+      .notas { border-top: 1px dashed #ccc; margin-top: 12px; padding-top: 8px; }
+      .notas h4 { font-size: 11pt; margin: 4px 0; }
+      .notas-lineas { border-bottom: 1px solid #ddd; height: 24px; margin-bottom: 2px; }
+      .footer { text-align: center; font-size: 9pt; color: #888; margin-top: 32px; border-top: 1px solid #ddd; padding-top: 8px; }
+      .cover { text-align: center; padding: 80px 20px; page-break-after: always; }
+      .cover h1 { font-size: 28pt; margin-bottom: 8px; }
+      .cover .sub { font-size: 14pt; color: #555; }
+      .cover .date { font-size: 11pt; color: #888; margin-top: 40px; }
+    </style></head><body>
+    <div class="cover">
+      <h1>📓 ${CUADERNILLO.titulo}</h1>
+      <div class="sub">${CUADERNILLO.subtitulo}</div>
+      <div class="date">Generado: ${new Date().toLocaleDateString('es-AR')}</div>
+      <div style="margin-top: 40px; font-size: 11pt; color: #666;">Este cuadernillo es tu guía de campo.<br>Usalo para estudiar, repasar y ejercer en España.</div>
+    </div>`;
+
+    CUADERNILLO.secciones.forEach(sec => {
+      const savedNotes = PRLStorage.get("cuad-notas-" + CUADERNILLO.secciones.indexOf(sec)) || "";
+      const notesLines = savedNotes ? savedNotes.replace(/\n/g, '<br>') : Array(5).fill('<div class="notas-lineas"></div>').join('');
+      printHTML += `<div class="seccion">
+        <h3>${sec.icono} ${sec.titulo}</h3>
+        <div class="contenido">${sec.contenido.replace(/\n/g, '<br>')}</div>
+        <div class="notas">
+          <h4>Mis notas:</h4>
+          <div>${notesLines}</div>
+        </div>
+      </div>`;
+    });
+
+    printHTML += `<div class="footer">Cuadernillo generado desde PRL España App — ${new Date().toLocaleDateString('es-AR')}</div></body></html>`;
+    printWindow.document.write(printHTML);
+    printWindow.document.close();
+    printWindow.onload = () => { printWindow.print(); };
+  },
+
+  descargarCuadernillo() {
+    let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Cuadernillo PRL</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+      h1 { text-align: center; color: #e67e22; }
+      h2 { text-align: center; color: #555; font-weight: normal; }
+      h3 { color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 4px; }
+      .seccion { margin-bottom: 24px; padding: 16px; border: 1px solid #ddd; border-radius: 8px; }
+      .contenido { white-space: pre-line; font-size: 14px; }
+    </style></head><body>
+    <h1>📓 ${CUADERNILLO.titulo}</h1>
+    <h2>${CUADERNILLO.subtitulo}</h2>
+    <p style="text-align:center; color:#888;">Generado: ${new Date().toLocaleDateString('es-AR')}</p><hr style="margin: 24px 0;">`;
+
+    CUADERNILLO.secciones.forEach(sec => {
+      html += `<div class="seccion"><h3>${sec.icono} ${sec.titulo}</h3><div class="contenido">${sec.contenido.replace(/\n/g, '<br>')}</div></div>`;
+    });
+
+    html += `<hr><p style="text-align:center; color:#888; font-size:12px;">Cuadernillo generado desde PRL España App</p></body></html>`;
+
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cuadernillo-prl-espana.html";
+    a.click();
+    URL.revokeObjectURL(url);
   },
 
   renderAutoevaluacion(viewEl) {
