@@ -1855,6 +1855,8 @@ body.light .comparativa-table td { border-color: #e2e8f0; }
   padding: 16px;
 }
 .quick-note-panel.hidden { display: none; }
+
+.chat-panel.hidden { display: none; }
 .quick-note-header {
   display: flex;
   justify-content: space-between;
