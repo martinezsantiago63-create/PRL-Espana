@@ -1,4 +1,4 @@
-const CACHE_NAME = "prl-espana-v2";
+const CACHE_NAME = "prl-espana-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -11,6 +11,7 @@ const ASSETS = [
   "./js/data-casos-accidentes.js",
   "./js/data-plantillas.js",
   "./js/data-quiz-autoeval.js",
+  "./js/data-contenido-expandido.js",
   "./js/data-extra.js",
   "./js/data-extra-2.js",
   "./js/data-profesor.js",

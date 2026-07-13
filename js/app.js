@@ -171,6 +171,18 @@ const App = {
         viewAuto.classList.add("active");
         this.renderAutoevaluacion(viewAuto);
         break;
+      case "convenio-colectivo":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewConv = document.getElementById("sectionView");
+        viewConv.classList.add("active");
+        this.renderConvenio(viewConv);
+        break;
+      case "registro-profesional":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewReg = document.getElementById("sectionView");
+        viewReg.classList.add("active");
+        this.renderRegistroProfesional(viewReg);
+        break;
       default:
         if (data) {
           this.showItemDetail(view, data);
@@ -2536,6 +2548,132 @@ th{background:#f5f5f5;}
     const a = document.createElement('a');
     a.href = url; a.download = titulo.replace(/[^a-zA-Z0-9]/g, '_') + '.html';
     a.click(); URL.revokeObjectURL(url);
+  },
+
+  renderConvenio(container) {
+    const c = CONTENIDO_EXPANDIDO.convenioSaneamiento;
+    let html = `<div class="profesor-container">
+      <div class="profesor-hero" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+        <div class="profesor-avatar">💰</div>
+        <h1 class="profesor-title">${c.titulo}</h1>
+        <p style="margin-top: 8px; opacity: 0.95; font-size: 1.05rem;">Tus derechos laborales como técnico de saneamiento en España</p>
+      </div>
+      <div class="leccion-concepto">
+        <p style="font-size: 1.05rem; line-height: 1.8;">${c.resumenLargo}</p>
+      </div>
+      <h3 style="margin: 24px 0 12px; color: var(--text-primary);">📋 ¿Qué regula el convenio?</h3>`;
+
+    c.queRegula.forEach(item => {
+      html += `<div class="leccion-concepto" style="margin-bottom: 16px;">
+        <h4 style="color: #27ae60; margin-bottom: 4px;">${item.concepto}</h4>
+        <p style="line-height: 1.7; margin-bottom: 6px;">${item.detalle}</p>
+        <div style="background: #d5f5e3; color: #1a5e3a; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.92rem;">
+          💡 Ejemplo: ${item.ejemplo}
+        </div>
+      </div>`;
+    });
+
+    html += `<div class="leccion-ejemplo">
+      <h4>🔧 Cómo lo uso yo como técnico</h4>
+      <div style="white-space: pre-line; line-height: 1.8; margin-top: 8px;">${c.comoLoUso}</div>
+    </div>`;
+
+    if (c.documentosUtiles && c.documentosUtiles.length) {
+      html += `<h3 style="margin: 24px 0 12px;">🔗 Enlaces útiles</h3><ul style="line-height: 2;">`;
+      c.documentosUtiles.forEach(l => {
+        const parts = l.split(': ');
+        const label = parts[0];
+        const url = parts.slice(1).join(': ');
+        html += `<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`;
+      });
+      html += `</ul>`;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
+  },
+
+  renderRegistroProfesional(container) {
+    let html = `<div class="profesor-container">
+      <div class="profesor-hero" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">
+        <div class="profesor-avatar">🪪</div>
+        <h1 class="profesor-title">Títulos Profesionales y Registro en España</h1>
+        <p style="margin-top: 8px; opacity: 0.95; font-size: 1.05rem;">Cómo te llamas allá, qué título necesitás y cómo te registrás</p>
+      </div>
+
+      <div class="leccion-concepto">
+        <h4>📚 ¿Cómo se llama el profesional de PRL en España?</h4>
+        <p style="line-height: 1.8; margin-top: 8px;">En España existen dos niveles:</p>
+        <ul style="line-height: 2; margin-top: 8px;">
+          <li><strong>Técnico Superior en Prevención de Riesgos Laborales</strong> — Grado Superior de Formación Profesional (3 años, 2000+ horas). Es el nivel más completo. Puede dirigir y evaluar riesgos en cualquier empresa.</li>
+          <li><strong>Técnico en Prevención de Riesgos Laborales</strong> — Grado Medio de FP (2 años, 1400+ horas). Puede realizar actividades preventivas bajo supervisión de un Técnico Superior.</li>
+        </ul>
+        <p style="line-height: 1.8; margin-top: 12px;">Para tu caso, como técnico argentino en saneamiento y seguridad industrial, lo más probable es que te homologuen como <strong>Técnico Superior</strong> o como <strong>Técnico Medio</strong> dependiendo de la equivalencia de horas y contenidos de tu título.</p>
+      </div>
+
+      <div class="leccion-concepto" style="background: #fdebd0; border-left: 4px solid #e67e22;">
+        <h4 style="color: #e67e22;">⚠️ ¡Importante! No hay "matrícula colegiada" como en Argentina</h4>
+        <p style="line-height: 1.8; margin-top: 8px;">En Argentina, para ejercer como profesional necesitás la matrícula del Consejo Profesional (ej: Consejo Profesional de Saneamiento y Seguridad). En España NO existe eso para técnicos de PRL. <strong>No hay colegio profesional obligatorio.</strong></p>
+        <p style="line-height: 1.8; margin-top: 8px;">Pero SÍ necesitás <strong>registrarte</strong> ante la autoridad laboral para poder ejercer legalmente.</p>
+      </div>
+
+      <div class="leccion-concepto">
+        <h4>📝 ¿Dónde te registrás?</h4>
+        <p style="line-height: 1.8; margin-top: 8px;">El registro se hace ante la <strong>Consejería de Trabajo</strong> de cada Comunidad Autónoma:</p>
+        <ul style="line-height: 2; margin-top: 8px;">
+          <li><strong>Cataluña:</strong> Registro ante el <strong>ICSST</strong> (Institut Català de Seguretat i Salut en el Treball). Formulario online.</li>
+          <li><strong>Madrid:</strong> Dirección General de Empleo y Formación Profesional.</li>
+          <li><strong>Andalucía:</strong> Dirección General de Prevención de Riesgos Laborales.</li>
+          <li><strong>Otras CC.AA.:</strong> Cada una tiene su propio registro.</li>
+        </ul>
+      </div>
+
+      <div class="leccion-concepto">
+        <h4>📋 ¿Qué documentos necesitás para registrarte?</h4>
+        <ul style="line-height: 2; margin-top: 8px;">
+          <li>Título homologado (o certificado de homologación provisional)</li>
+          <li>DNI/NIE en vigor</li>
+          <li>Solicitud formal (formulario de la CC.AA.)</li>
+          <li>Certificado de antecedentes penales (a veces)</li>
+          <li>Justificante de pago de tasas (si aplica)</li>
+        </ul>
+      </div>
+
+      <div class="leccion-ejemplo">
+        <h4>🔧 Cómo lo uso yo como técnico</h4>
+        <div style="white-space: pre-line; line-height: 1.8; margin-top: 8px;">EJEMPLO PRÁCTICO: Llegás a Barcelona con tu título argentino homologado.
+
+PASO 1 - HOMOLOGACIÓN:
+- Presentás tu título en el Ministerio de Educación
+- Esperás 6-12 meses para la resolución
+- Mientras tanto, podés trabajar con la homologación provisional
+
+PASO 2 - REGISTRO EN CATALUÑA:
+- Entrás a la web del ICSST
+- Completás el formulario de alta como Técnico Superior de PRL
+- Subís: título homologado + DNI/NIE + solicitud
+- En 2-4 semanas te dan el certificado de registro
+
+PASO 3 - EJERCER:
+- Con el registro, podés firmar evaluaciones de riesgos
+- Podés emitir informes oficiales de PRL
+- Podés trabajar como técnico de PRL en cualquier empresa
+- Sin registro, NO podés firmar nada oficial
+
+PASO 4 - MANTENER:
+- El registro se renueva cada 5 años
+- Debes estar al día con la formación continua (mínimo 20 horas/año)
+- Si cambiás de CC.AA., debés registrarte de nuevo
+
+IMPORTANTE: Sin el registro, tu título vale pero no podés ejercer plenamente. Es como tener la habilitación pero no el sello oficial.</div>
+      </div>
+
+      <div class="leccion-concepto" style="background: #d5f5e3; border-left: 4px solid #27ae60;">
+        <h4 style="color: #27ae60;">💡 Consejo clave para vos</h4>
+        <p style="line-height: 1.8; margin-top: 8px;">Mientras esperás la homologación de tu título, podés empezar a trabajar como <strong>asistente técnico</strong> o <strong>auxiliar de prevención</strong>. No necesitás título homologado para esas funciones. Así ganás experiencia en el sistema español mientras se resuelve tu homologación.</p>
+      </div>
+    </div>`;
+    container.innerHTML = html;
   },
 
   renderAutoevaluacion(viewEl) {
