@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="description" content="App de estudio para técnicos de PRL que quieren ejercer en España">
+  <title>PRL España - Estudio y Organización</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">PRL España</h1>
+        <p class="subtitle">Preparación Profesional</p>
+        <div class="overall-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="overallProgressFill"></div>
+          </div>
+          <span id="overallProgressText">0% completado</span>
+        </div>
+      </div>
+
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item active" data-section="dashboard">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Panel Principal</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="profesor">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Mi Profesor PRL</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="catala">
+          <span class="nav-icon">🗣️</span>
+          <span class="nav-text">Catalán para PRL</span>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="nav-item" data-section="marco-normativo">
+          <span class="nav-icon">⚖️</span>
+          <span class="nav-text">Marco Normativo</span>
+          <span class="nav-badge" data-badge="marco-normativo"></span>
+        </li>
+        <li class="nav-item" data-section="guias-insst">
+          <span class="nav-icon">📚</span>
+          <span class="nav-text">Guías INSST</span>
+          <span class="nav-badge" data-badge="guias-insst"></span>
+        </li>
+        <li class="nav-item" data-section="normas-iso">
+          <span class="nav-icon">🌐</span>
+          <span class="nav-text">Normas ISO</span>
+          <span class="nav-badge" data-badge="normas-iso"></span>
+        </li>
+        <li class="nav-item" data-section="homologacion">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Homologación</span>
+          <span class="nav-badge" data-badge="homologacion"></span>
+        </li>
+        <li class="nav-item" data-section="idioma">
+          <span class="nav-icon">🗣️</span>
+          <span class="nav-text">Idioma Español</span>
+          <span class="nav-badge" data-badge="idioma"></span>
+        </li>
+        <li class="nav-item" data-section="aplicaciones-practicas">
+          <span class="nav-icon">🔧</span>
+          <span class="nav-text">Aplicaciones Prácticas</span>
+          <span class="nav-badge" data-badge="aplicaciones-practicas"></span>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="nav-item" data-section="checklist">
+          <span class="nav-icon">✅</span>
+          <span class="nav-text">Checklist Homologación</span>
+        </li>
+        <li class="nav-item" data-section="vocabulario">
+          <span class="nav-icon">📖</span>
+          <span class="nav-text">Vocabulario AR→ES</span>
+        </li>
+        <li class="nav-item" data-section="calculadora">
+          <span class="nav-icon">🧮</span>
+          <span class="nav-text">Calculadora Riesgos</span>
+        </li>
+        <li class="nav-item" data-section="quiz">
+          <span class="nav-icon">❓</span>
+          <span class="nav-text">Autoevaluación</span>
+        </li>
+        <li class="nav-item" data-section="comunidades">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">Comunidades PRL</span>
+        </li>
+        <li class="nav-item" data-section="mercado">
+          <span class="nav-icon">💼</span>
+          <span class="nav-text">Mercado Laboral</span>
+        </li>
+        <li class="nav-item" data-section="comparativa">
+          <span class="nav-icon">🔄</span>
+          <span class="nav-text">AR vs España</span>
+        </li>
+        <li class="nav-item" data-section="cursos-insst">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Cursos INSST</span>
+        </li>
+        <li class="nav-item" data-section="guias-descargables">
+          <span class="nav-icon">📥</span>
+          <span class="nav-text">Guías INSST</span>
+        </li>
+        <li class="nav-item" data-section="review">
+          <span class="nav-icon">🧠</span>
+          <span class="nav-text">Repaso por Tema</span>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="nav-item" data-section="timeline">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text">Plan de Estudio</span>
+        </li>
+        <li class="nav-item" data-section="favorites">
+          <span class="nav-icon">⭐</span>
+          <span class="nav-text">Favoritos</span>
+        </li>
+        <li class="nav-item" data-section="settings">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-text">Configuración</span>
+        </li>
+      </ul>
+    </nav>
+
+    <main id="mainContent">
+      <header id="topBar">
+        <button id="menuToggle" class="menu-toggle" aria-label="Menu">☰</button>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Buscar normativa, vocabulario, checklist..." autocomplete="off">
+          <div id="searchResults" class="search-results hidden"></div>
+        </div>
+        <button id="themeToggle" class="theme-toggle" title="Cambiar tema">☀️</button>
+      </header>
+
+      <div id="contentArea">
+        <div id="dashboard" class="view active"></div>
+        <div id="sectionView" class="view"></div>
+        <div id="itemView" class="view"></div>
+        <div id="timelineView" class="view"></div>
+        <div id="favoritesView" class="view"></div>
+        <div id="settingsView" class="view"></div>
+        <div id="checklistView" class="view"></div>
+        <div id="vocabularioView" class="view"></div>
+        <div id="calculadoraView" class="view"></div>
+        <div id="quizView" class="view"></div>
+        <div id="comunidadesView" class="view"></div>
+        <div id="mercadoView" class="view"></div>
+        <div id="comparativaView" class="view"></div>
+        <div id="cursosInsstView" class="view"></div>
+        <div id="guiasDescargablesView" class="view"></div>
+        <div id="reviewView" class="view"></div>
+        <div id="profesorView" class="view"></div>
+        <div id="catalaView" class="view"></div>
+      </div>
+    </main>
+
+    <!-- Floating Quick Note Button -->
+    <button id="quickNoteBtn" class="quick-note-btn" title="Nota rápida">📝</button>
+    <div id="quickNotePanel" class="quick-note-panel hidden">
+      <div class="quick-note-header">
+        <span>📝 Nota rápida</span>
+        <button id="closeQuickNote" class="quick-note-close">✕</button>
+      </div>
+      <textarea id="quickNoteText" placeholder="Escribí tu nota aquí..."></textarea>
+      <button id="saveQuickNote" class="btn btn-primary" style="width:100%; margin-top:8px;">Guardar</button>
+    </div>
+
+    <!-- Preguntale al Profesor Chat -->
+    <button id="chatToggleBtn" class="chat-toggle-btn" title="Preguntale al Profesor">💬</button>
+    <div id="chatPanel" class="chat-panel hidden">
+      <div class="chat-header">
+        <span>👨‍🏫 Preguntale al Profesor</span>
+        <button id="closeChatBtn" class="chat-close">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg profesor">
+          <div class="chat-bubble">Hola! Soy tu profesor de PRL. Escribí cualquier duda sobre seguridad laboral, leyes, espacios confinados, catalán, homologación... y te respondo!</div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Escribí tu pregunta acá..." />
+        <button id="chatSendBtn" class="chat-send">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/data-extra.js"></script>
+  <script src="js/data-extra-2.js"></script>
+  <script src="js/data-profesor.js"></script>
+  <script src="js/data-catalan.js"></script>
+  <script src="js/data-explicaciones.js"></script>
+  <script src="js/data-preguntas.js"></script>
+  <script src="js/ai-profesor.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
