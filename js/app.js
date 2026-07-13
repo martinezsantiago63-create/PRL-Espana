@@ -153,6 +153,24 @@ const App = {
         document.getElementById("catalaView").classList.add("active");
         this.renderCatala();
         break;
+      case "casos-accidentes":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewCasos = document.getElementById("sectionView");
+        viewCasos.classList.add("active");
+        this.renderCasosAccidentes(viewCasos);
+        break;
+      case "plantillas":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewPlant = document.getElementById("sectionView");
+        viewPlant.classList.add("active");
+        this.renderPlantillas(viewPlant);
+        break;
+      case "autoevaluacion":
+        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+        const viewAuto = document.getElementById("sectionView");
+        viewAuto.classList.add("active");
+        this.renderAutoevaluacion(viewAuto);
+        break;
       default:
         if (data) {
           this.showItemDetail(view, data);
@@ -2406,6 +2424,161 @@ const App = {
     };
 
     renderQuestion();
+  },
+
+  renderCasosAccidentes(viewEl) {
+    let html = `
+      <div class="section-header">
+        <h2>⚠️ Casos Reales de Accidentes en Saneamiento</h2>
+        <p>Aprendé de los errores que otros cometieron. Cada caso es una lección que puede salvar tu vida.</p>
+      </div>
+      <div class="category-block">
+        <h3 class="category-title">Lecciones Generales</h3>
+        <div class="item-list">
+          ${LECCIONES_GENERALES.map(l => `
+            <div class="item-card" style="background: rgba(231,76,60,0.05); border-left: 4px solid #e74c3c; padding: 12px; margin-bottom: 8px;">
+              <div style="font-weight: bold; color: #e74c3c;">${l.leccion}</div>
+              <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">${l.descripcion}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Normas: ${l.normas.join(', ')}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="category-block">
+        <h3 class="category-title">Casos Detallados</h3>
+        <div class="item-list">
+          ${CASOS_ACCIDENTES.map(c => `
+            <div class="item-card" style="padding: 16px; margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 8px;">
+                <div style="font-weight: bold; font-size: 1.05rem;">${c.titulo}</div>
+                <span style="padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; ${
+                  c.gravedad.includes('MORTAL') ? 'background: #e74c3c; color: white;' :
+                  c.gravedad.includes('MUY GRAVE') ? 'background: #e67e22; color: white;' :
+                  c.gravedad.includes('GRAVE') ? 'background: #f39c12; color: black;' :
+                  'background: #3498db; color: white;'
+                }">${c.gravedad}</span>
+              </div>
+              <div style="color: var(--text-secondary); margin: 8px 0; font-size: 0.9rem;">
+                <strong>Víctima:</strong> ${c.victima}
+              </div>
+              <div style="margin: 8px 0; font-size: 0.95rem;">${c.resumen}</div>
+              <details style="margin-top: 8px;">
+                <summary style="cursor: pointer; color: #e74c3c; font-weight: bold;">¿Qué salió mal?</summary>
+                <ul style="margin: 8px 0; padding-left: 20px;">${c.queSalioMal.map(s => `<li style="margin: 4px 0; font-size: 0.9rem;">${s}</li>`).join('')}</ul>
+              </details>
+              <details>
+                <summary style="cursor: pointer; color: #27ae60; font-weight: bold;">¿Qué debió pasarse?</summary>
+                <ul style="margin: 8px 0; padding-left: 20px;">${c.queDebioPasarse.map(s => `<li style="margin: 4px 0; font-size: 0.9rem;">${s}</li>`).join('')}</ul>
+              </details>
+              <details>
+                <summary style="cursor: pointer; color: #3498db; font-weight: bold;">Normas violadas</summary>
+                <ul style="margin: 8px 0; padding-left: 20px;">${c.normasVioladas.map(n => `<li style="margin: 4px 0; font-size: 0.9rem;">${n}</li>`).join('')}</ul>
+              </details>
+              <div style="background: rgba(39,174,96,0.05); border-left: 3px solid #27ae60; padding: 10px; margin-top: 10px; border-radius: 0 4px 4px 0;">
+                <strong style="color: #27ae60;">Lección:</strong> ${c.leccion}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    viewEl.innerHTML = html;
+  },
+
+  renderPlantillas(viewEl) {
+    let html = `
+      <div class="section-header">
+        <h2>📄 Plantillas Descargables</h2>
+        <p>Modelos en blanco para evaluaciones de riesgos, permisos de trabajo, registros y planes de prevención.</p>
+      </div>
+      <div class="item-list">
+        ${Object.values(PLANTILLAS).map(p => `
+          <div class="item-card" style="padding: 16px; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <div style="font-weight: bold; font-size: 1.05rem;">${p.titulo}</div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">${p.descripcion}</div>
+              </div>
+              <button onclick="App.togglePlantilla('${p.titulo}')" style="padding: 6px 14px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;">Ver plantilla</button>
+            </div>
+            <div id="plantilla-${p.titulo.replace(/[^a-zA-Z0-9]/g,'')}" style="display: none; margin-top: 12px; padding: 16px; background: var(--bg-secondary); border-radius: var(--radius); border: 1px solid var(--border); max-height: 500px; overflow-y: auto;">
+              ${p.contenido}
+              <div style="margin-top: 12px; text-align: center;">
+                <button onclick="App.descargarPlantilla('${p.titulo}', this.parentElement.parentElement)" style="padding: 8px 20px; background: #3498db; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.95rem;">📥 Descargar como HTML</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    viewEl.innerHTML = html;
+  },
+
+  togglePlantilla(titulo) {
+    const el = document.getElementById("plantilla-" + titulo.replace(/[^a-zA-Z0-9]/g, ''));
+    if (el) el.style.display = el.style.display === "none" ? "block" : "none";
+  },
+
+  descargarPlantilla(titulo, contenido) {
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>${titulo}</title>
+<style>body{font-family:Arial,sans-serif;max-width:900px;margin:40px auto;padding:20px;color:#333;}
+h2{text-align:center;border-bottom:2px solid #333;padding-bottom:10px;}
+h3{margin-top:24px;color:#555;}
+table{width:100%;border-collapse:collapse;margin:12px 0;}
+th,td{border:1px solid #ccc;padding:8px;text-align:left;}
+th{background:#f5f5f5;}
+@media print{body{margin:20px;}}</style></head>
+<body>${contenido}</body></html>`;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = titulo.replace(/[^a-zA-Z0-9]/g, '_') + '.html';
+    a.click(); URL.revokeObjectURL(url);
+  },
+
+  renderAutoevaluacion(viewEl) {
+    let html = `
+      <div class="section-header">
+        <h2>✅ Autoevaluación por Tema</h2>
+        <p>Respondé honestamente para saber si estás listo para cada tema. Marcaste lo que sabés y lo que te falta.</p>
+      </div>
+      <div class="item-list">
+        ${AUTOEVALUACIONES.map(a => `
+          <div class="item-card" style="padding: 16px; margin-bottom: 12px;">
+            <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 4px;">${a.titulo}</div>
+            <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px;">Norma: ${a.ley}</div>
+            <div id="autoeval-${a.id}">
+              ${a.preguntas.map((p, i) => `
+                <label style="display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); cursor: pointer;">
+                  <input type="checkbox" class="autoeval-check" data-autoeval="${a.id}" style="margin-top: 3px; min-width: 18px; min-height: 18px;">
+                  <span style="font-size: 0.95rem;">${p}</span>
+                </label>
+              `).join('')}
+            </div>
+            <div style="margin-top: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span id="autoeval-score-${a.id}" style="font-weight: bold;">0/${a.preguntas.length} respondidos</span>
+              <span id="autoeval-pct-${a.id}" style="padding: 3px 10px; border-radius: 20px; font-size: 0.85rem; background: #e74c3c; color: white;">0%</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    viewEl.innerHTML = html;
+
+    viewEl.querySelectorAll(".autoeval-check").forEach(cb => {
+      cb.addEventListener("change", () => {
+        const id = cb.dataset.autoeval;
+        const total = viewEl.querySelectorAll(`[data-autoeval="${id}"]`).length;
+        const checked = viewEl.querySelectorAll(`[data-autoeval="${id}"]:checked`).length;
+        const pct = Math.round((checked / total) * 100);
+        document.getElementById("autoeval-score-" + id).textContent = `${checked}/${total} respondidos`;
+        const pctEl = document.getElementById("autoeval-pct-" + id);
+        pctEl.textContent = pct + "%";
+        pctEl.style.background = pct >= 80 ? "#27ae60" : pct >= 50 ? "#f39c12" : "#e74c3c";
+      });
+    });
   }
 };
 

@@ -86,7 +86,7 @@ const COMPARATIVA_AR_ES = [
   },
   {
     aspecto: "Ruido",
-    argentina: { norma: "Decreto 911/96, Anexo VII", detalle: "Valores límite根据 exposición." },
+    argentina: { norma: "Decreto 911/96, Anexo VII", detalle: "Valores límite según exposición." },
     espana: { norma: "Directiva 2003/10/CE + RD 286/2006", detalle: "VLE: 87 dB(A). Acción inferior: 80 dB(A). Acción superior: 85 dB(A)." }
   },
   {

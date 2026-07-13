@@ -84,7 +84,7 @@ const VOCABULARIO_AR_ES = [
   { ar: "cinta transportadora", es: "transportador / cinta transportadora", context: "Equipo de movimiento de materiales" },
   { ar: "explosión", es: "explosión / atmósfera explosiva (ATEX)", context: "Riesgo por gases o polvos inflamables" },
   { ar: "inflamable", es: "inflamable / combustible", context: "Sustancia que arde fácilmente" },
-  { ar: "电rico", es: "eléctrico", context: "Riesgo por energía eléctrica" },
+  { ar: "eléctrico", es: "eléctrico", context: "Riesgo por energía eléctrica" },
   { ar: "voladura", es: "voladura / trabajos de demolicción", context: "Uso de explosivos en construcción" },
   { ar: "permiso de trabajo", es: "permiso de trabajo / autorización", context: "Documento que autoriza trabajos de riesgo" },
   { ar: "plan de emergencia", es: "plan de emergencia y evacuación", context: "Protocolo ante siniestros" },
@@ -297,7 +297,7 @@ const QUIZZES = {
         "Es una recomendación opcional",
         "Es una norma de seguridad obligatoria",
         "Solo aplica si el espacio es grande",
-        "Solo aplica si hay气体 tóxicos"
+        "Solo aplica si hay gases tóxicos"
       ],
       correct: 1,
       explanation: "Entrar solo a un espacio confinado es extremadamente peligroso. Siempre debe haber al menos una persona de vigilancia externa."

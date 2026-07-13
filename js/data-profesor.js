@@ -116,7 +116,7 @@ En España: la empresa te contrata directamente (o a través de un servicio de p
 
 Voy a ser honesto con vos: esta ley tiene 57 artículos y 5 disposiciones adicionales. Nadie la lee entera de corrido. Lo que tenés que hacer es ENTENDER la lógica y SABER BUSCAR cuando la necesites. Yo te voy a explicar la lógica.»
 
-La ley se divide en这几部分:
+La ley se divide en estas partes:
 - Capítulo I: Disposiciones generales (Art. 1-6) — Qué es prevención, quién hace qué
 - Capítulo II: Principios de la acción preventiva (Art. 15) — Los 10 mandamientos
 - Capítulo III: Derechos y obligaciones (Art. 17-29) — Qué puede y qué debe cada uno
@@ -213,7 +213,7 @@ Principio 9 (Formación): El trabajador tiene que saber qué hacer si suena la a
     icono: "🔍",
     objetivos: [
       "Saber hacer una Evaluación de Riesgos paso a paso",
-      "Conocer la metodología矩阵 de valoración",
+      "Conocer la metodología matrix de valoración",
       "Entender cuándo y cómo actualizar una evaluación",
       "Saber documentar y registrar resultados"
     ],
@@ -661,7 +661,7 @@ PIES:
 CUERPO:
 - Arneses (UNE-EN 361) — Caídas en altura
 - Traje de protección química (UNE-EN 14602) — Químicos
-- Traje de高 visibilidad (UNE-EN ISO 20471) — Tráfico, obras
+- Traje de alta visibilidad (UNE-EN ISO 20471) — Tráfico, obras
 
 NOTA IMPORTANTE: Todos los EPIs DEBEN llevar la marca CE. Si no tiene marca CE, no cumple normativa europea y no se puede usar.»`
       },
@@ -681,7 +681,7 @@ NOTA IMPORTANTE: Todos los EPIs DEBEN llevar la marca CE. Si no tiene marca CE, 
 7. GAFAS DE SEGURIDAD (UNE-EN 166) — Si hay riesgo de salpicadura
 
 ¿Qué NO necesita?
-- No necesita chaqueta de高 visibilidad (no hay tráfico)
+- No necesita chaqueta de alta visibilidad (no hay tráfico)
 - No necesita auriculares (no hay ruido)
 - No necesita pantalla facial (no hay chispas)
 

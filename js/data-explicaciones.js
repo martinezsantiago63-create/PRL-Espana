@@ -38,7 +38,7 @@ const EXPLICACIONES_ARTICULOS = {
   "art. 21": {
     titulo: "Art. 21 - Riesgo grave e inminente",
     simple: "Si hay un peligro de MUERTE o lesión GRAVE, vos podés PARAR EL LABURO. Nadie te puede sancionar por eso. Si el jefe no para, los delegados pueden parar la actividad. Y si hay un inspector, él también puede ordenar que se pare.",
-    consejo: "ESTE ES TU DERECHO MÁS IMPORTANTE. Si ves un pozo sin baranda o气体 tóxico, PARÁ. No te pueden echar."
+    consejo: "ESTE ES TU DERECHO MÁS IMPORTANTE. Si ves un pozo sin baranda o un gas tóxico, PARÁ. No te pueden echar."
   },
   "art. 22": {
     titulo: "Art. 22 - Vigilancia de la salud",
