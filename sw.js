@@ -1,11 +1,23 @@
-const CACHE_NAME = "prl-espana-v1";
+const CACHE_NAME = "prl-espana-v2";
 const ASSETS = [
   "./",
   "./index.html",
   "./css/styles.css",
   "./js/data.js",
+  "./js/data-normativa-extra.js",
+  "./js/data-detalle-rds.js",
+  "./js/data-detalle-catalunya.js",
+  "./js/data-detalle-saneamiento.js",
+  "./js/data-casos-accidentes.js",
+  "./js/data-plantillas.js",
+  "./js/data-quiz-autoeval.js",
   "./js/data-extra.js",
   "./js/data-extra-2.js",
+  "./js/data-profesor.js",
+  "./js/data-catalan.js",
+  "./js/data-explicaciones.js",
+  "./js/data-preguntas.js",
+  "./js/ai-profesor.js",
   "./js/storage.js",
   "./js/app.js"
 ];
@@ -28,6 +40,12 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   e.respondWith(
-    caches.match(e.request).then((r) => r || fetch(e.request))
+    fetch(e.request)
+      .then((r) => {
+        const clone = r.clone();
+        caches.open(CACHE_NAME).then((c) => c.put(e.request, clone));
+        return r;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
