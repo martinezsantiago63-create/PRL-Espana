@@ -5,6 +5,7 @@ const App = {
 
   init() {
     this.bindEvents();
+    this.setupAudioListeners();
     this.updateProgressBadges();
     this.renderDashboard();
     if ("speechSynthesis" in window) {
@@ -63,6 +64,24 @@ const App = {
     document.getElementById("chatToggleBtn").addEventListener("click", () => {
       document.getElementById("chatPanel").classList.toggle("hidden");
     });
+
+    const miniRate = document.getElementById("miniPlayerRateBtn");
+    const miniPlay = document.getElementById("miniPlayerPlayBtn");
+    const miniStop = document.getElementById("miniPlayerStopBtn");
+
+    if (miniRate) {
+      miniRate.addEventListener("click", () => {
+        const rates = [1.0, 1.25, 1.5];
+        const next = rates[(rates.indexOf(PRLAudio.rate) + 1) % rates.length] || 1.0;
+        PRLAudio.setRate(next);
+      });
+    }
+    if (miniPlay) {
+      miniPlay.addEventListener("click", () => PRLAudio.pausar());
+    }
+    if (miniStop) {
+      miniStop.addEventListener("click", () => PRLAudio.detener());
+    }
     document.getElementById("closeChatBtn").addEventListener("click", () => {
       document.getElementById("chatPanel").classList.add("hidden");
     });
@@ -73,6 +92,49 @@ const App = {
 
     const savedTheme = PRLStorage.get("theme") || "auto";
     this.applyThemePreference();
+  },
+
+  setupAudioListeners() {
+    if (typeof PRLAudio === "undefined") return;
+
+    PRLAudio.onStateChange = (state) => {
+      // 1. Update main player in podcast view if present
+      const playBtn = document.getElementById("playerPlayBtn");
+      const progressBar = document.getElementById("playerProgressBar");
+      const statusText = document.getElementById("playerStatusText");
+      const nowIcon = document.querySelector(".podcast-now-icon");
+
+      if (playBtn) {
+        playBtn.textContent = state.isPlaying && !state.isPaused ? "⏸️ Pausar" : "▶️ Reproducir";
+      }
+      if (progressBar) {
+        progressBar.style.width = state.progress + "%";
+      }
+      if (statusText) {
+        statusText.textContent = state.isPlaying
+          ? (state.isPaused ? "En pausa" : `Reproduciendo audio (${state.progress}%)...`)
+          : "Listo para reproducir";
+      }
+      if (nowIcon) {
+        nowIcon.textContent = state.isPlaying && !state.isPaused ? "🔊" : "🎙️";
+      }
+
+      // 2. Update episode cards
+      document.querySelectorAll(".play-ep-btn").forEach((btn) => {
+        const epId = btn.dataset.episodeId;
+        const isCurrent = epId === state.episodeId;
+        btn.textContent = isCurrent && state.isPlaying && !state.isPaused ? "⏸️ Pausar" : "▶️ Escuchar";
+      });
+
+      document.querySelectorAll(".podcast-card").forEach((card) => {
+        const epId = card.dataset.episodeId;
+        if (epId === state.episodeId) {
+          card.classList.add("active-episode");
+        } else {
+          card.classList.remove("active-episode");
+        }
+      });
+    };
   },
 
   navigateTo(view, data) {
@@ -153,41 +215,68 @@ const App = {
         document.getElementById("catalaView").classList.add("active");
         this.renderCatala();
         break;
-      case "casos-accidentes":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewCasos = document.getElementById("sectionView");
-        viewCasos.classList.add("active");
-        this.renderCasosAccidentes(viewCasos);
+      case "laminas":
+        document.getElementById("laminasView").classList.add("active");
+        this.renderLaminas();
         break;
-      case "plantillas":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewPlant = document.getElementById("sectionView");
-        viewPlant.classList.add("active");
-        this.renderPlantillas(viewPlant);
+      case "metodos-insst":
+        document.getElementById("metodosInsstView").classList.add("active");
+        this.renderMetodosInsst();
         break;
-      case "autoevaluacion":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewAuto = document.getElementById("sectionView");
-        viewAuto.classList.add("active");
-        this.renderAutoevaluacion(viewAuto);
-        break;
-      case "convenio-colectivo":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewConv = document.getElementById("sectionView");
-        viewConv.classList.add("active");
-        this.renderConvenio(viewConv);
-        break;
-      case "registro-profesional":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewReg = document.getElementById("sectionView");
-        viewReg.classList.add("active");
-        this.renderRegistroProfesional(viewReg);
+      case "novedades-boe":
+        document.getElementById("novedadesBoeView").classList.add("active");
+        this.renderNovedadesBoe();
         break;
       case "cuadernillo":
-        document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
-        const viewCuad = document.getElementById("sectionView");
-        viewCuad.classList.add("active");
-        this.renderCuadernillo(viewCuad);
+        document.getElementById("cuadernilloView").classList.add("active");
+        this.renderCuadernilloView();
+        break;
+      case "simulador-examen":
+        document.getElementById("simuladorExamenView").classList.add("active");
+        this.renderSimuladorExamenView();
+        break;
+      case "normas-iso":
+        document.getElementById("normasIsoView").classList.add("active");
+        this.renderNormasIsoView();
+        break;
+      case "guia-app":
+        document.getElementById("guiaAppView").classList.add("active");
+        this.renderGuiaAppView();
+        break;
+      case "casos-accidentes":
+        document.getElementById("casosAccidentesView").classList.add("active");
+        this.renderCasosAccidentesView();
+        break;
+      case "plantillas":
+        document.getElementById("plantillasView").classList.add("active");
+        this.renderPlantillasView();
+        break;
+      case "autoevaluacion":
+        document.getElementById("quizView").classList.add("active");
+        this.renderQuiz();
+        break;
+      case "convenio-colectivo":
+        document.getElementById("convenioColectivoView").classList.add("active");
+        this.renderConvenioColectivoView();
+        break;
+      case "registro-profesional":
+        this.showItemDetail("registro-profesional");
+        break;
+      case "empleo-prl":
+        document.getElementById("empleoPrlView").classList.add("active");
+        this.renderEmpleoPrlView();
+        break;
+      case "cv-europass":
+        document.getElementById("cvEuropassView").classList.add("active");
+        this.renderCvEuropassView();
+        break;
+      case "podcast":
+        document.getElementById("podcastView").classList.add("active");
+        this.renderPodcastView();
+        break;
+      case "siglas-cifras":
+        document.getElementById("siglasCifrasView").classList.add("active");
+        this.renderSiglasCifrasView();
         break;
       default:
         if (data) {
@@ -333,6 +422,9 @@ const App = {
     const favorite = PRLStorage.isFavorite(itemId);
     const notes = PRLStorage.getNotes(itemId);
 
+    const hasBoe = typeof ARTICULADO_BOE_OFICIAL !== "undefined" ? ARTICULADO_BOE_OFICIAL[itemId] : null;
+    const detalleRd = typeof CONTENIDO_DETALLADO !== "undefined" ? CONTENIDO_DETALLADO[itemId] : null;
+
     let html = `
       <button class="back-btn" id="backBtn">← Volver</button>
       <div class="detail-header">
@@ -348,13 +440,43 @@ const App = {
           <button class="btn" id="toggleFavBtn">
             ${favorite ? "⭐ En Favoritos" : "☆ Agregar a Favoritos"}
           </button>
+          <button class="btn btn-copiar-cuadernillo" id="copiarFichaBtn">
+            📋 Copiar para Cuadernillo
+          </button>
+          <button class="btn" id="playAudioBtn" style="background: #8e44ad; color: white; font-weight: bold;">
+            🔊 Escuchar en Audio
+          </button>
         </div>
       </div>
 
+      ${hasBoe ? `
+        <div class="detail-tab-group">
+          <button class="detail-tab-btn active" id="btnTabResumen">🛠️ Explicación & Práctica</button>
+          <button class="detail-tab-btn" id="btnTabBoe">⚖️ Texto Literal BOE (${hasBoe.articulos.length} Artículos)</button>
+        </div>
+      ` : ""}
+
+      <div id="panelResumen">
       <div class="detail-section">
         <h3>📋 Resumen</h3>
         <p>${this.highlightArticles(item.summary)}</p>
       </div>
+
+      ${detalleRd && detalleRd.resumenLargo ? `
+        <div class="detail-section" style="background: var(--bg-secondary); border-left: 4px solid var(--accent, #3498db); padding: 16px; border-radius: var(--radius-sm);">
+          <h3 style="margin-top: 0; color: var(--accent, #3498db);">📖 Desarrollo Técnico Exhaustivo</h3>
+          <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-primary); margin: 0;">${this.highlightArticles(detalleRd.resumenLargo)}</p>
+        </div>
+      ` : ""}
+
+      ${detalleRd && detalleRd.queRegula && detalleRd.queRegula.length > 0 ? `
+        <div class="detail-section">
+          <h3>🎯 Qué Regula Específicamente (Ámbito de Aplicación)</h3>
+          <ul class="key-points-list">
+            ${detalleRd.queRegula.map((qr) => `<li>${this.highlightArticles(qr)}</li>`).join("")}
+          </ul>
+        </div>
+      ` : ""}
 
       ${item.keyPoints.length > 0 ? `
         <div class="detail-section">
@@ -389,10 +511,19 @@ const App = {
         </div>
       ` : ""}
 
-      ${item.comoLoUso ? `
+      ${item.comoLoUso || (detalleRd && detalleRd.comoLoUso) ? `
         <div class="detail-section" style="background: linear-gradient(135deg, var(--accent-light), var(--bg-card)); border: 1px solid var(--accent); border-radius: var(--radius); padding: 20px;">
           <h3>🛠️ Cómo lo uso yo como técnico</h3>
-          <p style="font-size: 0.92rem; line-height: 1.7; color: var(--text-primary);">${item.comoLoUso}</p>
+          <div style="font-size: 0.92rem; line-height: 1.7; color: var(--text-primary); white-space: pre-line;">${this.highlightArticles(item.comoLoUso || detalleRd.comoLoUso)}</div>
+        </div>
+      ` : ""}
+
+      ${detalleRd && detalleRd.sanciones && detalleRd.sanciones.length > 0 ? `
+        <div class="detail-section" style="background: rgba(231, 76, 60, 0.08); border-left: 4px solid #e74c3c; padding: 16px; border-radius: var(--radius-sm);">
+          <h3 style="color: #c0392b; margin-top: 0;">⚠️ Régimen Sancionador Aplicable (LISOS)</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 0.92rem; line-height: 1.7;">
+            ${detalleRd.sanciones.map((s) => `<li>${s}</li>`).join("")}
+          </ul>
         </div>
       ` : ""}
 
@@ -481,9 +612,111 @@ const App = {
         <button class="btn btn-primary" id="saveNotesBtn" style="margin-top: 8px;">Guardar Notas</button>
         <div id="explicacionArea"></div>
       </div>
+      </div>
+      <!-- Fin panelResumen -->
+
+      ${hasBoe ? `
+        <div id="panelBoe" class="hidden">
+          <div style="margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+              📖 Articulado textual oficial publicado en el BOE (${hasBoe.fuente}) para contrastar la teoría con la práctica.
+            </p>
+            <button class="btn btn-copiar-cuadernillo" id="copiarTodoBoeBtn">📋 Copiar Todo el Articulado</button>
+          </div>
+          <div class="articulado-boe-box">
+            ${hasBoe.articulos.map((art, artIdx) => `
+              <div class="articulo-boe-item">
+                <div class="articulo-boe-header">
+                  <span>${art.numero}: ${art.titulo}</span>
+                  <button class="btn copy-art-btn" data-art-idx="${artIdx}" style="padding: 4px 10px; font-size: 0.8rem; background: var(--bg-secondary);">📋 Copiar</button>
+                </div>
+                <div class="articulo-boe-literal">${art.textoLiteral}</div>
+                <div class="articulo-boe-comentario">
+                  💡 <strong>En la práctica:</strong> ${art.comentarioPractico}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      ` : ""}
     `;
 
     viewEl.innerHTML = html;
+
+    const copiarFichaBtn = document.getElementById("copiarFichaBtn");
+    if (copiarFichaBtn) {
+      copiarFichaBtn.addEventListener("click", () => {
+        let textoCuadernillo = `=== FICHA DE ESTUDIO: ${item.title.toUpperCase()} ===\n`;
+        textoCuadernillo += `• Tipo: ${item.type} | Estado: ${item.status}\n\n`;
+        textoCuadernillo += `RESUMEN:\n${item.summary}\n\n`;
+        if (detalleRd && detalleRd.resumenLargo) {
+          textoCuadernillo += `DESARROLLO TÉCNICO EXHAUSTIVO:\n${detalleRd.resumenLargo}\n\n`;
+        }
+        if (detalleRd && detalleRd.queRegula && detalleRd.queRegula.length > 0) {
+          textoCuadernillo += `QUÉ REGULA ESPECÍFICAMENTE:\n`;
+          detalleRd.queRegula.forEach(qr => { textoCuadernillo += `• ${qr}\n`; });
+          textoCuadernillo += `\n`;
+        }
+        if (item.keyPoints && item.keyPoints.length > 0) {
+          textoCuadernillo += `PUNTOS CLAVE PARA EL CUADERNILLO:\n`;
+          item.keyPoints.forEach(kp => { textoCuadernillo += `• ${kp}\n`; });
+          textoCuadernillo += `\n`;
+        }
+        if (item.comoLoUso || (detalleRd && detalleRd.comoLoUso)) {
+          textoCuadernillo += `CÓMO SE USA EN LA PRÁCTICA:\n${item.comoLoUso || detalleRd.comoLoUso}\n\n`;
+        }
+        if (detalleRd && detalleRd.sanciones && detalleRd.sanciones.length > 0) {
+          textoCuadernillo += `SANCIONES LISOS:\n`;
+          detalleRd.sanciones.forEach(s => { textoCuadernillo += `• ${s}\n`; });
+          textoCuadernillo += `\n`;
+        }
+        this.copiarAlCuadernillo(textoCuadernillo, item.title);
+      });
+    }
+
+    if (hasBoe) {
+      const btnTabResumen = document.getElementById("btnTabResumen");
+      const btnTabBoe = document.getElementById("btnTabBoe");
+      const panelResumen = document.getElementById("panelResumen");
+      const panelBoe = document.getElementById("panelBoe");
+
+      if (btnTabResumen && btnTabBoe && panelResumen && panelBoe) {
+        btnTabResumen.addEventListener("click", () => {
+          btnTabResumen.classList.add("active");
+          btnTabBoe.classList.remove("active");
+          panelResumen.classList.remove("hidden");
+          panelBoe.classList.add("hidden");
+        });
+        btnTabBoe.addEventListener("click", () => {
+          btnTabBoe.classList.add("active");
+          btnTabResumen.classList.remove("active");
+          panelBoe.classList.remove("hidden");
+          panelResumen.classList.add("hidden");
+        });
+      }
+
+      const copiarTodoBoeBtn = document.getElementById("copiarTodoBoeBtn");
+      if (copiarTodoBoeBtn) {
+        copiarTodoBoeBtn.addEventListener("click", () => {
+          let textoBoe = `=== ${hasBoe.titulo} ===\nFuente: ${hasBoe.fuente}\n\n`;
+          hasBoe.articulos.forEach(a => {
+            textoBoe += `--- ${a.numero}: ${a.titulo} ---\n${a.textoLiteral}\n\nEN LA PRÁCTICA:\n${a.comentarioPractico}\n\n`;
+          });
+          this.copiarAlCuadernillo(textoBoe, hasBoe.titulo);
+        });
+      }
+
+      viewEl.querySelectorAll(".copy-art-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.dataset.artIdx);
+          const a = hasBoe.articulos[idx];
+          if (a) {
+            const texto = `--- ${a.numero}: ${a.titulo} ---\n${a.textoLiteral}\n\nEN LA PRÁCTICA:\n${a.comentarioPractico}`;
+            this.copiarAlCuadernillo(texto, a.numero);
+          }
+        });
+      });
+    }
 
     document.getElementById("backBtn").addEventListener("click", () => {
       if (context?.fromSection) {
@@ -503,6 +736,15 @@ const App = {
     document.getElementById("toggleFavBtn").addEventListener("click", () => {
       PRLStorage.toggleFavorite(itemId);
       this.showItemDetail(itemId, context);
+    });
+
+    document.getElementById("playAudioBtn").addEventListener("click", () => {
+      let textToRead = `${item.title}. Resumen: ${item.summary}.`;
+      if (detalleRd && detalleRd.resumenLargo) {
+        textToRead += ` Desarrollo: ${detalleRd.resumenLargo}.`;
+      }
+      textToRead += ` Puntos Clave: ${item.keyPoints ? item.keyPoints.join(". ") : ""}. ${item.comoLoUso || (detalleRd ? detalleRd.comoLoUso : "")}`;
+      PRLAudio.reproducirTexto(textToRead, item.title, itemId);
     });
 
     document.getElementById("saveNotesBtn").addEventListener("click", () => {
@@ -742,6 +984,9 @@ const App = {
 
     const overview = document.getElementById("sectionsOverview");
     const tools = [
+      { id: "profesor", icon: "👨‍🏫", title: "Mi Profesor PRL" },
+      { id: "podcast", icon: "🎙️", title: "Podcast PRL (10 Audios)" },
+      { id: "siglas-cifras", icon: "📊", title: "Siglas & Cifras Clave" },
       { id: "checklist", icon: "✅", title: "Checklist Homologación" },
       { id: "vocabulario", icon: "📖", title: "Vocabulario AR→ES" },
       { id: "calculadora", icon: "🧮", title: "Calculadora Riesgos" },
@@ -1307,11 +1552,26 @@ const App = {
     };
 
     let html = `
-      <h2 style="margin-bottom: 6px;">🧮 Calculadora de Riesgos</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 20px;">Matriz de valoración de riesgos 5×5 (Severidad × Probabilidad)</p>
+      <h2 style="margin-bottom: 6px;">🧮 Calculadora de Riesgos Laborales (Método Matriz INSST 5×5)</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 20px;">Matriz de valoración de riesgos (Severidad × Probabilidad) con generación de informes técnicos.</p>
+      
+      <div style="background: var(--bg-card); padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 20px;">
+        <h4 style="margin-bottom: 12px; color: var(--accent);">📋 Datos de la Evaluación Técnica</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px;">Puesto / Área de Trabajo:</label>
+            <input type="text" id="calcPuesto" placeholder="Ej: Operario de Mantenimiento en Pozo" style="width: 100%; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary);" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px;">Peligro / Riesgo Evaluado:</label>
+            <input type="text" id="calcPeligro" placeholder="Ej: Caída a distinto nivel / Atmósfera asfixiante" style="width: 100%; padding: 8px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary);" />
+          </div>
+        </div>
+      </div>
+
       <div class="calc-container">
         <div class="calc-panel">
-          <h3>Parametros de Evaluación</h3>
+          <h3>Parámetros de Evaluación</h3>
           <div class="calc-select-group">
             <label>Severidad del daño</label>
             <select id="calcSev">
@@ -1329,12 +1589,18 @@ const App = {
             <div class="calc-result-label">Riesgo Bajo</div>
             <div class="calc-result-description">${measures.low}</div>
           </div>
+          <div style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
+            <button id="btnSaveEval" style="flex: 1; padding: 10px 14px; background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.9rem;">💾 Guardar Evaluación</button>
+            <button id="btnPrintEval" style="flex: 1; padding: 10px 14px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.9rem;">🖨️ Exportar Informe A4</button>
+          </div>
         </div>
         <div class="calc-panel">
-          <h3>Matriz 5×5</h3>
+          <h3>Matriz 5×5 INSST</h3>
           <div class="calc-matrix" id="calcMatrix"></div>
         </div>
       </div>
+
+      <div id="evaluacionesGuardadasArea" style="margin-top: 30px;"></div>
     `;
 
     viewEl.innerHTML = html;
@@ -1362,6 +1628,8 @@ const App = {
       matrixEl.innerHTML = mhtml;
     };
 
+    let currentEvalData = { score: 5, level: "Riesgo BAJO", desc: measures.low, cls: "risk-low", sev: 1, prob: 1 };
+
     const updateCalc = () => {
       const sev = parseInt(document.getElementById("calcSev").value);
       const prob = parseInt(document.getElementById("calcProb").value);
@@ -1374,6 +1642,8 @@ const App = {
       else if (score < 20) { cls = "risk-high"; level = "Riesgo ALTO"; desc = measures.high; }
       else { cls = "risk-very-high"; level = "Riesgo MUY ALTO"; desc = measures["very-high"]; }
 
+      currentEvalData = { score, level, desc, cls, sev, prob };
+
       document.getElementById("calcResult").innerHTML = `
         <div class="calc-result-number ${cls}">${score}</div>
         <div class="calc-result-label">${level}</div>
@@ -1383,9 +1653,101 @@ const App = {
       renderMatrix(sev, prob);
     };
 
+    const renderEvaluacionesGuardadasList = () => {
+      const container = document.getElementById("evaluacionesGuardadasArea");
+      const saved = PRLStorage.getRiskEvaluations();
+      if (!saved.length) {
+        container.innerHTML = "";
+        return;
+      }
+
+      container.innerHTML = `
+        <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);">
+          <h3 style="color: var(--accent); margin-bottom: 14px;">📂 Evaluaciones Guardadas en Local (${saved.length})</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            ${saved.map(item => `
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius-sm); border-left: 5px solid ${item.score >= 20 ? '#ef4444' : item.score >= 15 ? '#f97316' : item.score >= 10 ? '#f59e0b' : '#22c55e'}; flex-wrap: wrap; gap: 10px;">
+                <div>
+                  <div style="font-weight: bold; font-size: 1rem; color: var(--text-primary);">${item.peligro}</div>
+                  <div style="font-size: 0.85rem; color: var(--text-secondary);">📌 Puesto: ${item.puesto} • Fecha: ${item.date} • Matriz S${item.sev}×P${item.prob} (Valor: ${item.score})</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span style="font-weight: bold; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; background: var(--bg-card); border: 1px solid var(--border);">${item.level}</span>
+                  <button onclick="PRLStorage.deleteRiskEvaluation(${item.id}); App.renderCalculadora();" style="background: none; border: none; cursor: pointer; font-size: 1.1rem;" title="Eliminar">🗑️</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    };
+
     document.getElementById("calcSev").addEventListener("change", updateCalc);
     document.getElementById("calcProb").addEventListener("change", updateCalc);
+
+    document.getElementById("btnSaveEval").addEventListener("click", () => {
+      const puesto = document.getElementById("calcPuesto").value.trim() || "Puesto General";
+      const peligro = document.getElementById("calcPeligro").value.trim() || "Riesgo Evaluado";
+      PRLStorage.saveRiskEvaluation({
+        puesto,
+        peligro,
+        sev: currentEvalData.sev,
+        prob: currentEvalData.prob,
+        score: currentEvalData.score,
+        level: currentEvalData.level,
+        desc: currentEvalData.desc
+      });
+      alert("✅ Evaluación guardada correctamente en tu dispositivo.");
+      renderEvaluacionesGuardadasList();
+    });
+
+    document.getElementById("btnPrintEval").addEventListener("click", () => {
+      const puesto = document.getElementById("calcPuesto").value.trim() || "Puesto General / No especificado";
+      const peligro = document.getElementById("calcPeligro").value.trim() || "Evaluación de Riesgo Técnico";
+      const printWin = window.open("", "_blank");
+      const dateStr = new Date().toLocaleDateString('es-ES');
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Informe Técnico de Evaluación de Riesgos - ${puesto}</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 40px; color: #1e293b; line-height: 1.6; }
+            .header { border-bottom: 3px solid #3b82f6; padding-bottom: 12px; margin-bottom: 24px; }
+            .title { font-size: 22px; font-weight: bold; color: #1e3a8a; }
+            .subtitle { font-size: 14px; color: #64748b; margin-top: 4px; }
+            .box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 18px; border-radius: 8px; margin-bottom: 20px; }
+            .badge { display: inline-block; padding: 6px 14px; font-weight: bold; border-radius: 4px; color: white; background: ${currentEvalData.score >= 20 ? '#ef4444' : currentEvalData.score >= 15 ? '#f97316' : currentEvalData.score >= 10 ? '#f59e0b' : '#22c55e'}; }
+            .footer { margin-top: 50px; font-size: 12px; color: #94a3b8; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div class="title">📋 INFORME TÉCNICO DE EVALUACIÓN DE RIESGOS LABORALES</div>
+            <div class="subtitle">Metodología INSST (España) - Matriz 5×5 • Fecha: ${dateStr}</div>
+          </div>
+          <div class="box">
+            <p><strong>Puesto / Área de Trabajo:</strong> ${puesto}</p>
+            <p><strong>Peligro / Factor de Riesgo:</strong> ${peligro}</p>
+          </div>
+          <div class="box">
+            <p><strong>Parámetros Evaluados:</strong> Severidad Nivel ${currentEvalData.sev} × Probabilidad Nivel ${currentEvalData.prob}</p>
+            <p><strong>Valoración del Riesgo:</strong> <span class="badge">${currentEvalData.level} (Puntaje: ${currentEvalData.score})</span></p>
+            <p style="margin-top: 14px;"><strong>Medidas Preventivas Obligatorias:</strong><br>${currentEvalData.desc}</p>
+          </div>
+          <div class="footer">
+            Documento generado desde la App de Estudios PRL España • Prevención de Riesgos Laborales
+          </div>
+          <script>window.onload = function() { window.print(); }</script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    });
+
     updateCalc();
+    renderEvaluacionesGuardadasList();
   },
 
   renderQuiz(sectionFilter) {
@@ -2008,13 +2370,83 @@ const App = {
       });
     }
 
+    if (typeof PROFESOR_LECCIONES !== "undefined") {
+      PROFESOR_LECCIONES.forEach((lec) => {
+        const matchTitle = lec.titulo.toLowerCase().includes(q);
+        const matchObjetivos = lec.objetivos.some((o) => o.toLowerCase().includes(q));
+        let matchSeccion = false;
+        let matchDetail = "";
+        lec.secciones.forEach((sec) => {
+          if (sec.titulo && sec.titulo.toLowerCase().includes(q)) {
+            matchSeccion = true;
+            matchDetail = sec.titulo;
+          } else if (sec.contenido && sec.contenido.toLowerCase().includes(q)) {
+            matchSeccion = true;
+            if (!matchDetail && sec.titulo) matchDetail = sec.titulo;
+          }
+        });
+        if (matchTitle || matchObjetivos || matchSeccion) {
+          results.push({ leccion: lec, matchDetail, type: "profesor" });
+        }
+      });
+    }
+
+    if (typeof PODCAST_EPISODIOS !== "undefined") {
+      PODCAST_EPISODIOS.forEach((ep) => {
+        if (ep.titulo.toLowerCase().includes(q) || ep.descripcion.toLowerCase().includes(q) || ep.guion.toLowerCase().includes(q)) {
+          results.push({ episode: ep, type: "podcast" });
+        }
+      });
+    }
+
+    if (typeof DATA_SIGLAS_PRL !== "undefined") {
+      DATA_SIGLAS_PRL.forEach((s) => {
+        if (s.sigla.toLowerCase().includes(q) || s.nombre.toLowerCase().includes(q) || s.explicacion.toLowerCase().includes(q) || (s.equivalenteAr && s.equivalenteAr.toLowerCase().includes(q))) {
+          results.push({ sigla: s, type: "sigla" });
+        }
+      });
+    }
+
     if (results.length === 0) {
       resultsEl.innerHTML = `<div class="search-result-item"><div class="result-title">Sin resultados para "${query}"</div></div>`;
     } else {
       let html = "";
+      const profesorResults = results.filter((r) => r.type === "profesor");
+      const podcastResults = results.filter((r) => r.type === "podcast");
+      const siglaResults = results.filter((r) => r.type === "sigla");
       const studyResults = results.filter((r) => r.type === "study");
       const vocabResults = results.filter((r) => r.type === "vocab");
       const checkResults = results.filter((r) => r.type === "checklist");
+
+      if (podcastResults.length > 0) {
+        html += `<div class="search-result-category">🎙️ Podcast & Audio-Clases</div>`;
+        html += podcastResults.slice(0, 3).map((r) => `
+          <div class="search-result-item podcast-result" data-episode-id="${r.episode.id}">
+            <div class="result-title">🎙️ Episodio ${r.episode.numero}: ${r.episode.titulo}</div>
+            <div class="result-section">Podcast PRL · ${r.episode.duracion} · ${r.episode.categoria}</div>
+          </div>
+        `).join("");
+      }
+
+      if (siglaResults.length > 0) {
+        html += `<div class="search-result-category">🔤 Siglas Oficiales PRL</div>`;
+        html += siglaResults.slice(0, 4).map((r) => `
+          <div class="search-result-item sigla-search-result" data-sigla="${r.sigla.sigla}">
+            <div class="result-title"><strong>[${r.sigla.sigla}]</strong> ${r.sigla.nombre}</div>
+            <div class="result-section">${r.sigla.equivalenteAr ? `🇦🇷 Eq. AR: ${r.sigla.equivalenteAr}` : r.sigla.categoria}</div>
+          </div>
+        `).join("");
+      }
+
+      if (profesorResults.length > 0) {
+        html += `<div class="search-result-category">👨‍🏫 Mi Profesor PRL</div>`;
+        html += profesorResults.slice(0, 5).map((r) => `
+          <div class="search-result-item profesor-result" data-leccion-id="${r.leccion.id}">
+            <div class="result-title">${r.leccion.icono} ${r.leccion.titulo}</div>
+            <div class="result-section">Profesor PRL ${r.matchDetail ? `· ${r.matchDetail}` : `· ${r.leccion.modulo}`}</div>
+          </div>
+        `).join("");
+      }
 
       if (studyResults.length > 0) {
         html += `<div class="search-result-category">📚 Estudio</div>`;
@@ -2050,6 +2482,36 @@ const App = {
     }
 
     resultsEl.classList.remove("hidden");
+
+    resultsEl.querySelectorAll(".podcast-result").forEach((el) => {
+      el.addEventListener("click", () => {
+        resultsEl.classList.add("hidden");
+        document.getElementById("searchInput").value = "";
+        this.navigateTo("podcast");
+        if (typeof PRLAudio !== "undefined") {
+          PRLAudio.currentEpisodeId = el.dataset.episodeId;
+          this.renderPodcastView();
+        }
+      });
+    });
+
+    resultsEl.querySelectorAll(".sigla-search-result").forEach((el) => {
+      el.addEventListener("click", () => {
+        resultsEl.classList.add("hidden");
+        document.getElementById("searchInput").value = "";
+        this.navigateTo("siglas-cifras");
+        this.renderSiglasCifrasView("siglas", el.dataset.sigla);
+      });
+    });
+
+    resultsEl.querySelectorAll(".profesor-result").forEach((el) => {
+      el.addEventListener("click", () => {
+        resultsEl.classList.add("hidden");
+        document.getElementById("searchInput").value = "";
+        this.navigateTo("profesor");
+        this.openLeccion(el.dataset.leccionId);
+      });
+    });
 
     resultsEl.querySelectorAll(".search-result-item[data-item-id]").forEach((el) => {
       el.addEventListener("click", () => {
@@ -2145,7 +2607,13 @@ const App = {
 
     let html = `
       <div class="leccion-container">
-        <button class="back-btn" id="backToProfesor">← Volver a lecciones</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+          <button class="back-btn" id="backToProfesor" style="margin: 0;">← Volver a lecciones</button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-copiar-cuadernillo" id="copiarLeccionBtn">📋 Copiar para Cuadernillo</button>
+            <button class="btn" id="playLeccionAudioBtn" style="background: #8e44ad; color: white;">🔊 Escuchar Audio</button>
+          </div>
+        </div>
         <h2 style="margin: 16px 0 4px;">${leccion.icono} ${leccion.titulo}</h2>
         <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">📖 ${leccion.modulo} · ⏱️ ${leccion.duracion}</p>
 
@@ -2254,6 +2722,42 @@ const App = {
       nextBtn.disabled = idx === PROFESOR_LECCIONES.length - 1;
       nextBtn.addEventListener("click", () => { if (idx < PROFESOR_LECCIONES.length - 1) this.openLeccion(PROFESOR_LECCIONES[idx + 1].id); });
     }
+
+    const copiarLeccionBtn = document.getElementById("copiarLeccionBtn");
+    if (copiarLeccionBtn) {
+      copiarLeccionBtn.addEventListener("click", () => {
+        let texto = `=== LECCIÓN: ${leccion.titulo.toUpperCase()} ===\n`;
+        texto += `Módulo: ${leccion.modulo} | Duración: ${leccion.duracion}\n\n`;
+        texto += `OBJETIVOS:\n`;
+        leccion.objetivos.forEach(o => { texto += `• ${o}\n`; });
+        texto += `\n`;
+        leccion.secciones.forEach(s => {
+          if (s.tipo === "narrativa") {
+            texto += `INTRODUCCIÓN DEL PROFESOR:\n${s.contenido}\n\n`;
+          } else if (s.tipo === "concepto-clave" || s.tipo === "ejemplo" || s.tipo === "comparativa") {
+            texto += `--- ${s.titulo} ---\n${s.contenido}\n\n`;
+          } else if (s.tipo === "resumen") {
+            texto += `RESUMEN CLAVE:\n${s.contenido}\n\n`;
+          } else if (s.tipo === "pregunta") {
+            texto += `PREGUNTA DE AUTOEVALUACIÓN:\n${s.pregunta}\nRespuesta correcta: ${s.opciones[s.correcta]}\nExplicación: ${s.explicacion}\n\n`;
+          }
+        });
+        this.copiarAlCuadernillo(texto, leccion.titulo);
+      });
+    }
+
+    const playLeccionAudioBtn = document.getElementById("playLeccionAudioBtn");
+    if (playLeccionAudioBtn) {
+      playLeccionAudioBtn.addEventListener("click", () => {
+        let textoVoz = `${leccion.titulo}. `;
+        leccion.secciones.forEach(s => {
+          if (s.tipo === "narrativa") textoVoz += `${s.contenido}. `;
+          else if (s.tipo === "concepto-clave" || s.tipo === "ejemplo") textoVoz += `${s.titulo}. ${s.contenido}. `;
+          else if (s.tipo === "resumen") textoVoz += `${s.contenido}. `;
+        });
+        PRLAudio.reproducirTexto(textoVoz, leccion.titulo, leccion.id);
+      });
+    }
   },
 
   renderCatala() {
@@ -2291,7 +2795,10 @@ const App = {
       "General": "📋", "Equipamiento": "🦺", "Espacios Confinados": "⚠️", "Evaluación": "🔍",
       "Formación": "📚", "Riesgos": "☢️", "Inspección": "🔎", "Emergencias": "🚨",
       "Documentación": "📄", "Puesto de trabajo": "🏗️", "Organización": "👥",
-      "Frases": "💬", "Números": "🔢", "Señales": "🚦"
+      "Frases": "💬", "Números": "🔢", "Señales": "🚦",
+      "Residus i Camions (Vic/Osona)": "🚛", "Sanejament i EDAR": "🚰",
+      "Indústria Càrnia (Osona)": "🥩", "Gestió i ICSSL": "🏛️",
+      "Frases de Seguretat": "🗣️"
     };
 
     Object.entries(categorias).forEach(([cat, items]) => {
@@ -2358,6 +2865,7 @@ const App = {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
+          alert("Tu navegador no soporta reconocimiento de voz. Te recomendamos usar Google Chrome o Microsoft Edge.");
           btn.textContent = "❌";
           setTimeout(() => { btn.textContent = "🎤"; }, 2000);
           return;
@@ -2372,30 +2880,39 @@ const App = {
         recognition.start();
 
         recognition.onresult = (event) => {
-          const expected = btn.dataset.expected.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['"]/g, "").replace(/\s+/g, " ").trim();
+          const rawExpected = btn.dataset.expected;
+          const expected = rawExpected.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['"]/g, "").replace(/\s+/g, " ").trim();
           let bestMatch = false;
+          let spokenText = event.results[0][0].transcript;
+
           for (let i = 0; i < event.results[0].length; i++) {
             const spoken = event.results[0][i].transcript.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['"]/g, "").replace(/\s+/g, " ").trim();
             if (spoken === expected || expected.includes(spoken) || spoken.includes(expected)) {
               bestMatch = true;
+              spokenText = event.results[0][i].transcript;
               break;
             }
             const expectedWords = expected.split(" ");
             const spokenWords = spoken.split(" ");
             let matches = 0;
             expectedWords.forEach((w) => { if (spokenWords.some((sw) => sw.includes(w) || w.includes(sw))) matches++; });
-            if (matches / expectedWords.length >= 0.7) { bestMatch = true; break; }
+            if (matches / expectedWords.length >= 0.6) { 
+              bestMatch = true; 
+              spokenText = event.results[0][i].transcript;
+              break; 
+            }
           }
 
           if (bestMatch) {
             btn.textContent = "✅";
             btn.style.background = "var(--success-light)";
           } else {
-            const spoken = event.results[0][0].transcript;
             btn.textContent = "⚠️";
-            btn.title = "Dijiste: " + spoken;
             btn.style.background = "var(--danger-light)";
           }
+
+          App.mostrarFeedbackPronunciacion(rawExpected, spokenText, bestMatch);
+
           setTimeout(() => { btn.textContent = "🎤"; btn.style.background = ""; btn.disabled = false; }, 2500);
         };
 
@@ -2409,6 +2926,79 @@ const App = {
         };
       });
     });
+  },
+
+  mostrarFeedbackPronunciacion(expected, spoken, isSuccess) {
+    let box = document.getElementById("pronunciacionFeedbackBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "pronunciacionFeedbackBox";
+      box.style.position = "fixed";
+      box.style.bottom = "24px";
+      box.style.right = "24px";
+      box.style.maxWidth = "380px";
+      box.style.width = "90%";
+      box.style.background = "var(--bg-card)";
+      box.style.border = "2px solid var(--accent)";
+      box.style.borderRadius = "var(--radius)";
+      box.style.padding = "16px 20px";
+      box.style.boxShadow = "0 10px 25px rgba(0,0,0,0.5)";
+      box.style.zIndex = "9999";
+      box.style.fontFamily = "inherit";
+      document.body.appendChild(box);
+    }
+
+    box.style.display = "block";
+    box.style.borderColor = isSuccess ? "#10b981" : "#f59e0b";
+
+    box.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+        <span style="font-weight: bold; font-size: 0.95rem; color: ${isSuccess ? '#10b981' : '#f59e0b'};">
+          ${isSuccess ? "🎉 ¡Molt bé! Pronunciación correcta" : "⚠️ Casi lo tienes (requiere ajuste)"}
+        </span>
+        <button id="closeFeedbackBtn" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
+      </div>
+
+      <div style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 6px;">
+        🎯 <strong>Modelo en Catalán:</strong> <span style="color: var(--text-primary); font-weight: 600;">"${expected}"</span>
+      </div>
+
+      <div style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 12px;">
+        🎙️ <strong>El sistema escuchó:</strong> <span style="color: ${isSuccess ? '#10b981' : '#f87171'}; font-weight: 500;">"${spoken}"</span>
+      </div>
+
+      <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px; background: var(--bg-secondary); padding: 8px 10px; border-radius: var(--radius-sm); border-left: 3px solid ${isSuccess ? '#10b981' : '#f59e0b'};">
+        ${isSuccess 
+          ? "👏 ¡Excelente! Tu pronunciación fue reconocida perfectamente por el motor en catalán. En Vic te entenderían sin problemas." 
+          : "💡 Fíjate en los acentos y sonidos clave (la 'X' suena como 'sh', la 'NY' como 'ñ'). Escucha el audio modelo y prueba otra vez."}
+      </div>
+
+      <div style="display: flex; gap: 8px; justify-content: flex-end;">
+        <button id="listenModelBtn" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">🔊 Escuchar Modelo</button>
+      </div>
+    `;
+
+    document.getElementById("closeFeedbackBtn").addEventListener("click", () => {
+      box.style.display = "none";
+    });
+
+    document.getElementById("listenModelBtn").addEventListener("click", () => {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(expected);
+        utter.lang = "ca-ES";
+        utter.rate = 0.8;
+        const voices = window.speechSynthesis.getVoices();
+        const caVoice = voices.find((v) => v.lang.startsWith("ca"));
+        if (caVoice) utter.voice = caVoice;
+        window.speechSynthesis.speak(utter);
+      }
+    });
+
+    clearTimeout(this._feedbackTimeout);
+    this._feedbackTimeout = setTimeout(() => {
+      if (box) box.style.display = "none";
+    }, 7000);
   },
 
   showFlashcard(idx, flashcards) {
@@ -2918,6 +3508,1752 @@ IMPORTANTE: Sin el registro, tu título vale pero no podés ejercer plenamente. 
         pctEl.style.background = pct >= 80 ? "#27ae60" : pct >= 50 ? "#f39c12" : "#e74c3c";
       });
     });
+  },
+
+  renderLaminas() {
+    const el = document.getElementById("laminasView");
+    if (!el) return;
+
+    const customLaminas = PRLStorage.get("custom_laminas") || [];
+    const todasLaminas = [...LAMINAS_DIDACTICAS, ...customLaminas];
+
+    let html = `
+      <div class="section-header">
+        <h2>🖼️ Láminas e Infografías Didácticas (Masterclass IA)</h2>
+        <p>Afiches técnicos industriales de alta densidad informativa con normas de España (LPRL 31/1995, RDs), esquemas paso a paso y diseño listo para imprimir en A4.</p>
+        
+        <!-- CREADOR DE LÁMINAS CON IA SOBRE CUALQUIER TEMA -->
+        <div style="background: #0f121d; padding: 20px; border-radius: var(--radius); border: 2px solid var(--accent); margin-top: 16px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+          <h3 style="color: #60a5fa; font-size: 1.15rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">✨ Generar Nueva Lámina con IA sobre CUALQUIER Tema</h3>
+          <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 14px;">Escribí cualquier tema o riesgo (ej. <em>Riesgo Eléctrico y LOTO, Trabajos en Altura, Riesgo Biológico en Alcantarillado, Ruido e Higiene Industrial, Manipulación de Químicos</em>) y la IA armará el afiche completo con su infografía A4.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="nuevoTemaLaminaInput" placeholder="Ej. Riesgo Eléctrico y Procedimiento LOTO según RD 614/2001..." style="flex: 1; min-width: 280px; padding: 12px 16px; background: #171c2c; border: 1px solid #374151; border-radius: var(--radius-sm); color: white; font-size: 0.95rem;">
+            <button id="btnCrearLaminaIA" onclick="App.crearNuevaLaminaPersonalizada()" style="padding: 12px 24px; background: linear-gradient(135deg, #2563eb, #8e44ad); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,99,235,0.4);">✨ Generar Afiche con IA</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <button onclick="App.imprimirTodasLasLaminas()" style="padding: 12px 24px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">🖨️ Imprimir TODAS las Láminas en A4 (Álbum Completo)</button>
+        </div>
+      </div>
+
+      <div class="laminas-grid">
+        ${todasLaminas.map((l, idx) => `
+          <div class="poster-sheet">
+            <div class="poster-top-banner">
+              <span class="category-badge">🛡️ ${l.categoria}</span>
+              <h3>${l.titulo}</h3>
+              <p>${l.subtitulo}</p>
+              <div style="margin-top: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button onclick="App.imprimirLaminaIndividual('${l.id}')" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px;">📄 Imprimir esta Lámina en A4</button>
+                <button onclick="App.generarInfografiaDinamica('${l.id}', '${l.titulo}')" style="padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid #4b5563; color: #e5e7eb; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">✨ Regenerar Ilustración con IA</button>
+              </div>
+            </div>
+
+            <div class="poster-hero-frame">
+              <img id="img-lamina-${l.id}" src="${l.imagen}" alt="${l.titulo}" onerror="this.onerror=null; this.src='assets/infografia_actos_condiciones.png';">
+            </div>
+
+            <div class="poster-grid-2x2">
+              <div class="poster-card-box red">
+                <span class="poster-card-number">01</span>
+                <div class="poster-card-title">⚠️ ${l.columnas.acto.titulo}</div>
+                <ul class="poster-card-list">
+                  ${l.columnas.acto.puntos.map(p => `<li>${p}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="poster-card-box green">
+                <span class="poster-card-number">02</span>
+                <div class="poster-card-title">✅ ${l.columnas.condicion.titulo}</div>
+                <ul class="poster-card-list">
+                  ${l.columnas.condicion.puntos.map(p => `<li>${p}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <div class="poster-clave-box">
+              <span class="bulb-icon">💡</span>
+              <div class="clave-text">
+                <strong>REGLA DE ORO / PUNTOS CLAVE DE NORMATIVA:</strong><br>
+                ${l.claves.join(" • ")}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  imprimirLaminaIndividual(id) {
+    const lamina = LAMINAS_DIDACTICAS.find(l => l.id === id);
+    if (!lamina) return;
+    const printWin = window.open("", "_blank");
+    const imgEl = document.getElementById(`img-lamina-${id}`);
+    const imgSrc = imgEl ? imgEl.src : lamina.imagen;
+
+    let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+    <title>${lamina.titulo} - Lámina PRL A4</title>
+    <style>
+      @page { size: A4 portrait; margin: 10mm; }
+      body { font-family: 'Segoe UI', Arial, sans-serif; color: #111; margin: 0; padding: 0; line-height: 1.4; background: #fff; }
+      .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 6px; margin-bottom: 10px; }
+      .header h1 { font-size: 16pt; margin: 0; color: #1e3a8a; }
+      .header p { font-size: 9.5pt; color: #4b5563; margin: 2px 0 0 0; }
+      .hero-img { width: 100%; max-height: 125mm; object-fit: contain; display: block; margin: 0 auto 10px auto; border: 1px solid #e5e7eb; border-radius: 4px; }
+      .cols { display: flex; gap: 10px; margin-bottom: 10px; }
+      .col { flex: 1; border: 1px solid #d1d5db; padding: 8px; border-radius: 4px; background: #f9fafb; font-size: 9pt; }
+      .col h3 { font-size: 10pt; margin-top: 0; margin-bottom: 4px; color: #b91c1c; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px; }
+      .col.acto h3 { color: #d97706; }
+      .col ul { padding-left: 14px; margin: 0; }
+      .col li { margin-bottom: 3px; }
+      .claves { background: #eff6ff; border: 1px solid #93c5fd; padding: 8px; border-radius: 4px; font-size: 9pt; }
+      .claves h4 { margin: 0 0 4px 0; color: #1d4ed8; font-size: 9.5pt; }
+      .claves ul { padding-left: 14px; margin: 0; }
+      .footer { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 8pt; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 4px; }
+    </style></head><body>
+      <div class="header">
+        <h1>${lamina.titulo}</h1>
+        <p>${lamina.subtitulo} — PRL España (Lámina A4)</p>
+      </div>
+      <img src="${imgSrc}" class="hero-img">
+      <div class="cols">
+        <div class="col acto">
+          <h3>${lamina.columnas.acto.titulo}</h3>
+          <ul>${lamina.columnas.acto.puntos.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>
+        <div class="col">
+          <h3>${lamina.columnas.condicion.titulo}</h3>
+          <ul>${lamina.columnas.condicion.puntos.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="claves">
+        <h4>💡 Puntos Clave para Recordar:</h4>
+        <ul>${lamina.claves.map(k => `<li>${k}</li>`).join('')}</ul>
+      </div>
+      <div class="footer">Lámina Didáctica de Estudio PRL España — Formato Imprimible A4</div>
+    </body></html>`;
+
+    printWin.document.write(html);
+    printWin.document.close();
+    printWin.onload = () => { printWin.print(); };
+  },
+
+  imprimirTodasLasLaminas() {
+    const printWin = window.open("", "_blank");
+    let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+    <title>Álbum de Láminas PRL A4</title>
+    <style>
+      @page { size: A4 portrait; margin: 10mm; }
+      body { font-family: 'Segoe UI', Arial, sans-serif; color: #111; margin: 0; padding: 0; line-height: 1.4; background: #fff; }
+      .lamina-page { page-break-after: always; height: 100%; box-sizing: border-box; }
+      .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 6px; margin-bottom: 10px; }
+      .header h1 { font-size: 16pt; margin: 0; color: #1e3a8a; }
+      .header p { font-size: 9.5pt; color: #4b5563; margin: 2px 0 0 0; }
+      .hero-img { width: 100%; max-height: 120mm; object-fit: contain; display: block; margin: 0 auto 10px auto; border: 1px solid #e5e7eb; border-radius: 4px; }
+      .cols { display: flex; gap: 10px; margin-bottom: 10px; }
+      .col { flex: 1; border: 1px solid #d1d5db; padding: 8px; border-radius: 4px; background: #f9fafb; font-size: 9pt; }
+      .col h3 { font-size: 10pt; margin-top: 0; margin-bottom: 4px; color: #b91c1c; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px; }
+      .col.acto h3 { color: #d97706; }
+      .col ul { padding-left: 14px; margin: 0; }
+      .col li { margin-bottom: 3px; }
+      .claves { background: #eff6ff; border: 1px solid #93c5fd; padding: 8px; border-radius: 4px; font-size: 9pt; }
+      .claves h4 { margin: 0 0 4px 0; color: #1d4ed8; font-size: 9.5pt; }
+      .claves ul { padding-left: 14px; margin: 0; }
+    </style></head><body>`;
+
+    LAMINAS_DIDACTICAS.forEach(lamina => {
+      const imgEl = document.getElementById(`img-lamina-${lamina.id}`);
+      const imgSrc = imgEl ? imgEl.src : lamina.imagen;
+      html += `<div class="lamina-page">
+        <div class="header">
+          <h1>${lamina.titulo}</h1>
+          <p>${lamina.subtitulo} — PRL España (Álbum A4)</p>
+        </div>
+        <img src="${imgSrc}" class="hero-img">
+        <div class="cols">
+          <div class="col acto">
+            <h3>${lamina.columnas.acto.titulo}</h3>
+            <ul>${lamina.columnas.acto.puntos.map(p => `<li>${p}</li>`).join('')}</ul>
+          </div>
+          <div class="col">
+            <h3>${lamina.columnas.condicion.titulo}</h3>
+            <ul>${lamina.columnas.condicion.puntos.map(p => `<li>${p}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="claves">
+          <h4>💡 Puntos Clave para Recordar:</h4>
+          <ul>${lamina.claves.map(k => `<li>${k}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+    });
+
+    html += `</body></html>`;
+    printWin.document.write(html);
+    printWin.document.close();
+    printWin.onload = () => { printWin.print(); };
+  },
+
+  async generarInfografiaDinamica(id, titulo) {
+    const imgEl = document.getElementById(`img-lamina-${id}`);
+    if (!imgEl) return;
+    const oldSrc = imgEl.src;
+    imgEl.style.opacity = "0.4";
+    const prompt = `Educational infographic poster in Spanish about industrial safety titled ${titulo}. Vector illustration style, clear text boxes, bright safety colors.`;
+
+    if (typeof AIProfesor !== "undefined" && AIProfesor.hasApiKey()) {
+      const googleImg = await AIProfesor.generarImagenConGoogle(prompt);
+      if (googleImg) {
+        imgEl.src = googleImg;
+        imgEl.style.opacity = "1";
+        return;
+      }
+    }
+
+    const newSrc = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${Math.floor(Math.random() * 1000000)}`;
+    const newImg = new Image();
+    newImg.onload = () => {
+      imgEl.src = newSrc;
+      imgEl.style.opacity = "1";
+    };
+    newImg.onerror = () => {
+      imgEl.src = oldSrc;
+      imgEl.style.opacity = "1";
+    };
+    newImg.src = newSrc;
+  },
+
+  async crearNuevaLaminaPersonalizada() {
+    const input = document.getElementById("nuevoTemaLaminaInput");
+    if (!input || !input.value.trim()) {
+      alert("Por favor escribí un tema para generar la lámina (ej: Trabajos en Altura, Riesgo Eléctrico, etc.)");
+      return;
+    }
+    const tema = input.value.trim();
+    const btn = document.getElementById("btnCrearLaminaIA");
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = "⏳ Generando Lámina con IA...";
+    }
+
+    try {
+      const estructura = await AIProfesor.generarEstructuraLamina(tema);
+      const promptImg = `Educational infographic poster in Spanish titled ${estructura.titulo}. Professional industrial safety vector style, clear icons, safety colors.`;
+      let imgSrc = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptImg)}?width=1024&height=1024&seed=${Math.floor(Math.random() * 1000000)}`;
+
+      if (typeof AIProfesor !== "undefined" && AIProfesor.hasApiKey()) {
+        const googleImg = await AIProfesor.generarImagenConGoogle(promptImg);
+        if (googleImg) imgSrc = googleImg;
+      }
+
+      const nuevaLamina = {
+        id: "custom-" + Date.now(),
+        titulo: estructura.titulo || tema,
+        subtitulo: estructura.subtitulo || `Prevención de riesgos para ${tema} en España`,
+        categoria: estructura.categoria || "Personalizado",
+        imagen: imgSrc,
+        resumen: estructura.resumen || `Lámina de estudio generada por IA para ${tema}.`,
+        columnas: estructura.columnas || {
+          acto: { titulo: "⚠️ OBLIGACIONES", puntos: ["Seguir protocolo de seguridad", "Usar EPIs obligatorios", "Recibir formación previa"] },
+          condicion: { titulo: "🚨 CONDICIONES Y RIESGOS", puntos: ["Señalizar el área de trabajo", "Verificar equipos", "Evitar zonas de peligro"] }
+        },
+        claves: estructura.claves || ["Verificar normativa aplicable en España", "Consultar Guía Técnica INSST"]
+      };
+
+      const customLaminas = PRLStorage.get("custom_laminas") || [];
+      customLaminas.unshift(nuevaLamina);
+      PRLStorage.set("custom_laminas", customLaminas);
+
+      this.renderLaminas();
+      alert(`¡Lámina sobre "${nuevaLamina.titulo}" generada exitosamente! Podés verla e imprimirla en A4.`);
+    } catch (e) {
+      alert("Ocurrió un error al generar la lámina. Por favor intentá nuevamente.");
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = "✨ Generar Lámina con IA";
+      }
+    }
+  },
+
+  renderMetodosInsst() {
+    const el = document.getElementById("metodosInsstView");
+    if (!el) return;
+    let html = `
+      <div class="section-header">
+        <h2>📊 Métodos de Evaluación INSST</h2>
+        <p>Métodos oficiales recomendados por el Instituto Nacional de Seguridad y Salud en el Trabajo de España para evaluación de riesgos mecánicos, ambientales y químicos.</p>
+      </div>
+      <div class="metodos-grid">
+        ${METODOS_INSST.map(m => `
+          <div class="metodo-card">
+            <h3>${m.nombre}</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">${m.aplicacion}</p>
+            <div class="formula-badge">FÓRMULA: ${m.formula}</div>
+            ${m.criterios ? `
+              <h4 style="margin-top: 14px; margin-bottom: 8px; font-size: 0.95rem;">Criterios de Acción:</h4>
+              <ul style="padding-left: 20px; font-size: 0.9rem;">
+                ${m.criterios.map(c => `<li style="margin-bottom: 6px;"><strong>${c.rango}:</strong> ${c.accion} <span style="font-size: 0.8rem; color: var(--warning);">${c.urgencia}</span></li>`).join('')}
+              </ul>
+            ` : ""}
+          </div>
+        `).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  renderCasosAccidentesView() {
+    const el = document.getElementById("casosAccidentesView");
+    if (!el) return;
+    const casos = typeof CASOS_ACCIDENTES !== "undefined" ? CASOS_ACCIDENTES : [];
+    let html = `
+      <div class="section-header">
+        <h2>⚠️ Investigaciones de Casos Reales de Accidentes en España</h2>
+        <p>Análisis técnico de accidentes laborales reales, infracciones normativas y lecciones de prevención para técnicos.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 20px auto;">
+        ${casos.map((c, i) => {
+          const victimaText = c.victima || c.victimas || "Trabajador afectado";
+          const resumenText = c.resumen || c.contexto || "";
+          
+          let queSalioMalList = [];
+          if (Array.isArray(c.queSalioMal)) queSalioMalList = c.queSalioMal;
+          else if (typeof c.queSalioMal === "string") queSalioMalList = [c.queSalioMal];
+          else if (c.causa) queSalioMalList = typeof c.causa === "string" ? [c.causa] : c.causa;
+
+          let normasList = [];
+          if (Array.isArray(c.normasVioladas)) normasList = c.normasVioladas;
+          else if (typeof c.normasVioladas === "string") normasList = [c.normasVioladas];
+          else if (c.normaIncumplida) normasList = typeof c.normaIncumplida === "string" ? [c.normaIncumplida] : c.normaIncumplida;
+
+          let queDebioList = [];
+          if (Array.isArray(c.queDebioPasarse)) queDebioList = c.queDebioPasarse;
+          else if (typeof c.queDebioPasarse === "string") queDebioList = [c.queDebioPasarse];
+          else if (c.leccion) queDebioList = [c.leccion];
+
+          const gravedadText = c.gravedad || "GRAVE";
+          const isMortal = String(gravedadText).toUpperCase().includes("MORTAL");
+
+          return `
+            <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); border-left: 6px solid ${isMortal ? '#ef4444' : '#f59e0b'}; box-shadow: var(--shadow);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                <h3 style="margin: 0; color: var(--accent); font-size: 1.2rem;">Caso ${i + 1}: ${c.titulo}</h3>
+                <span style="font-weight: bold; padding: 4px 10px; background: rgba(239,68,68,0.15); color: #ef4444; border-radius: var(--radius-sm); font-size: 0.85rem;">${gravedadText}</span>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 14px;">👤 <strong>VÍCTIMA / CONTEXTO:</strong> ${victimaText}</p>
+              <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); margin-bottom: 14px; line-height: 1.6; font-size: 0.95rem;">
+                <strong>Resumen de los Hechos:</strong><br>${resumenText}
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div style="background: rgba(239,68,68,0.08); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid rgba(239,68,68,0.3); color: var(--text-primary);">
+                  <h4 style="margin: 0 0 8px 0; color: #ef4444;">❌ ¿Qué salió mal / Causa?</h4>
+                  <ul style="margin: 0; padding-left: 18px; font-size: 0.88rem; line-height: 1.6;">
+                    ${queSalioMalList.map(m => `<li>${m}</li>`).join('')}
+                  </ul>
+                </div>
+                <div style="background: rgba(34,197,94,0.08); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid rgba(34,197,94,0.3); color: var(--text-primary);">
+                  <h4 style="margin: 0 0 8px 0; color: #22c55e;">✅ ¿Qué debió hacerse?</h4>
+                  <ul style="margin: 0; padding-left: 18px; font-size: 0.88rem; line-height: 1.6;">
+                    ${queDebioList.map(m => `<li>${m}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+              ${normasList.length > 0 ? `
+                <div style="background: rgba(59,130,246,0.1); padding: 12px 16px; border-radius: var(--radius-sm); border-left: 4px solid var(--accent); margin-bottom: 14px;">
+                  <strong>📜 Normativa Incumplida:</strong> ${normasList.join(' • ')}
+                </div>
+              ` : ''}
+              ${c.leccion ? `
+                <div style="font-weight: bold; color: var(--accent); font-size: 0.95rem;">
+                  💡 LECCIÓN TÉCNICA: ${c.leccion}
+                </div>
+              ` : ''}
+              <button onclick="PRLAudio.reproducirTexto('${c.titulo.replace(/'/g, '')}. ${resumenText.replace(/'/g, '')}')" style="margin-top: 14px; padding: 8px 16px; background: #8e44ad; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.85rem;">🔊 Escuchar Caso en Audio</button>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  renderPlantillasView() {
+    const el = document.getElementById("plantillasView");
+    if (!el) return;
+    const plantillas = typeof PLANTILLAS !== "undefined" ? PLANTILLAS : {};
+    const keys = Object.keys(plantillas);
+
+    let html = `
+      <div class="section-header">
+        <h2>📄 Plantillas y Modelos de Documentación Técnica PRL</h2>
+        <p>Modelos en blanco y formularios oficiales según normativa del INSST para adaptar y usar en tus trabajos.</p>
+      </div>
+      <div style="max-width: 900px; margin: 20px auto;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+          ${keys.map((k, idx) => `
+            <button onclick="App.verPlantilla('${k}')" style="padding: 10px 18px; background: ${idx === 0 ? 'var(--accent)' : 'var(--bg-card)'}; color: ${idx === 0 ? 'white' : 'var(--text-primary)'}; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-weight: bold;" class="plantilla-tab-btn" data-key="${k}">${plantillas[k].titulo.replace('Plantilla: ', '')}</button>
+          `).join('')}
+        </div>
+        <div id="plantillaDisplayArea" style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);"></div>
+      </div>
+    `;
+    el.innerHTML = html;
+    if (keys.length > 0) this.verPlantilla(keys[0]);
+  },
+
+  verPlantilla(key) {
+    const area = document.getElementById("plantillaDisplayArea");
+    if (!area || typeof PLANTILLAS === "undefined" || !PLANTILLAS[key]) return;
+    const p = PLANTILLAS[key];
+
+    document.querySelectorAll(".plantilla-tab-btn").forEach(btn => {
+      const isSelected = btn.dataset.key === key;
+      btn.style.background = isSelected ? "var(--accent)" : "var(--bg-card)";
+      btn.style.color = isSelected ? "white" : "var(--text-primary)";
+    });
+
+    area.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+        <h3 style="margin: 0; color: var(--accent);">${p.titulo}</h3>
+        <button onclick="App.imprimirPlantilla('${key}')" style="padding: 8px 18px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold;">🖨️ Imprimir / Copiar Documento</button>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 16px;">${p.descripcion}</p>
+      <div style="background: var(--bg-secondary); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border); overflow-x: auto; color: var(--text-primary);">
+        ${p.contenido}
+      </div>
+    `;
+  },
+
+  imprimirPlantilla(key) {
+    if (typeof PLANTILLAS === "undefined" || !PLANTILLAS[key]) return;
+    const p = PLANTILLAS[key];
+    const printWin = window.open("", "_blank");
+    printWin.document.write(`
+      <!DOCTYPE html><html><head><meta charset="UTF-8"><title>${p.titulo}</title>
+      <style>body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.6; color: #1e293b; }</style>
+      </head><body>${p.contenido}<script>window.onload = function() { window.print(); }</script></body></html>
+    `);
+    printWin.document.close();
+  },
+
+  renderConvenioColectivoView() {
+    const el = document.getElementById("convenioColectivoView");
+    if (!el) return;
+    let html = `
+      <div class="section-header">
+        <h2>💰 Convenio Colectivo y Escala Salarial de PRL en España</h2>
+        <p>Regulación laboral, tablas de remuneración, categorías profesionales y derechos del Técnico en Prevención.</p>
+      </div>
+      <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); max-width: 850px; margin: 20px auto;">
+        <h3 style="color: var(--accent); margin-bottom: 12px;">📊 Salarios de Referencia (Servicios de Prevención Ajenos - SPA)</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+          En España, el ejercicio de la PRL está regulado bajo el <strong>Convenio Colectivo Nacional de Servicios de Prevención Ajenos</strong>.
+        </p>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: var(--bg-secondary); text-align: left;">
+              <th style="padding: 10px; border: 1px solid var(--border);">Categoría Profesional</th>
+              <th style="padding: 10px; border: 1px solid var(--border);">Requisitos / Título</th>
+              <th style="padding: 10px; border: 1px solid var(--border);">Rango Salarial Bruto/Año</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px; border: 1px solid var(--border);"><strong>Técnico Superior PRL (3 Esp.)</strong></td>
+              <td style="padding: 10px; border: 1px solid var(--border);">Máster Oficial Universitario + Homologación</td>
+              <td style="padding: 10px; border: 1px solid var(--border); color: var(--success); font-weight: bold;">26.000 € – 38.000 €</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid var(--border);"><strong>Técnico Intermedio PRL</strong></td>
+              <td style="padding: 10px; border: 1px solid var(--border);">Título FP Superior / Acreditación 300h</td>
+              <td style="padding: 10px; border: 1px solid var(--border); color: var(--accent); font-weight: bold;">20.000 € – 25.000 €</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid var(--border);"><strong>Coordinador de Seguridad en Obras</strong></td>
+              <td style="padding: 10px; border: 1px solid var(--border);">Arquitecto Técnico / Ingeniero + Acreditación</td>
+              <td style="padding: 10px; border: 1px solid var(--border); color: var(--success); font-weight: bold;">30.000 € – 45.000 €</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 style="color: var(--accent); margin-bottom: 8px;">📌 Jornada Laboral y Vacaciones Obligatorias:</h4>
+        <ul style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">
+          <li>Jornada Máxima Anual: 1.710 horas (promedio 38,5h semanales).</li>
+          <li>Vacaciones Pagadas: 23 días laborables (30 días naturales por año trabajado).</li>
+          <li>Pagas Extraordinarias: 14 pagas al año (o 12 pagas con extras prorrateadas).</li>
+        </ul>
+        <button onclick="PRLAudio.reproducirTexto('Convenio Colectivo de Prevención de Riesgos Laborales en España. El salario de un Técnico Superior con 3 especialidades ronda entre 26.000 y 38.000 euros brutos al año. La jornada máxima es de 1710 horas anuales con 14 pagas.')" style="padding: 8px 16px; background: #8e44ad; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.85rem;">🔊 Escuchar Convenio en Audio</button>
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  renderEmpleoPrlView() {
+    const el = document.getElementById("empleoPrlView");
+    if (!el) return;
+    let html = `
+      <div class="section-header">
+        <h2>💼 Portal Directo de Búsqueda de Empleo PRL & Residuos en España</h2>
+        <p>Acceso a las principales bolsas de trabajo, contratistas de servicios urbanos y portales de empleo en España y Cataluña.</p>
+      </div>
+      <div style="max-width: 900px; margin: 20px auto; display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 2px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">🚛 Principales Empresas Concesionarias de Recogida y Limpieza (España y Cataluña)</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+            Estas multinacionales gestionan los servicios urbanos de recogida de basura, saneamiento y limpieza en Vic, Barcelona y toda España. Buscan constantemente Técnicos de Prevención y Encargados de Seguridad:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">FCC Medio Ambiente</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Líder en servicios urbanos en España y Cataluña.</p>
+              <a href="https://www.fccma.com/es/empleo" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--accent); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🌐 Canal Empleo FCC ➔</a>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">PreZero España</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Gestión de residuos y medio ambiente.</p>
+              <a href="https://prezero.es/empleo/" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--accent); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🌐 Trabajar en PreZero ➔</a>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">Urbaser</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Gestión ambiental y servicios municipales.</p>
+              <a href="https://www.urbaser.com/unete-a-nosotros/" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--accent); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🌐 Canal Empleo Urbaser ➔</a>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">Valoriza Servicios</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Servicios urbanos y economía circular.</p>
+              <a href="https://www.valoriza.es/es/personas/empleo" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--accent); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🌐 Trabajar en Valoriza ➔</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">🔍 Portales de Empleo en España y Cataluña</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">InfoJobs España</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Búsqueda directa: "Técnico Prevención Residuos" / "PRL Barcelona".</p>
+              <a href="https://www.infojobs.net/jobsearch/search-map/list.xhtml?keyword=tecnico%20prevencion%20riesgos" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--success); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🔍 Buscar en InfoJobs ➔</a>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <h4 style="margin: 0 0 6px 0; color: var(--text-primary);">Creacció Vic / Osona (Cataluña)</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Bolsa de empleo local en la comarca de Vic.</p>
+              <a href="https://www.creaccio.cat/" target="_blank" rel="noopener" style="display: inline-block; padding: 6px 12px; background: var(--success); color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">🌐 Bolsa Empleo Vic / Osona ➔</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  renderCvEuropassView() {
+    const el = document.getElementById("cvEuropassView");
+    if (!el) return;
+    let html = `
+      <div class="section-header">
+        <h2>📄 Generador de CV Europeo (Europass) — Experiencia 20 Años</h2>
+        <p>Formato oficial de Currículum Vitae Europass adaptado al mercado laboral español con foco en Recolección de Residuos, Limpieza Viaria y PRL.</p>
+      </div>
+      <div style="max-width: 900px; margin: 20px auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <button onclick="App.imprimirCvEuropass()" style="padding: 12px 24px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 1rem;">🖨️ Exportar / Imprimir CV Europass A4 (PDF)</button>
+          <button onclick="PRLAudio.reproducirTexto('Currículum Vitae Europeo. Profesional con 20 años de trayectoria continuada en el sector de recolección de residuos, limpieza viaria y salud laboral en el sindicato.')" style="padding: 12px 20px; background: #8e44ad; color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.9rem;">🔊 Escuchar Presentación CV</button>
+        </div>
+
+        <div id="cvEuropassDocument" style="background: white; color: #1e293b; padding: 40px; border-radius: var(--radius); border: 2px solid #3b82f6; box-shadow: var(--shadow); font-family: Arial, sans-serif; line-height: 1.6;">
+          <div style="border-bottom: 3px solid #3b82f6; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+            <div>
+              <h1 style="margin: 0; color: #1e3a8a; font-size: 1.8rem; text-transform: uppercase;">CURRÍCULUM VITAE EUROPASS</h1>
+              <h3 style="margin: 6px 0 0 0; color: #3b82f6; font-size: 1.2rem;">Técnico Especialista en Prevención de Riesgos Laborales & Servicios Urbanos</h3>
+              <p style="margin: 4px 0 0 0; color: #64748b; font-size: 0.95rem;"><strong>20 Años de Experiencia Sectorial</strong> (Recolección de Residuos, Limpieza Viaria y Salud Laboral Gremial)</p>
+            </div>
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 10px 16px; border-radius: 6px; font-size: 0.85rem; color: #1e40af;">
+              🇪🇸 Disponibilidad para trabajar en España / Cataluña
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <h3 style="color: #1e3a8a; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 10px;">👤 PERFIL PROFESIONAL Y RESUMEN EJECUTIVO</h3>
+            <p style="margin: 0; text-align: justify; font-size: 0.95rem;">
+              Profesional con <strong>20 años de trayectoria ininterrumpida</strong> en el sector de la recolección de residuos urbanos (RSU), limpieza viaria y salud laboral. Amplia experiencia práctica en campo desarrollada desde las bases operativas (barrido y recolección) hasta el liderazgo institucional como <strong>Secretario de Higiene y Seguridad Laboral en el Sindicato de Recolección de la Provincia de Santa Fe</strong>. Especialista en la aplicación de normativas técnicas de seguridad (NTP 618, NTP 958, NTP 1.050 del INSST), inspección de flota de camiones compactadores, formación en prevención y negociación paritaria con comités de seguridad.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <h3 style="color: #1e3a8a; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 12px;">💼 EXPERIENCIA LABORAL (20 AÑOS DE TRAYECTORIA)</h3>
+            
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0f172a;">
+                <span>Secretario / Responsable de Higiene y Seguridad Laboral</span>
+                <span>Sindicato de Recolección de Santa Fe</span>
+              </div>
+              <div style="font-size: 0.88rem; color: #475569; margin-bottom: 6px;">Gestión Institucional y Supervisión Paritaria de Salud Laboral</div>
+              <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
+                <li>Supervisión de protocolos de seguridad laboral para más de 1.500 trabajadores del sector de recolección y limpieza urbana.</li>
+                <li>Diseño e implementación de campañas de prevención de atropellos, aplastamientos en compactadoras y manejo seguro de contenedores.</li>
+                <li>Interlocución con empresas concesionarias y comités de seguridad para la dotación de EPIs de alta visibilidad (EN ISO 20471) y calzado antiperforación.</li>
+                <li>Reducción sistemática de la siniestralidad laboral e incapacidades por sobresfuerzo lumbar en operarios de recolección.</li>
+              </ul>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0f172a;">
+                <span>Operario Especialista & Inspector de Servicios Urbanos</span>
+                <span>Servicios de Recolección y Barrido Urbano</span>
+              </div>
+              <div style="font-size: 0.88rem; color: #475569; margin-bottom: 6px;">Operación Técnica en Vía Pública y Flota de Camiones Compactadores</div>
+              <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
+                <li>Ejecución y supervisión directa de rutas de recolección nocturna y diurna con camiones compactadores de carga trasera y lateral.</li>
+                <li>Inspección diaria de equipos de compactación, paradas de emergencia e interbloqueos de seguridad (equivalente a RD 1215/1997).</li>
+                <li>Aplicación estricta de medidas de protección biológica frente a cortes por vidrios, jeringas y sustancias peligrosas en vía pública.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <h3 style="color: #1e3a8a; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 10px;">🎓 FORMACIÓN Y ACREDITACIONES TÉCNICAS</h3>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
+              <li><strong>Titulación en Higiene y Seguridad Laboral</strong> (En proceso de Homologación / Acreditación en España).</li>
+              <li><strong>Especialización en Prevención de Riesgos Laborales en España (LPRL 31/1995 & NTPs INSST)</strong>.</li>
+              <li>Capacitación en Protocolos de Espacios Confinados (RD 604/2006) y Medición Atmosférica (H₂S, CO, O₂, LEL).</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="color: #1e3a8a; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 10px;">🛠️ COMPETENCIAS CLAVE PARA EMPRESAS ESPAÑOLAS</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.88rem;">
+              <div>✔️ Dominio de NTP 618, 958 y 1.050 INSST</div>
+              <div>✔️ Seguridad en Flota de Camiones RSU</div>
+              <div>✔️ Liderazgo de Comités de Seguridad</div>
+              <div>✔️ Prevención de Riesgos Biológicos</div>
+              <div>✔️ Control de Estrés Térmico en Vía Pública</div>
+              <div>✔️ Comunicación y Gestión Gremial</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  imprimirCvEuropass() {
+    const doc = document.getElementById("cvEuropassDocument");
+    if (!doc) return;
+    const printWin = window.open("", "_blank");
+    printWin.document.write(`
+      <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Curriculum Vitae Europass - PRL España</title>
+      <style>body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; color: #1e293b; }</style>
+      </head><body>${doc.innerHTML}<script>window.onload = function() { window.print(); }</script></body></html>
+    `);
+    printWin.document.close();
+  },
+
+  renderNovedadesBoe() {
+    const el = document.getElementById("novedadesBoeView");
+    if (!el) return;
+    let html = `
+      <div class="section-header">
+        <h2>📰 Novedades BOE / INSST</h2>
+        <p>Actualizaciones legislativas y boletines normativos oficiales en materia de Prevención de Riesgos Laborales en España.</p>
+      </div>
+      <div class="novedades-list">
+        ${NOVEDADES_BOE.map(n => `
+          <div class="novedad-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 0.8rem; font-weight: bold; color: var(--accent);">${n.organismo}</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">${n.fecha}</span>
+            </div>
+            <h3>${n.titulo}</h3>
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin: 8px 0; line-height: 1.6;">${n.resumen}</p>
+            <a href="${n.enlace}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 8px; color: var(--accent); font-weight: bold; font-size: 0.88rem; text-decoration: none;">🔗 Ver publicación oficial ➔</a>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  renderCuadernilloView() {
+    const el = document.getElementById("cuadernilloView");
+    if (!el) return;
+    const c = CUADERNILLO;
+    let html = `
+      <div class="print-actions">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir Manual Completo (Modo Libro A4)</button>
+        <button onclick="App.descargarCuadernillo()" class="btn-print" style="background: var(--accent);">📥 Descargar Versión HTML</button>
+        <button onclick="App.reproducirAudioCuadernillo()" class="btn-print" style="background: #8e44ad;">🔊 Escuchar Manual en Audio</button>
+        <button onclick="PRLAudio.detener()" class="btn-print" style="background: #c0392b;">⏹️ Detener Audio</button>
+      </div>
+      <div class="cuadernillo-portada">
+        <h1>📖 ${c.titulo}</h1>
+        <p style="font-size: 1.2rem; color: var(--accent); font-weight: 600; margin-top: 8px;">${c.subtitulo}</p>
+        <p style="margin-top: 16px; color: var(--text-secondary);">${c.autor} — ${c.version}</p>
+      </div>
+      <div class="cuadernillo-capitulos">
+        ${c.secciones.map((s, idx) => `
+          <div class="cuadernillo-capitulo">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px;">
+              <h2 style="margin: 0; border: none;">${s.icono} ${s.titulo}</h2>
+              <button onclick="PRLAudio.reproducirTexto('${s.titulo}. ${s.contenido.replace(/'/g, '')}')" style="padding: 4px 10px; background: rgba(142,68,173,0.2); border: 1px solid #8e44ad; color: #a855f7; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">🔊 Escuchar este Capítulo</button>
+            </div>
+            <div class="cuadernillo-contenido">${s.contenido}</div>
+            ${s.ejercicios ? `
+              <div class="cuadernillo-ejercicios">
+                <h4 style="color: var(--accent); margin-bottom: 10px;">✍️ Ejercicios Prácticos de Autoevaluación:</h4>
+                ${s.ejercicios.map(ej => `
+                  <div style="margin-bottom: 12px;">
+                    <p style="font-weight: 600; font-size: 0.95rem;">${ej.pregunta}</p>
+                    <ul style="list-style: none; padding-left: 10px; margin-top: 4px; font-size: 0.9rem;">
+                      ${ej.opciones.map(o => `<li style="margin-bottom: 2px;">${o}</li>`).join('')}
+                    </ul>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ""}
+          </div>
+        `).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  reproducirAudioCuadernillo() {
+    const textoCompleto = CUADERNILLO.secciones.map(s => `${s.titulo}. ${s.contenido}`).join(". ");
+    PRLAudio.reproducirTexto(textoCompleto);
+  },
+
+  renderSimuladorExamenView() {
+    const el = document.getElementById("simuladorExamenView");
+    if (!el) return;
+
+    if (!this.examenState) {
+      this.examenState = {
+        activo: false,
+        preguntas: [],
+        respuestas: {},
+        tiempoRestante: 1800,
+        timerId: null,
+        finalizado: false,
+        puntuacion: 0
+      };
+    }
+
+    const st = this.examenState;
+
+    if (!st.activo && !st.finalizado) {
+      let html = `
+        <div class="section-header">
+          <h2>⏱️ Simulador de Examen Oficial de PRL (España)</h2>
+          <p>Prueba oficial con cronómetro de 30 minutos, 10 preguntas seleccionadas al azar de la legislación española y Diploma A4 al aprobar (+70%).</p>
+        </div>
+        <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 2px solid var(--accent); text-align: center; max-width: 700px; margin: 20px auto; box-shadow: var(--shadow);">
+          <div style="font-size: 3rem; margin-bottom: 10px;">📜</div>
+          <h3 style="font-size: 1.5rem; color: var(--accent); margin-bottom: 12px;">Examen de Acreditación de Conocimientos Técnicos en PRL</h3>
+          <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+            Este simulador evalúa tus conocimientos en la Ley 31/1995, Reales Decretos (RD 773/97, RD 1215/97, RD 217/2004, RD 614/2001), Espacios Confinados y Guías INSST.<br>
+            <strong>Requisitos:</strong> 10 Preguntas • Tiempo Máximo: 30 minutos • Aprobación: 70%+
+          </p>
+          <button onclick="App.iniciarExamen()" style="padding: 14px 36px; background: linear-gradient(135deg, var(--success), #16a34a); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 16px rgba(34,197,94,0.4);">🚀 Comenzar Examen Ahora</button>
+        </div>
+        ${this.renderHistoricoExamenes()}
+      `;
+      el.innerHTML = html;
+      return;
+    }
+
+    if (st.activo) {
+      const mins = Math.floor(st.tiempoRestante / 60).toString().padStart(2, '0');
+      const secs = (st.tiempoRestante % 60).toString().padStart(2, '0');
+      let html = `
+        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 16px 24px; border-radius: var(--radius); border: 1px solid var(--accent); margin-bottom: 20px; position: sticky; top: 10px; z-index: 90;">
+          <span style="font-weight: bold; font-size: 1.1rem; color: var(--accent);">⏱️ Tiempo Restante: <span style="font-family: monospace; font-size: 1.3rem; color: ${st.tiempoRestante < 300 ? '#ef4444' : '#f59e0b'};">${mins}:${secs}</span></span>
+          <button onclick="App.finalizarExamen()" style="padding: 8px 18px; background: var(--danger); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold;">🏁 Entregar y Finalizar Examen</button>
+        </div>
+        <div class="preguntas-list">
+          ${st.preguntas.map((p, idx) => `
+            <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 16px;">
+              <h4 style="font-size: 1.05rem; margin-bottom: 12px; color: var(--text-primary);">${idx + 1}. ${p.pregunta}</h4>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${p.opciones.map((opt, oIdx) => `
+                  <label style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg-secondary); border: 1px solid ${st.respuestas[p.id] === oIdx ? 'var(--accent)' : 'var(--border)'}; border-radius: var(--radius-sm); cursor: pointer;">
+                    <input type="radio" name="preg-${p.id}" value="${oIdx}" ${st.respuestas[p.id] === oIdx ? 'checked' : ''} onchange="App.responderExamen(${p.id}, ${oIdx})">
+                    <span style="font-size: 0.95rem;">${opt}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      el.innerHTML = html;
+      return;
+    }
+
+    if (st.finalizado) {
+      const pct = st.puntuacion;
+      const aprobo = pct >= 70;
+      let html = `
+        <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 2px solid ${aprobo ? 'var(--success)' : 'var(--danger)'}; text-align: center; max-width: 750px; margin: 20px auto;">
+          <div style="font-size: 4rem; margin-bottom: 10px;">${aprobo ? '🏆' : '⚠️'}</div>
+          <h2 style="color: ${aprobo ? 'var(--success)' : 'var(--danger)'}; font-size: 1.8rem; margin-bottom: 8px;">${aprobo ? '¡EXAMEN APROBADO!' : 'NECESITAS REPASAR'}</h2>
+          <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 16px;">Puntuación Final: <span style="font-size: 1.6rem; color: ${aprobo ? 'var(--success)' : 'var(--danger)'};">${pct}%</span></p>
+          <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+            ${aprobo ? 'Felicitaciones. Has demostrado un dominio solvente de la legislación e higiene laboral de España.' : 'No alcanzaste el 70% requerido. Repasá el Cuadernillo y volvé a intentarlo.'}
+          </p>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            ${aprobo ? `<button onclick="App.generarDiplomaAprobacion(${pct})" style="padding: 12px 28px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 800; font-size: 1rem;">📜 Imprimir Diploma A4 de Acreditación</button>` : ''}
+            <button onclick="App.iniciarExamen()" style="padding: 12px 24px; background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold;">🔄 Realizar Nuevo Examen</button>
+          </div>
+        </div>
+        ${this.renderHistoricoExamenes()}
+      `;
+      el.innerHTML = html;
+    }
+  },
+
+  renderHistoricoExamenes() {
+    const history = PRLStorage.getExamHistory();
+    if (!history.length) return '';
+
+    const aprobados = history.filter(h => h.passed).length;
+    const avgScore = Math.round(history.reduce((acc, h) => acc + h.score, 0) / history.length);
+
+    return `
+      <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); max-width: 750px; margin: 30px auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <h3 style="margin: 0; color: var(--accent);">📊 Histórico de Exámenes Realizados (${history.length})</h3>
+          <button onclick="PRLStorage.clearExamHistory(); App.renderSimuladorExamenView();" style="padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--danger); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem;">🗑️ Limpiar Histórico</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 20px;">
+          <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Rendidos</span>
+            <div style="font-size: 1.4rem; font-weight: bold;">${history.length}</div>
+          </div>
+          <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Aprobados (+70%)</span>
+            <div style="font-size: 1.4rem; font-weight: bold; color: var(--success);">${aprobados}</div>
+          </div>
+          <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Promedio</span>
+            <div style="font-size: 1.4rem; font-weight: bold; color: var(--accent);">${avgScore}%</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto;">
+          ${history.map(h => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-secondary); border-radius: var(--radius-sm); border-left: 4px solid ${h.passed ? 'var(--success)' : 'var(--danger)'}; font-size: 0.88rem;">
+              <span>📅 <strong>${h.date}</strong></span>
+              <span>Aciertos: ${h.correctas}/${h.total} (${h.score}%)</span>
+              <span style="font-weight: bold; color: ${h.passed ? 'var(--success)' : 'var(--danger)'};">${h.passed ? 'APROBADO' : 'NO APTO'}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  iniciarExamen() {
+    if (typeof PREGUNTAS_EXAMEN_OFICIAL === "undefined") return;
+    const shuffled = [...PREGUNTAS_EXAMEN_OFICIAL].sort(() => 0.5 - Math.random());
+    this.examenState = {
+      activo: true,
+      preguntas: shuffled.slice(0, 10),
+      respuestas: {},
+      tiempoRestante: 1800,
+      timerId: setInterval(() => {
+        if (this.examenState.tiempoRestante > 0) {
+          this.examenState.tiempoRestante--;
+          this.renderSimuladorExamenView();
+        } else {
+          this.finalizarExamen();
+        }
+      }, 1000),
+      finalizado: false,
+      puntuacion: 0
+    };
+    this.renderSimuladorExamenView();
+  },
+
+  responderExamen(pregId, oIdx) {
+    if (this.examenState && this.examenState.activo) {
+      this.examenState.respuestas[pregId] = oIdx;
+    }
+  },
+
+  finalizarExamen() {
+    if (!this.examenState) return;
+    clearInterval(this.examenState.timerId);
+    let correctas = 0;
+    this.examenState.preguntas.forEach(p => {
+      if (this.examenState.respuestas[p.id] === p.respuestaCorrecta) {
+        correctas++;
+      }
+    });
+    const pct = Math.round((correctas / this.examenState.preguntas.length) * 100);
+    this.examenState.activo = false;
+    this.examenState.finalizado = true;
+    this.examenState.puntuacion = pct;
+
+    PRLStorage.saveExamResult({
+      score: pct,
+      correctas: correctas,
+      total: this.examenState.preguntas.length,
+      passed: pct >= 70
+    });
+
+    this.renderSimuladorExamenView();
+  },
+
+  generarDiplomaAprobacion(scorePct) {
+    const printWin = window.open("", "_blank");
+    const dateStr = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+    let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+    <title>Diploma de Acreditación PRL España</title>
+    <style>
+      @page { size: A4 landscape; margin: 15mm; }
+      body { font-family: 'Georgia', serif; text-align: center; color: #1e293b; background: #fff; padding: 40px; border: 12px double #1e3a8a; }
+      h1 { font-size: 32pt; color: #1e3a8a; font-family: 'Times New Roman', serif; margin-bottom: 6px; }
+      h2 { font-size: 18pt; color: #3b82f6; font-weight: normal; margin-top: 0; border-bottom: 2px solid #3b82f6; display: inline-block; padding-bottom: 6px; }
+      .grant { font-size: 14pt; margin: 30px 0 10px 0; color: #475569; }
+      .name { font-size: 26pt; font-weight: bold; color: #0f172a; border-bottom: 1px solid #cbd5e1; display: inline-block; padding: 0 40px 4px 40px; margin-bottom: 20px; }
+      .desc { font-size: 12pt; line-height: 1.8; max-width: 800px; margin: 0 auto 30px auto; color: #334155; }
+      .seal { font-size: 45pt; margin-bottom: 10px; }
+      .signatures { display: flex; justify-content: space-around; margin-top: 40px; }
+      .sig-box { border-top: 1px solid #64748b; width: 250px; padding-top: 6px; font-size: 10pt; font-family: sans-serif; color: #475569; }
+    </style></head><body>
+      <div class="seal">🛡️</div>
+      <h1>DIPLOMA DE ACREDITACIÓN TÉCNICA</h1>
+      <h2>PREVENCIÓN DE RIESGOS LABORALES (ESPAÑA)</h2>
+      <div class="grant">Se otorga la presente acreditación de conocimientos a:</div>
+      <div class="name">TÉCNICO EN HIGIENE Y SEGURIDAD LABORAL</div>
+      <div class="desc">
+        Por haber superado satisfactoriamente la evaluación oficial del **Simulador de Examen de PRL España** con una calificación sobresaliente de <strong>${scorePct}%</strong>, demostrando solvencia técnica en la Ley 31/1995 de PRL, Reales Decretos de aplicación e Higiene Industrial.
+      </div>
+      <div style="font-size: 11pt; color: #64748b;">Expedido en España — Fecha: ${dateStr}</div>
+      <div class="signatures">
+        <div class="sig-box">Comisión de Evaluación Técnica PRL</div>
+        <div class="sig-box">Firma del Titular Acreditado</div>
+      </div>
+    </body></html>`;
+
+    printWin.document.write(html);
+    printWin.document.close();
+    printWin.onload = () => { printWin.print(); };
+  },
+
+  renderSettings() {
+    const el = document.getElementById("settingsView");
+    if (!el) return;
+
+    const currentKey = PRLStorage.get("gemini_key") || "";
+    const currentModel = PRLStorage.get("gemini_model") || "gemini-1.5-pro";
+
+    let html = `
+      <div class="section-header">
+        <h2>⚙️ Configuración y Copia de Seguridad</h2>
+        <p>Gestión de claves de Inteligencia Artificial (Google Gemini) y respaldo completo de tu avance de estudio.</p>
+      </div>
+
+      <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 24px;">
+        <h3 style="color: var(--accent); margin-bottom: 8px;">🔑 Clave API de Google Gemini (IA)</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 14px;">Tu clave activa para generar láminas personalizadas y consultas al Profesor PRL.</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="password" id="settingsApiKeyInput" value="${currentKey}" style="flex: 1; min-width: 280px; padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: white;">
+          <button onclick="App.guardarApiKeyConfig()" style="padding: 10px 20px; background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold;">💾 Guardar Clave</button>
+        </div>
+      </div>
+
+      <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 2px solid var(--success); margin-bottom: 24px;">
+        <h3 style="color: var(--success); margin-bottom: 8px;">💾 Copia de Seguridad y Respaldo de Datos</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+          Descargá un archivo con todas tus notas, progresos, láminas creadas y configuraciones para no perder nada al cambiar de celular o computadora.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <button onclick="PRLStorage.exportBackup()" style="padding: 12px 24px; background: var(--success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: bold; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">📥 Descargar Copia de Seguridad (.json)</button>
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--bg-secondary); padding: 8px 14px; border-radius: var(--radius-sm); border: 1px dashed var(--border);">
+            <span style="font-size: 0.9rem; font-weight: 600;">📤 Restaurar desde JSON:</span>
+            <input type="file" id="backupFileInput" accept=".json" onchange="App.procesarArchivoBackup(this)" style="font-size: 0.85rem;">
+          </div>
+        </div>
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  guardarApiKeyConfig() {
+    const val = document.getElementById("settingsApiKeyInput").value.trim();
+    if (val) {
+      PRLStorage.set("gemini_key", val);
+      alert("¡Clave de Google Gemini guardada correctamente!");
+    }
+  },
+
+  procesarArchivoBackup(inputEl) {
+    const file = inputEl.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const ok = PRLStorage.importBackup(e.target.result);
+      if (ok) {
+        alert("¡Copia de seguridad restaurada con éxito! La página se recargará ahora.");
+        window.location.reload();
+      } else {
+        alert("Error al leer el archivo de respaldo. Asegúrate de que sea un archivo JSON válido.");
+      }
+    };
+    reader.readAsText(file);
+  },
+
+  renderNormasIsoView(tab) {
+    const el = document.getElementById("normasIsoView");
+    if (!el || typeof DATA_ISO_SIG === "undefined") return;
+
+    this._currentIsoTab = tab || this._currentIsoTab || "jerarquia";
+    const currentTab = this._currentIsoTab;
+    const data = DATA_ISO_SIG;
+
+    let html = `
+      <div class="siglas-container">
+        <div class="siglas-hero" style="background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);">
+          <h1>🏅 Normas ISO y Normas Europeas (UNE-EN)</h1>
+          <p style="font-size: 1.05rem; opacity: 0.95; margin-top: 6px;">
+            El marco normativo técnico y de gestión internacional aplicado a la PRL, maquinaria, camiones de residuos, EPIs y auditorías en España.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div class="siglas-tabs" style="margin-bottom: 0;">
+            <button class="sigla-tab-btn ${currentTab === "jerarquia" ? "active" : ""}" data-iso-tab="jerarquia">⚖️ Jerarquía Normativa</button>
+            <button class="sigla-tab-btn ${currentTab === "iso" ? "active" : ""}" data-iso-tab="iso">🌐 Normas ISO (Gestión)</button>
+            <button class="sigla-tab-btn ${currentTab === "une-en" ? "active" : ""}" data-iso-tab="une-en">🇪🇺 Normas Europeas (UNE-EN)</button>
+            <button class="sigla-tab-btn ${currentTab === "equivalencias" ? "active" : ""}" data-iso-tab="equivalencias">🔄 Equivalencias ARG vs ESP</button>
+            <button class="sigla-tab-btn ${currentTab === "auditoria" ? "active" : ""}" data-iso-tab="auditoria">📋 Checklist Auditoría (10)</button>
+          </div>
+          <div>
+            <button class="btn btn-copiar-cuadernillo" id="btnCopiarResumenIso">📋 Copiar Síntesis Completa al Cuadernillo</button>
+          </div>
+        </div>
+    `;
+
+    // TAB 1: JERARQUÍA
+    if (currentTab === "jerarquia") {
+      const jer = data.jerarquiaNormativa;
+      html += `
+        <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 24px;">
+          <h3 style="color: var(--accent); margin-bottom: 8px;">${jer.titulo}</h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">${jer.explicacion}</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            ${jer.niveles.map(niv => `
+              <div style="background: var(--bg-secondary); border-left: 5px solid ${niv.color}; padding: 16px 20px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                <h4 style="font-size: 1.05rem; color: ${niv.color}; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                  <span>${niv.icono}</span> ${niv.rango}
+                </h4>
+                <ul style="padding-left: 20px; font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+                  ${niv.items.map(it => `<li style="margin-bottom: 6px;">${it}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // TAB 2: NORMAS ISO
+    else if (currentTab === "iso") {
+      html += `
+        <div style="margin-bottom: 20px;">
+          <p style="font-size: 0.92rem; color: var(--text-secondary);">
+            📌 Estándares internacionales de gestión (Anexo SL: Cláusulas 1 a 10). Clave para contratos públicos de ayuntamientos en recogida de residuos y depuradoras.
+          </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin-bottom: 30px;">
+          ${(data.normasIso || data.normas).map(n => `
+            <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); border-top: 4px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                  <span style="font-size: 2.2rem;">${n.icono}</span>
+                  <div>
+                    <span style="font-size: 0.82rem; font-weight: bold; color: var(--accent); background: rgba(59,130,246,0.15); padding: 2px 8px; border-radius: 4px;">${n.codigo}</span>
+                    <h3 style="font-size: 1.1rem; margin: 4px 0 0 0;">${n.nombre}</h3>
+                  </div>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">${n.alcance || n.resumen}</p>
+                
+                <h4 style="font-size: 0.88rem; color: var(--text-primary); margin-bottom: 8px;">📌 Cláusulas y Requisitos Clave:</h4>
+                <ul style="padding-left: 18px; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">
+                  ${n.clausulasClave.map(c => `<li style="margin-bottom: 6px;">${c}</li>`).join('')}
+                </ul>
+
+                ${n.aplicacionPractica ? `
+                  <div style="background: var(--bg-secondary); padding: 10px 12px; border-radius: var(--radius-sm); border-left: 3px solid #10b981; font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">
+                    <strong style="color: #10b981;">💡 Aplicación en España:</strong> ${n.aplicacionPractica}
+                  </div>
+                ` : ''}
+              </div>
+
+              <button class="btn btn-secondary btn-copiar-norma" data-norma-codigo="${n.codigo}" style="width: 100%; font-size: 0.82rem; padding: 6px;">
+                📋 Copiar Ficha de ${n.codigo}
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // TAB 3: NORMAS EUROPEAS (UNE-EN)
+    else if (currentTab === "une-en") {
+      html += `
+        <div style="margin-bottom: 20px;">
+          <p style="font-size: 0.92rem; color: var(--text-secondary);">
+            🇪🇺 Especificaciones técnicas armonizadas: diseño de camiones de basura, parada de emergencia de tolva, EPIs y mediciones higiénicas.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+          ${data.normasEuropeasUneEn.map(cat => `
+            <div>
+              <h3 style="color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; font-size: 1.25rem;">
+                ${cat.categoria}
+              </h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px;">
+                ${cat.normas.map(une => `
+                  <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); border-top: 4px solid #f59e0b; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-size: 0.8rem; font-weight: bold; color: #f59e0b; background: rgba(245, 158, 11, 0.15); padding: 3px 8px; border-radius: 4px;">${une.codigo}</span>
+                        <span style="font-size: 1.4rem;">${une.icono}</span>
+                      </div>
+                      <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--text-primary);">${une.nombre}</h4>
+                      <p style="font-size: 0.85rem; color: #10b981; font-weight: 600; margin-bottom: 10px;">${une.relevancia}</p>
+                      
+                      <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+                        ${une.detalles.map(d => `<div style="margin-bottom: 4px;">• ${d}</div>`).join('')}
+                      </div>
+
+                      <div style="background: var(--bg-secondary); padding: 10px 12px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent); margin-bottom: 12px;">
+                        <div style="font-size: 0.8rem; font-weight: bold; color: var(--accent); margin-bottom: 4px;">⚙️ Requisitos Técnicos de Campo:</div>
+                        <ul style="padding-left: 16px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">
+                          ${une.requisitosTecnicosClave.map(r => `<li style="margin-bottom: 3px;">${r}</li>`).join('')}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-secondary btn-copiar-une" data-une-codigo="${une.codigo}" style="width: 100%; font-size: 0.82rem; padding: 6px;">
+                      📋 Copiar Ficha Técnica
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // TAB 4: EQUIVALENCIAS
+    else if (currentTab === "equivalencias") {
+      html += `
+        <div style="background: var(--bg-card); padding: 22px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 24px;">
+          <h3 style="color: var(--accent); margin-bottom: 10px;">🔄 Comparativa Práctica: Marco Técnico de Argentina vs España / Europa</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 18px;">
+            Esta tabla te ayuda a traducir directamente tus 20 años de experiencia a los estándares que te exigirán en España:
+          </p>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+              <thead>
+                <tr style="background: var(--bg-secondary); text-align: left; border-bottom: 2px solid var(--border);">
+                  <th style="padding: 12px; color: var(--text-primary);">Concepto Preventivo</th>
+                  <th style="padding: 12px; color: #60a5fa;">En Argentina (Referencia)</th>
+                  <th style="padding: 12px; color: #f59e0b;">Normativa Legal en España</th>
+                  <th style="padding: 12px; color: #10b981;">Norma Técnica UNE-EN / ISO</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.tablaEquivalencias.map(eq => `
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px; font-weight: 600; color: var(--text-primary);">${eq.concepto}</td>
+                    <td style="padding: 12px; color: var(--text-secondary);">${eq.ar}</td>
+                    <td style="padding: 12px; color: var(--text-secondary);">${eq.es}</td>
+                    <td style="padding: 12px; color: #10b981; font-weight: 500;">${eq.norma}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // TAB 5: CHECKLIST DE AUDITORÍA
+    else if (currentTab === "auditoria") {
+      html += `
+        <div style="background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 2px solid var(--accent);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+            <div>
+              <h3 style="color: var(--accent); margin: 0; display: flex; align-items: center; gap: 8px;">
+                📋 Checklist de Auditoría Integrada (ISO 45001 + UNE-EN Técnicas)
+              </h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;">
+                10 puntos de control para auditar tanto el Sistema de Gestión como las medidas técnicas de campo (camiones, EPIs y químicos).
+              </p>
+            </div>
+            <button class="btn btn-secondary" onclick="App.reiniciarChecklistIso()" style="font-size: 0.82rem; padding: 6px 12px;">🔄 Reiniciar</button>
+          </div>
+          
+          <div id="isoAuditChecklist">
+            ${data.checklistAuditoria.map(item => `
+              <div style="background: var(--bg-secondary); padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="flex: 1; min-width: 260px;">
+                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 0.72rem; font-weight: bold; background: rgba(59,130,246,0.2); color: #60a5fa; padding: 2px 8px; border-radius: 10px;">${item.categoria}</span>
+                    <span style="font-size: 0.72rem; color: #f59e0b; font-weight: 600;">[${item.normaRef}]</span>
+                  </div>
+                  <p style="font-size: 0.92rem; margin: 0; font-weight: 500; color: var(--text-primary); line-height: 1.4;">${item.requisito}</p>
+                </div>
+                <div style="display: flex; gap: 16px; align-items: center;">
+                  <label style="font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <input type="radio" name="iso-chk-${item.id}" value="conforme" onchange="App.evaluarAuditoriaIso()" style="accent-color: #10b981;"> Conforme
+                  </label>
+                  <label style="font-size: 0.9rem; cursor: pointer; color: var(--danger); display: flex; align-items: center; gap: 6px;">
+                    <input type="radio" name="iso-chk-${item.id}" value="no-conforme" onchange="App.evaluarAuditoriaIso()" style="accent-color: #ef4444;"> No Conforme
+                  </label>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div id="isoAuditResult" style="margin-top: 18px; font-weight: bold; font-size: 1.15rem; color: var(--success); text-align: center;"></div>
+        </div>
+      `;
+    }
+
+    html += `</div>`;
+    el.innerHTML = html;
+
+    // Event listeners para pestañas internas
+    el.querySelectorAll("button[data-iso-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        this.renderNormasIsoView(btn.dataset.isoTab);
+      });
+    });
+
+    // Copiar resumen general
+    const btnResumen = document.getElementById("btnCopiarResumenIso");
+    if (btnResumen) {
+      btnResumen.addEventListener("click", () => {
+        this.copiarAlCuadernillo(data.resumenCuadernillo, "Síntesis ISO y UNE-EN");
+      });
+    }
+
+    // Copiar norma ISO individual
+    el.querySelectorAll(".btn-copiar-norma").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const cod = btn.dataset.normaCodigo;
+        const n = (data.normasIso || data.normas).find(x => x.codigo === cod);
+        if (n) {
+          const txt = `=== FICHA TÉCNICA: ${n.codigo} ===\n${n.nombre}\n\nAlcance:\n${n.alcance || n.resumen}\n\nCláusulas y Requisitos Clave:\n${n.clausulasClave.join('\n')}\n\nAplicación en España:\n${n.aplicacionPractica || ''}`;
+          this.copiarAlCuadernillo(txt, `Norma ${n.codigo}`);
+        }
+      });
+    });
+
+    // Copiar norma UNE individual
+    el.querySelectorAll(".btn-copiar-une").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const cod = btn.dataset.uneCodigo;
+        let found = null;
+        data.normasEuropeasUneEn.forEach(c => {
+          c.normas.forEach(u => {
+            if (u.codigo === cod) found = u;
+          });
+        });
+        if (found) {
+          const txt = `=== NORMA TÉCNICA EUROPEA: ${found.codigo} ===\n${found.nombre}\n\nRelevancia:\n${found.relevancia}\n\nDetalles:\n${found.detalles.join('\n')}\n\nRequisitos Técnicos de Campo:\n${found.requisitosTecnicosClave.join('\n')}`;
+          this.copiarAlCuadernillo(txt, `Norma ${found.codigo}`);
+        }
+      });
+    });
+  },
+
+  evaluarAuditoriaIso() {
+    if (typeof DATA_ISO_SIG === "undefined") return;
+    const items = DATA_ISO_SIG.checklistAuditoria;
+    let conformes = 0;
+    let noConformes = 0;
+    let respondidas = 0;
+
+    items.forEach(item => {
+      const selected = document.querySelector(`input[name="iso-chk-${item.id}"]:checked`);
+      if (selected) {
+        respondidas++;
+        if (selected.value === "conforme") conformes++;
+        else noConformes++;
+      }
+    });
+
+    const resEl = document.getElementById("isoAuditResult");
+    if (resEl && respondidas > 0) {
+      const pct = Math.round((conformes / items.length) * 100);
+      let estado = pct >= 85 ? "🟢 RESULTADO: AUDITORÍA FAVORABLE (Cumplimiento Alto)" : pct >= 50 ? "🟡 RESULTADO: AUDITORÍA CON SALVEDADES (Requiere Acciones Correctivas)" : "🔴 RESULTADO: AUDITORÍA DESFAVORABLE (No Conformidades Graves)";
+      resEl.innerHTML = `
+        <div style="margin-bottom: 6px;">${estado}</div>
+        <div style="font-size: 1rem; opacity: 0.9;">
+          Conformidad: ${pct}% (${conformes} conformes, ${noConformes} no conformes de ${items.length} evaluados)
+        </div>
+      `;
+    }
+  },
+
+  reiniciarChecklistIso() {
+    if (typeof DATA_ISO_SIG === "undefined") return;
+    DATA_ISO_SIG.checklistAuditoria.forEach(item => {
+      const radios = document.querySelectorAll(`input[name="iso-chk-${item.id}"]`);
+      radios.forEach(r => r.checked = false);
+    });
+    const resEl = document.getElementById("isoAuditResult");
+    if (resEl) resEl.innerHTML = "";
+  },
+
+  renderGuiaAppView() {
+    const el = document.getElementById("guiaAppView");
+    if (!el || typeof GUIA_USO_APP === "undefined") return;
+
+    const g = GUIA_USO_APP;
+    let html = `
+      <div class="section-header">
+        <h2>${g.titulo}</h2>
+        <p>${g.subtitulo}</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        ${g.secciones.map(s => `
+          <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h3 style="color: var(--accent); font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span>${s.icono}</span> ${s.titulo}
+            </h3>
+            <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              ${s.contenido}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    el.innerHTML = html;
+  },
+
+  copiarAlCuadernillo(texto, titulo) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(() => {
+        this.mostrarToastCuadernillo(titulo);
+      }).catch(() => {
+        this.fallbackCopiar(texto, titulo);
+      });
+    } else {
+      this.fallbackCopiar(texto, titulo);
+    }
+  },
+
+  fallbackCopiar(texto, titulo) {
+    const ta = document.createElement("textarea");
+    ta.value = texto;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      this.mostrarToastCuadernillo(titulo);
+    } catch (e) {
+      alert("Copia el texto manualmente.");
+    }
+    document.body.removeChild(ta);
+  },
+
+  mostrarToastCuadernillo(titulo) {
+    let toast = document.querySelector(".cuadernillo-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "cuadernillo-toast";
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `📋 <strong>${titulo || "Ficha"}</strong> copiada al portapapeles.<br><span style="font-size:0.85rem; opacity:0.9;">¡Lista para transcribir a tu cuaderno!</span>`;
+    toast.style.display = "block";
+    clearTimeout(this._toastTimeout);
+    this._toastTimeout = setTimeout(() => {
+      if (toast) toast.style.display = "none";
+    }, 3500);
+  },
+
+  renderPodcastView(categoriaFilter) {
+    const viewEl = document.getElementById("podcastView");
+    if (!viewEl || typeof PODCAST_EPISODIOS === "undefined") return;
+
+    const episodios = PODCAST_EPISODIOS;
+    const cat = categoriaFilter || "all";
+    const filtered = cat === "all" ? episodios : episodios.filter(e => e.categoria.toLowerCase() === cat.toLowerCase());
+    const categorias = [...new Set(episodios.map(e => e.categoria))];
+
+    const currentEp = episodios.find(e => e.id === PRLAudio.currentEpisodeId) || episodios[0];
+
+    let html = `
+      <div class="podcast-container">
+        <div class="podcast-hero">
+          <h1>🎙️ Podcast de Estudio: PRL España</h1>
+          <p style="font-size: 1.05rem; opacity: 0.95; margin-top: 6px;">Explicaciones habladas de la ley, su significado real en criollo y casos prácticos de aplicación diaria. Ideal para estudiar escuchando mientras viajás o descansás la vista.</p>
+          <div style="margin-top: 10px; padding: 8px 14px; background: rgba(255,255,255,0.12); border-radius: var(--radius-sm); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;">
+            <span>🤖</span>
+            <span><strong>Dossiers para Google NotebookLM:</strong> Los 10 módulos íntegros sin resumir y la guía de prompts ya están generados en la carpeta <code>NotebookLM_Guiones_Completos/</code>.</span>
+          </div>
+        </div>
+
+        <div class="podcast-player-box">
+          <div class="podcast-player-header">
+            <div class="podcast-now-playing">
+              <span class="podcast-now-icon">${PRLAudio.isPlaying ? "🔊" : "🎙️"}</span>
+              <div>
+                <div class="podcast-now-title" id="playerEpTitle">Episodio ${currentEp.numero}: ${currentEp.titulo}</div>
+                <div class="podcast-now-meta" id="playerEpMeta">⏱️ ${currentEp.duracion} · 🏷️ ${currentEp.categoria}</div>
+              </div>
+            </div>
+            <div class="podcast-controls">
+              <button class="podcast-btn podcast-btn-primary" id="playerPlayBtn">
+                ${PRLAudio.estaReproduciendo() && PRLAudio.currentEpisodeId === currentEp.id ? "⏸️ Pausar" : "▶️ Reproducir"}
+              </button>
+              <button class="podcast-btn podcast-btn-secondary" id="playerStopBtn">⏹️ Detener</button>
+              <select class="podcast-speed-select" id="playerSpeedSelect">
+                <option value="1.0" ${PRLAudio.rate === 1.0 ? "selected" : ""}>Velocidad: 1.0x</option>
+                <option value="1.25" ${PRLAudio.rate === 1.25 ? "selected" : ""}>Velocidad: 1.25x</option>
+                <option value="1.5" ${PRLAudio.rate === 1.5 ? "selected" : ""}>Velocidad: 1.5x</option>
+              </select>
+              <button class="podcast-btn btn-copiar-cuadernillo" id="playerCopyGuionBtn">📋 Copiar Guión al Cuadernillo</button>
+            </div>
+          </div>
+
+          <div class="podcast-progress-bar">
+            <div class="podcast-progress-fill" id="playerProgressBar" style="width: ${PRLAudio.currentEpisodeId === currentEp.id ? PRLAudio.getProgress() : 0}%"></div>
+          </div>
+
+          <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.85rem; color: var(--text-secondary);" id="playerStatusText">
+              ${PRLAudio.isPlaying ? (PRLAudio.isPaused ? "En pausa" : "Reproduciendo con voz en español...") : "Listo para reproducir"}
+            </span>
+            <button class="btn btn-secondary" id="toggleTranscriptBtn" style="font-size: 0.82rem; padding: 4px 10px;">📜 Ver / Ocultar Guión Hablado</button>
+          </div>
+
+          <div id="transcriptBox" class="hidden" style="margin-top: 14px; padding: 16px; background: var(--bg-secondary); border-radius: var(--radius-sm); border-left: 3px solid #8e44ad; max-height: 250px; overflow-y: auto; font-size: 0.9rem; line-height: 1.7; white-space: pre-line; color: var(--text-primary);">
+            ${currentEp.guion}
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+          <button class="sigla-tab-btn ${cat === "all" ? "active" : ""}" data-cat="all">Todos los Episodios (${episodios.length})</button>
+          ${categorias.map(c => `
+            <button class="sigla-tab-btn ${cat.toLowerCase() === c.toLowerCase() ? "active" : ""}" data-cat="${c}">${c}</button>
+          `).join("")}
+        </div>
+
+        <div class="podcast-grid">
+          ${filtered.map(ep => {
+            const isCurrent = PRLAudio.currentEpisodeId === ep.id;
+            return `
+              <div class="podcast-card ${isCurrent ? "active-episode" : ""}" data-episode-id="${ep.id}">
+                <div>
+                  <div class="podcast-card-top">
+                    <span class="podcast-card-icon">${ep.icono}</span>
+                    <div>
+                      <div style="font-size: 0.75rem; color: #9b59b6; font-weight: 700;">EPISODIO ${ep.numero}</div>
+                      <div class="podcast-card-title">${ep.titulo}</div>
+                    </div>
+                  </div>
+                  <p class="podcast-card-desc">${ep.descripcion}</p>
+                </div>
+                <div class="podcast-card-bottom">
+                  <span>⏱️ ${ep.duracion} · 🏷️ ${ep.categoria}</span>
+                  <div style="display: flex; gap: 6px;">
+                    <button class="btn btn-primary play-ep-btn" data-episode-id="${ep.id}" style="padding: 4px 12px; font-size: 0.8rem;">
+                      ${isCurrent && PRLAudio.estaReproduciendo() ? "⏸️ Pausar" : "▶️ Escuchar"}
+                    </button>
+                    <button class="btn copy-ep-btn" data-episode-id="${ep.id}" title="Copiar guión al cuadernillo" style="padding: 4px 8px; font-size: 0.8rem;">📋</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+
+    viewEl.innerHTML = html;
+
+    const playBtn = document.getElementById("playerPlayBtn");
+    const stopBtn = document.getElementById("playerStopBtn");
+    const speedSelect = document.getElementById("playerSpeedSelect");
+    const copyGuionBtn = document.getElementById("playerCopyGuionBtn");
+    const toggleTranscript = document.getElementById("toggleTranscriptBtn");
+    const transcriptBox = document.getElementById("transcriptBox");
+
+    if (playBtn) {
+      playBtn.addEventListener("click", () => {
+        if (PRLAudio.estaReproduciendo() && PRLAudio.currentEpisodeId === currentEp.id) {
+          PRLAudio.pausar();
+        } else if (PRLAudio.isPaused && PRLAudio.currentEpisodeId === currentEp.id) {
+          PRLAudio.pausar();
+        } else {
+          PRLAudio.reproducirTexto(currentEp.guion, `Episodio ${currentEp.numero}: ${currentEp.titulo}`, currentEp.id, () => {
+            const btn = document.getElementById("playerPlayBtn");
+            if (btn) btn.textContent = "▶️ Reproducir";
+          });
+        }
+      });
+    }
+
+    if (stopBtn) {
+      stopBtn.addEventListener("click", () => {
+        PRLAudio.detener();
+      });
+    }
+
+    if (speedSelect) {
+      speedSelect.addEventListener("change", (e) => {
+        PRLAudio.setRate(e.target.value);
+      });
+    }
+
+    if (copyGuionBtn) {
+      copyGuionBtn.addEventListener("click", () => {
+        this.copiarAlCuadernillo(`=== PODCAST PRL: EPISODIO ${currentEp.numero} - ${currentEp.titulo.toUpperCase()} ===\n\n${currentEp.guion}`, `Guión Episodio ${currentEp.numero}`);
+      });
+    }
+
+    if (toggleTranscript && transcriptBox) {
+      toggleTranscript.addEventListener("click", () => {
+        transcriptBox.classList.toggle("hidden");
+      });
+    }
+
+    viewEl.querySelectorAll(".sigla-tab-btn[data-cat]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        this.renderPodcastView(btn.dataset.cat);
+      });
+    });
+
+    viewEl.querySelectorAll(".play-ep-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const epId = btn.dataset.episodeId;
+        const targetEp = episodios.find(x => x.id === epId);
+        if (!targetEp) return;
+
+        if (PRLAudio.currentEpisodeId === epId && PRLAudio.estaReproduciendo()) {
+          PRLAudio.pausar();
+        } else if (PRLAudio.currentEpisodeId === epId && PRLAudio.isPaused) {
+          PRLAudio.pausar();
+        } else {
+          PRLAudio.currentEpisodeId = targetEp.id;
+          const titleEl = document.getElementById("playerEpTitle");
+          const metaEl = document.getElementById("playerEpMeta");
+          const transcriptBox = document.getElementById("transcriptBox");
+          if (titleEl) titleEl.textContent = `Episodio ${targetEp.numero}: ${targetEp.titulo}`;
+          if (metaEl) metaEl.textContent = `⏱️ ${targetEp.duracion} · 🏷️ ${targetEp.categoria}`;
+          if (transcriptBox) transcriptBox.textContent = targetEp.guion;
+
+          viewEl.querySelectorAll(".podcast-card").forEach(c => {
+            c.classList.toggle("active-episode", c.dataset.episodeId === epId);
+          });
+
+          PRLAudio.reproducirTexto(targetEp.guion, `Episodio ${targetEp.numero}: ${targetEp.titulo}`, targetEp.id, () => {
+            const pBtn = document.getElementById("playerPlayBtn");
+            if (pBtn) pBtn.textContent = "▶️ Reproducir";
+          });
+        }
+      });
+    });
+
+    viewEl.querySelectorAll(".copy-ep-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const epId = btn.dataset.episodeId;
+        const targetEp = episodios.find(x => x.id === epId);
+        if (targetEp) {
+          this.copiarAlCuadernillo(`=== PODCAST PRL: EPISODIO ${targetEp.numero} - ${targetEp.titulo.toUpperCase()} ===\n\n${targetEp.guion}`, `Guión Episodio ${targetEp.numero}`);
+        }
+      });
+    });
+
+    viewEl.querySelectorAll(".podcast-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const epId = card.dataset.episodeId;
+        const targetEp = episodios.find(x => x.id === epId);
+        if (targetEp) {
+          PRLAudio.currentEpisodeId = targetEp.id;
+          const titleEl = document.getElementById("playerEpTitle");
+          const metaEl = document.getElementById("playerEpMeta");
+          const transcriptBox = document.getElementById("transcriptBox");
+          if (titleEl) titleEl.textContent = `Episodio ${targetEp.numero}: ${targetEp.titulo}`;
+          if (metaEl) metaEl.textContent = `⏱️ ${targetEp.duracion} · 🏷️ ${targetEp.categoria}`;
+          if (transcriptBox) transcriptBox.textContent = targetEp.guion;
+
+          viewEl.querySelectorAll(".podcast-card").forEach(c => {
+            c.classList.toggle("active-episode", c.dataset.episodeId === epId);
+          });
+        }
+      });
+    });
+  },
+
+  renderSiglasCifrasView(tabName, searchQuery) {
+    const viewEl = document.getElementById("siglasCifrasView");
+    if (!viewEl || typeof DATA_SIGLAS_PRL === "undefined" || typeof DATA_CIFRAS_CRITICAS === "undefined") return;
+
+    const currentTab = tabName || "cifras";
+    const query = (searchQuery || "").toLowerCase();
+
+    let html = `
+      <div class="siglas-container">
+        <div class="siglas-hero">
+          <h1>📊 Siglas & Cifras Clave para Exámenes</h1>
+          <p style="font-size: 1.05rem; opacity: 0.95; margin-top: 6px;">Todo el vocabulario técnico español y los números exactos que toman en homologaciones, oposiciones y entrevistas.</p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div class="siglas-tabs" style="margin-bottom: 0;">
+            <button class="sigla-tab-btn ${currentTab === "cifras" ? "active" : ""}" id="tabCifrasBtn">🎯 Memento de Cifras Críticas</button>
+            <button class="sigla-tab-btn ${currentTab === "siglas" ? "active" : ""}" id="tabSiglasBtn">🔤 Diccionario de Siglas PRL (${DATA_SIGLAS_PRL.length})</button>
+          </div>
+          <div>
+            <input type="text" id="siglasSearchInput" value="${searchQuery || ""}" placeholder="Filtrar por sigla, valor o palabra..." style="padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); color: white; min-width: 260px;">
+          </div>
+        </div>
+    `;
+
+    if (currentTab === "cifras") {
+      html += `
+        <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            📌 Tarjetas de memorización: valores reglamentarios de alturas, confinados, ruido, cargas y dimensiones.
+          </p>
+          <button class="btn btn-copiar-cuadernillo" id="copiarTodasCifrasBtn">📋 Copiar Todas las Cifras al Cuadernillo</button>
+        </div>
+      `;
+
+      DATA_CIFRAS_CRITICAS.forEach(sec => {
+        const filteredCifras = sec.cifras.filter(c => !query || c.valor.toLowerCase().includes(query) || c.concepto.toLowerCase().includes(query) || sec.area.toLowerCase().includes(query));
+        if (filteredCifras.length === 0) return;
+
+        let claseColor = "cifra-altura";
+        if (sec.area.includes("Confinados")) claseColor = "cifra-confinados";
+        else if (sec.area.includes("Ruido")) claseColor = "cifra-ruido";
+        else if (sec.area.includes("Cargas")) claseColor = "cifra-cargas";
+        else if (sec.area.includes("Lugares")) claseColor = "cifra-lugares";
+        else if (sec.area.includes("Seguridad y Cancer") || sec.area.includes("Ficha")) claseColor = "cifra-quimicos";
+        else if (sec.area.includes("Órganos")) claseColor = "cifra-organos";
+
+        html += `
+          <div class="cifras-section">
+            <div class="cifras-section-header">
+              <span>${sec.icono}</span> ${sec.area}
+            </div>
+            <div class="cifras-grid">
+              ${filteredCifras.map(c => `
+                <div class="cifra-card ${claseColor}">
+                  <div class="cifra-valor">${c.valor}</div>
+                  <div class="cifra-concepto">${c.concepto}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      });
+    } else {
+      const filteredSiglas = DATA_SIGLAS_PRL.filter(s => !query || s.sigla.toLowerCase().includes(query) || s.nombre.toLowerCase().includes(query) || s.categoria.toLowerCase().includes(query) || (s.equivalenteAr && s.equivalenteAr.toLowerCase().includes(query)));
+
+      html += `
+        <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            Abreviaturas oficiales y equivalencias con el sistema de Argentina para entender el idioma técnico español.
+          </p>
+          <button class="btn btn-copiar-cuadernillo" id="copiarTodasSiglasBtn">📋 Copiar Todas las Siglas al Cuadernillo</button>
+        </div>
+
+        <div class="siglas-grid">
+          ${filteredSiglas.map(s => `
+            <div class="sigla-card">
+              <div>
+                <span class="sigla-badge">${s.sigla}</span>
+                <div class="sigla-nombre">${s.nombre}</div>
+                ${s.equivalenteAr ? `<div class="sigla-ar">🇦🇷 Eq. Argentina: ${s.equivalenteAr}</div>` : ""}
+                <p class="sigla-desc">${s.explicacion}</p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; margin-top: 10px;">
+                <span style="font-size: 0.78rem; color: var(--text-muted);">${s.categoria}</span>
+                <button class="btn copy-sigla-btn" data-sigla="${s.sigla}" style="padding: 4px 10px; font-size: 0.8rem; background: var(--bg-secondary);">📋 Copiar</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    html += `</div>`;
+    viewEl.innerHTML = html;
+
+    const btnCifras = document.getElementById("tabCifrasBtn");
+    const btnSiglas = document.getElementById("tabSiglasBtn");
+    const searchInput = document.getElementById("siglasSearchInput");
+
+    if (btnCifras) btnCifras.addEventListener("click", () => this.renderSiglasCifrasView("cifras", searchInput ? searchInput.value : ""));
+    if (btnSiglas) btnSiglas.addEventListener("click", () => this.renderSiglasCifrasView("siglas", searchInput ? searchInput.value : ""));
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        this.renderSiglasCifrasView(currentTab, e.target.value);
+        const inputNow = document.getElementById("siglasSearchInput");
+        if (inputNow) {
+          inputNow.focus();
+          inputNow.setSelectionRange(inputNow.value.length, inputNow.value.length);
+        }
+      });
+    }
+
+    const copiarTodasCifrasBtn = document.getElementById("copiarTodasCifrasBtn");
+    if (copiarTodasCifrasBtn) {
+      copiarTodasCifrasBtn.addEventListener("click", () => {
+        let texto = "=== MEMENTO DE CIFRAS CRÍTICAS DE EXAMEN (PRL ESPAÑA) ===\n\n";
+        DATA_CIFRAS_CRITICAS.forEach(sec => {
+          texto += `--- ${sec.area.toUpperCase()} ---\n`;
+          sec.cifras.forEach(c => {
+            texto += `• ${c.valor}: ${c.concepto}\n`;
+          });
+          texto += "\n";
+        });
+        this.copiarAlCuadernillo(texto, "Memento de Cifras Críticas");
+      });
+    }
+
+    const copiarTodasSiglasBtn = document.getElementById("copiarTodasSiglasBtn");
+    if (copiarTodasSiglasBtn) {
+      copiarTodasSiglasBtn.addEventListener("click", () => {
+        let texto = "=== DICCIONARIO DE SIGLAS Y ABREVIATURAS DE PRL (ESPAÑA) ===\n\n";
+        DATA_SIGLAS_PRL.forEach(s => {
+          texto += `• [${s.sigla}] ${s.nombre} (${s.categoria})\n`;
+          if (s.equivalenteAr) texto += `  Eq. Argentina: ${s.equivalenteAr}\n`;
+          texto += `  Significado: ${s.explicacion}\n\n`;
+        });
+        this.copiarAlCuadernillo(texto, "Diccionario de Siglas");
+      });
+    }
+
+    viewEl.querySelectorAll(".copy-sigla-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const siglaText = btn.dataset.sigla;
+        const s = DATA_SIGLAS_PRL.find(x => x.sigla === siglaText);
+        if (s) {
+          let t = `[${s.sigla}] ${s.nombre}\n${s.explicacion}`;
+          if (s.equivalenteAr) t += `\nEq. Argentina: ${s.equivalenteAr}`;
+          this.copiarAlCuadernillo(t, s.sigla);
+        }
+      });
+    });
   }
 };
 
@@ -2927,3 +5263,4 @@ document.addEventListener("DOMContentLoaded", () => {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   }
 });
+

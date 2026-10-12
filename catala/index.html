@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f59e0b">
+  <title>Català Pas a Pas | Curs Integral de Català per a la Vida Quotidiana a Vic i Catalunya</title>
+  <script>
+    if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+      window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="app-container">
+    <!-- BARRA LATERAL DE NAVEGACIÓ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><span>🎗️</span> Català Pas a Pas</h1>
+        <p>Aprendre Català General per a la Vida a Vic (Osona) & Catalunya</p>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-item active" data-view="frases">
+          <span class="nav-icon">🗣️</span>
+          <span>Frases Desglossades</span>
+        </li>
+        <li class="nav-item" data-view="podcast">
+          <span class="nav-icon">🎙️</span>
+          <span>Podcast Bilingüe</span>
+        </li>
+        <li class="nav-item" data-view="diccionari">
+          <span class="nav-icon">📚</span>
+          <span>Diccionari Temàtic</span>
+        </li>
+        <li class="nav-item" data-view="flashcards">
+          <span class="nav-icon">🎴</span>
+          <span>Flashcards Repàs</span>
+        </li>
+        <li class="nav-item" data-view="cuadernillo">
+          <span class="nav-icon">📝</span>
+          <span>El Meu Cuadernillo</span>
+        </li>
+        <li style="margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px;">
+          <a href="../index.html" style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(56, 189, 248, 0.12); border: 1px solid #38bdf8; border-radius: 8px; color: #38bdf8; text-decoration: none; font-size: 0.85rem; font-weight: 700;">
+            <span>🛡️</span> Ir a PRL España
+          </a>
+        </li>
+        <li style="margin-top: 6px;">
+          <a href="../index.html" style="display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(148, 163, 184, 0.1); border: 1px solid #475569; border-radius: 8px; color: #cbd5e1; text-decoration: none; font-size: 0.82rem; font-weight: 600;">
+            <span>🏠</span> Portal Principal
+          </a>
+        </li>
+      </ul>
+
+      <div style="padding: 16px; margin-top: auto; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px; color: var(--accent); font-weight: 700;">
+          <span>📍</span> Destinació: Vic (Osona)
+        </div>
+        <p>Fonètica Central (Vocal neutra /e/~/a/, /o/~/u/) + Síntesi dual bilingüe + Corrector de micròfon.</p>
+        <div style="margin-top: 10px; font-size: 0.72rem; opacity: 0.7;">
+          Preparació per a la Residència 2028
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTINGUT PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- VISTA 1: FRASES DESGLOSSADES -->
+      <section id="frasesView" class="view-section active">
+        <div class="hero-banner">
+          <h2>🗣️ Frases de la Vida Diària amb Desglossament Bilingüe</h2>
+          <p>
+            Aprèn català amb el mètode oració per oració: escolta la frase sencera en català natiu, la seva traducció al castellà, el desglossament paraula per paraula amb la seva funció gramatical, i consells fonètics típics de la plana de Vic i de la Catalunya Central.
+          </p>
+        </div>
+
+        <div id="frasesContainer">
+          <!-- Es genera dinàmicament des de js/app.js -->
+        </div>
+      </section>
+
+      <!-- VISTA 2: PODCAST BILINGÜE -->
+      <section id="podcastView" class="view-section">
+        <div class="hero-banner">
+          <h2>🎙️ Podcast Bilingüe: «Català Pas a Pas»</h2>
+          <p>
+            Leccions sonores guiades d'immersió. El narrador et presenta situacions reals a Catalunya i Vic, et pronuncia cada frase en català natiu, te la tradueix al castellà, te la desglossa pas a pas i t'explica els detalls culturals i pràctics.
+          </p>
+        </div>
+
+        <!-- REPRODUCTOR PRINCIPAL -->
+        <div class="podcast-box">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h3 id="mainPodcastTitle" style="font-size: 1.35rem; color: #fbbf24; margin-bottom: 4px;">Episodi 1: Benvinguts a Catalunya i primers passos</h3>
+              <div id="mainPodcastMeta" style="font-size: 0.85rem; color: #38bdf8;">⏱️ ~6 min · 🎙️ Desglose Guiado</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button id="toggleTranscriptBtn" class="btn btn-secondary" style="font-size: 0.82rem;">📜 Veure/Amagar Guió</button>
+              <button id="mainPodcastCopyBtn" class="btn btn-secondary" style="font-size: 0.82rem;">📋 Copiar al Cuadernillo</button>
+            </div>
+          </div>
+
+          <p id="mainPodcastDesc" style="margin: 14px 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">
+            Salutacions essencials, presentació personal i com trencar el gel educadament.
+          </p>
+
+          <div class="progress-container">
+            <div id="mainPodcastProgressFill" class="progress-fill"></div>
+          </div>
+          <div id="mainPodcastStatusText" style="font-size: 0.8rem; color: #94a3b8; margin-top: 6px;">A punt per reproduir</div>
+
+          <div class="podcast-controls">
+            <button id="mainPodcastPlayBtn" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.95rem;">▶️ Reproduir Lecció</button>
+            <button id="mainPodcastStopBtn" class="btn btn-secondary">⏹️ Aturar</button>
+            
+            <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+              <label for="mainPodcastSpeed" style="font-size: 0.85rem; color: #94a3b8;">Velocitat:</label>
+              <select id="mainPodcastSpeed" style="background: #0f172a; border: 1px solid var(--border); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem;">
+                <option value="1.0" selected>1.0x (Normal)</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Guió complet de l'episodi -->
+          <div id="mainPodcastTranscript" style="display: none; margin-top: 20px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 18px; font-size: 0.9rem; line-height: 1.6; color: #e2e8f0; white-space: pre-line; max-height: 380px; overflow-y: auto;">
+          </div>
+        </div>
+
+        <h3 style="color: var(--accent); margin: 30px 0 16px; font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+          <span>📻</span> Tots els Episodis del Podcast
+        </h3>
+
+        <div id="podcastList" class="podcast-list">
+          <!-- Es genera dinàmicament des de js/app.js -->
+        </div>
+      </section>
+
+      <!-- VISTA 3: DICCIONARI TEMÀTIC -->
+      <section id="diccionariView" class="view-section">
+        <div class="hero-banner">
+          <h2>📚 Diccionari Temàtic per a la Vida Quotidiana</h2>
+          <p>
+            Vocabulari fonamental classificat per situacions reals a Vic i Catalunya: compres al mercat, cafeteries, transport a Barcelona/Rodalies, tràmits administratius, metges (CAP) i la llar.
+          </p>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="diccionariSearchInput" class="search-input" placeholder="🔍 Cercar paraula en català o castellà (ex: pa, cafè, metge, comprar, estació)...">
+        </div>
+
+        <div id="diccionariGrid" class="diccionari-grid">
+          <!-- Es genera dinàmicament des de js/app.js -->
+        </div>
+      </section>
+
+      <!-- VISTA 4: FLASHCARDS -->
+      <section id="flashcardsView" class="view-section">
+        <div class="hero-banner">
+          <h2>🎴 Repàs Actiu amb Flashcards</h2>
+          <p>
+            Fixa el vocabulari a la memòria a llarg termini. Toca la targeta per girar-la i descobrir la traducció i un exemple real. Escolta la pronunciació nativa i avalua la teva retenció.
+          </p>
+        </div>
+
+        <div class="flashcard-wrapper">
+          <div id="flashcardCount">Targeta 1 de 80</div>
+          <div id="flashcardEl" class="flashcard">
+            <!-- Es renderitza des de js/app.js -->
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
+            <button id="prevFlashcardBtn" class="btn btn-secondary">⬅️ Anterior</button>
+            <button id="flipFlashcardBtn" class="btn btn-primary">🔄 Girar Targeta</button>
+            <button id="speakFlashcardBtn" class="btn btn-speak">🔊 Escuchar</button>
+            <button id="nextFlashcardBtn" class="btn btn-secondary">Següent ➡️</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISTA 5: EL MEU CUADERNILLO -->
+      <section id="cuadernilloView" class="view-section">
+        <div class="hero-banner">
+          <h2>📝 El Meu Cuadernillo d'Apunts</h2>
+          <p>
+            El teu espai de treball personal. Guarda apunts, llistes de paraules o desglosses d'oracions per transcriure-les al teu quadern d'estudi de paper. Tot queda guardat al teu navegador de forma permanent.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 24px;">
+          <h3 style="color: #fbbf24; font-size: 1.15rem; margin-bottom: 12px;">➕ Afegir Nova Nota al Cuadernillo</h3>
+          <textarea id="noteInput" style="width: 100%; height: 110px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 12px; font-family: inherit; font-size: 0.92rem; resize: vertical; margin-bottom: 12px;" placeholder="Escriu aquí paraules noves, frases que vols practicar, regles fonètiques o recordatoris per a Vic..."></textarea>
+          <div style="display: flex; justify-content: flex-end;">
+            <button id="saveNoteBtn" class="btn btn-primary">💾 Guardar Nota</button>
+          </div>
+        </div>
+
+        <h3 style="color: var(--accent); margin-bottom: 16px; font-size: 1.2rem;">📂 Notes Guardades</h3>
+        <div id="notesList">
+          <!-- Es renderitza des de js/app.js -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- REPRODUCTOR FLOTANT MINI -->
+  <div id="floatingMiniPlayer" class="mini-player hidden">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 1.6rem;">🎧</span>
+      <div>
+        <div id="miniPlayerTitle" style="font-weight: 700; font-size: 0.95rem; color: #fbbf24;">Reproduint lecció...</div>
+        <div style="font-size: 0.78rem; color: #94a3b8;">Podcast Català Pas a Pas</div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <button id="miniPlayerPlayBtn" class="btn btn-primary" style="padding: 6px 14px; font-size: 1.1rem;">⏸️</button>
+      <button id="miniPlayerStopBtn" class="btn btn-secondary" style="padding: 6px 14px;">⏹️</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DE L'APLICACIÓ -->
+  <script src="js/data-catala-frases.js"></script>
+  <script src="js/data-catala-podcast.js"></script>
+  <script src="js/data-catala-diccionari.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- REGISTRE DE SERVICE WORKER -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

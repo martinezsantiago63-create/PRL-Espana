@@ -6,7 +6,12 @@
   <meta name="theme-color" content="#3b82f6">
   <meta name="description" content="App de estudio para técnicos de PRL que quieren ejercer en España">
   <title>PRL España - Estudio y Organización</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+      window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=14">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">
 </head>
@@ -30,12 +35,44 @@
           <span class="nav-text">Panel Principal</span>
         </li>
         <li class="nav-item nav-highlight" data-section="profesor">
-          <span class="nav-icon">🎓</span>
+          <span class="nav-icon">👨‍🏫</span>
           <span class="nav-text">Mi Profesor PRL</span>
         </li>
-        <li class="nav-item nav-highlight" data-section="catala">
-          <span class="nav-icon">🗣️</span>
-          <span class="nav-text">Catalán para PRL</span>
+        <li class="nav-item nav-highlight" data-section="podcast">
+          <span class="nav-icon">🎙️</span>
+          <span class="nav-text">Podcast & Audio-Clases</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="siglas-cifras">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Siglas & Cifras Clave</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="laminas">
+          <span class="nav-icon">🖼️</span>
+          <span class="nav-text">Láminas & Infografías IA</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="cuadernillo">
+          <span class="nav-icon">📖</span>
+          <span class="nav-text">Manual Imprimible</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="simulador-examen">
+          <span class="nav-icon">⏱️</span>
+          <span class="nav-text">Simulador Examen PRL</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="normas-iso">
+          <span class="nav-icon">🏅</span>
+          <span class="nav-text">Normas ISO & Auditoría</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="guia-app">
+          <span class="nav-icon">❓</span>
+          <span class="nav-text">Guía de Uso de la App</span>
+        </li>
+        <li class="nav-item" data-section="metodos-insst">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Métodos INSST</span>
+        </li>
+        <li class="nav-item" data-section="novedades-boe">
+          <span class="nav-icon">📰</span>
+          <span class="nav-text">Novedades BOE</span>
         </li>
         <li class="nav-divider"></li>
         <li class="nav-item" data-section="marco-normativo">
@@ -53,6 +90,18 @@
         <li class="nav-item" data-section="saneamiento-sector">
           <span class="nav-icon">🏭</span>
           <span class="nav-text">Saneamiento</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="residuos-urbanos">
+          <span class="nav-icon">🚛</span>
+          <span class="nav-text">Recolección de Residuos</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="empleo-prl">
+          <span class="nav-icon">💼</span>
+          <span class="nav-text">Búsqueda Empleo España</span>
+        </li>
+        <li class="nav-item nav-highlight" data-section="cv-europass">
+          <span class="nav-icon">📄</span>
+          <span class="nav-text">Generador CV Europeo (20 Años)</span>
         </li>
         <li class="nav-item" data-section="casos-accidentes">
           <span class="nav-icon">⚠️</span>
@@ -74,19 +123,14 @@
           <span class="nav-icon">🪪</span>
           <span class="nav-text">Registro Profesional</span>
         </li>
-        <li class="nav-item" data-section="cuadernillo">
-          <span class="nav-icon">📓</span>
-          <span class="nav-text">Cuadernillo</span>
-        </li>
         <li class="nav-item" data-section="guias-insst">
           <span class="nav-icon">📚</span>
           <span class="nav-text">Guías INSST</span>
           <span class="nav-badge" data-badge="guias-insst"></span>
         </li>
-        <li class="nav-item" data-section="normas-iso">
-          <span class="nav-icon">🌐</span>
-          <span class="nav-text">Normas ISO</span>
-          <span class="nav-badge" data-badge="normas-iso"></span>
+        <li class="nav-item" data-section="catala">
+          <span class="nav-icon">🗣️</span>
+          <span class="nav-text">Catalán Técnico</span>
         </li>
         <li class="nav-item" data-section="homologacion">
           <span class="nav-icon">🎓</span>
@@ -94,7 +138,7 @@
           <span class="nav-badge" data-badge="homologacion"></span>
         </li>
         <li class="nav-item" data-section="idioma">
-          <span class="nav-icon">🗣️</span>
+          <span class="nav-icon">💬</span>
           <span class="nav-text">Idioma Español</span>
           <span class="nav-badge" data-badge="idioma"></span>
         </li>
@@ -117,8 +161,8 @@
           <span class="nav-text">Calculadora Riesgos</span>
         </li>
         <li class="nav-item" data-section="quiz">
-          <span class="nav-icon">❓</span>
-          <span class="nav-text">Autoevaluación</span>
+          <span class="nav-icon">📝</span>
+          <span class="nav-text">Quiz Rápido</span>
         </li>
         <li class="nav-item" data-section="comunidades">
           <span class="nav-icon">👥</span>
@@ -138,7 +182,7 @@
         </li>
         <li class="nav-item" data-section="guias-descargables">
           <span class="nav-icon">📥</span>
-          <span class="nav-text">Guías INSST</span>
+          <span class="nav-text">Guías Descargables</span>
         </li>
         <li class="nav-item" data-section="review">
           <span class="nav-icon">🧠</span>
@@ -156,6 +200,17 @@
         <li class="nav-item" data-section="settings">
           <span class="nav-icon">⚙️</span>
           <span class="nav-text">Configuración</span>
+        </li>
+        <li class="nav-divider"></li>
+        <li style="padding: 6px 12px;">
+          <a href="catala/index.html" style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: rgba(245, 158, 11, 0.12); border: 1px solid #f59e0b; border-radius: 8px; color: #fbbf24; text-decoration: none; font-size: 0.85rem; font-weight: 700;">
+            <span>🎗️</span> Ir a Català Pas a Pas
+          </a>
+        </li>
+        <li style="padding: 2px 12px 12px;">
+          <a href="../index.html" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(148, 163, 184, 0.1); border: 1px solid #475569; border-radius: 8px; color: #cbd5e1; text-decoration: none; font-size: 0.82rem; font-weight: 600;">
+            <span>🏠</span> Portal Principal
+          </a>
         </li>
       </ul>
     </nav>
@@ -189,6 +244,20 @@
         <div id="reviewView" class="view"></div>
         <div id="profesorView" class="view"></div>
         <div id="catalaView" class="view"></div>
+        <div id="laminasView" class="view"></div>
+        <div id="metodosInsstView" class="view"></div>
+        <div id="novedadesBoeView" class="view"></div>
+        <div id="cuadernilloView" class="view"></div>
+        <div id="simuladorExamenView" class="view"></div>
+        <div id="normasIsoView" class="view"></div>
+        <div id="guiaAppView" class="view"></div>
+        <div id="casosAccidentesView" class="view"></div>
+        <div id="plantillasView" class="view"></div>
+        <div id="convenioColectivoView" class="view"></div>
+        <div id="empleoPrlView" class="view"></div>
+        <div id="cvEuropassView" class="view"></div>
+        <div id="podcastView" class="view"></div>
+        <div id="siglasCifrasView" class="view"></div>
       </div>
     </main>
 
@@ -220,26 +289,54 @@
         <button id="chatSendBtn" class="chat-send">➤</button>
       </div>
     </div>
+
+    <!-- Floating Mini Podcast Player -->
+    <div id="podcastMiniPlayer" class="podcast-mini-player hidden">
+      <div class="mini-player-info">
+        <span class="mini-player-icon">🎙️</span>
+        <div class="mini-player-text">
+          <div class="mini-player-title">Audio de Estudio</div>
+          <div class="mini-player-progress-bar">
+            <div class="mini-player-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mini-player-controls">
+        <button id="miniPlayerRateBtn" class="mini-player-btn mini-player-rate" title="Velocidad">1x</button>
+        <button id="miniPlayerPlayBtn" class="mini-player-btn mini-player-play-btn" title="Pausar/Reanudar">⏸️</button>
+        <button id="miniPlayerStopBtn" class="mini-player-btn" title="Detener">⏹️</button>
+      </div>
+    </div>
   </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/data-normativa-extra.js"></script>
-  <script src="js/data-detalle-rds.js"></script>
-  <script src="js/data-detalle-catalunya.js"></script>
-  <script src="js/data-detalle-saneamiento.js"></script>
-  <script src="js/data-casos-accidentes.js"></script>
-  <script src="js/data-plantillas.js"></script>
-  <script src="js/data-quiz-autoeval.js"></script>
-  <script src="js/data-contenido-expandido.js"></script>
-  <script src="js/data-cuadernillo.js"></script>
-  <script src="js/data-extra.js"></script>
-  <script src="js/data-extra-2.js"></script>
-  <script src="js/data-profesor.js"></script>
-  <script src="js/data-catalan.js"></script>
-  <script src="js/data-explicaciones.js"></script>
-  <script src="js/data-preguntas.js"></script>
-  <script src="js/ai-profesor.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/data.js?v=14"></script>
+  <script src="js/data-normativa-extra.js?v=14"></script>
+  <script src="js/data-detalle-rds.js?v=14"></script>
+  <script src="js/data-detalle-catalunya.js?v=14"></script>
+  <script src="js/data-detalle-saneamiento.js?v=14"></script>
+  <script src="js/data-casos-accidentes.js?v=14"></script>
+  <script src="js/data-plantillas.js?v=14"></script>
+  <script src="js/data-quiz-autoeval.js?v=14"></script>
+  <script src="js/data-contenido-expandido.js?v=14"></script>
+  <script src="js/data-cuadernillo.js?v=14"></script>
+  <script src="js/data-extra.js?v=14"></script>
+  <script src="js/data-extra-2.js?v=14"></script>
+  <script src="js/data-profesor.js?v=14"></script>
+  <script src="js/data-podcast.js?v=14"></script>
+  <script src="js/data-articulado-boe.js?v=14"></script>
+  <script src="js/data-siglas-cifras.js?v=14"></script>
+  <script src="js/data-catalan.js?v=14"></script>
+  <script src="js/data-explicaciones.js?v=14"></script>
+  <script src="js/data-preguntas.js?v=14"></script>
+  <script src="js/data-laminas.js?v=14"></script>
+  <script src="js/data-metodos-insst.js?v=14"></script>
+  <script src="js/data-novedades-boe.js?v=14"></script>
+  <script src="js/data-examen.js?v=14"></script>
+  <script src="js/data-iso-sig.js?v=14"></script>
+  <script src="js/data-guia-app.js?v=14"></script>
+  <script src="js/audio.js?v=14"></script>
+  <script src="js/ai-profesor.js?v=14"></script>
+  <script src="js/storage.js?v=14"></script>
+  <script src="js/app.js?v=14"></script>
 </body>
 </html>

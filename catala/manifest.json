@@ -1,0 +1,16 @@
+{
+  "name": "Català Pas a Pas - Curs per a la Vida Quotidiana a Vic i Catalunya",
+  "short_name": "Català Pas a Pas",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#f59e0b",
+  "description": "Aplicació autònoma per aprendre català general oració per oració, amb àudios bilingües, desglossament mot a mot, corrector de veu i consells per a Vic (Osona).",
+  "icons": [
+    {
+      "src": "css/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

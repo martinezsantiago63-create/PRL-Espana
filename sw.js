@@ -1,8 +1,9 @@
-const CACHE_NAME = "prl-espana-v4";
+const CACHE_NAME = "prl-espana-v14";
 const ASSETS = [
   "./",
   "./index.html",
   "./css/styles.css",
+  "./manifest.json",
   "./js/data.js",
   "./js/data-normativa-extra.js",
   "./js/data-detalle-rds.js",
@@ -16,9 +17,19 @@ const ASSETS = [
   "./js/data-extra.js",
   "./js/data-extra-2.js",
   "./js/data-profesor.js",
+  "./js/data-podcast.js",
+  "./js/data-articulado-boe.js",
+  "./js/data-siglas-cifras.js",
   "./js/data-catalan.js",
   "./js/data-explicaciones.js",
   "./js/data-preguntas.js",
+  "./js/data-laminas.js",
+  "./js/data-metodos-insst.js",
+  "./js/data-novedades-boe.js",
+  "./js/data-examen.js",
+  "./js/data-iso-sig.js",
+  "./js/data-guia-app.js",
+  "./js/audio.js",
   "./js/ai-profesor.js",
   "./js/storage.js",
   "./js/app.js"

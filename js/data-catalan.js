@@ -179,71 +179,147 @@ const CATALA_VOCABULARIO = [
   { catala: "Espereu un moment, si us plau", castella: "Espere un momento, por favor", pron: "es-PE-reu un mo-MENT, si us PLOU", categoria: "Comunicación en Obra" },
   { catala: "Ja ho faig", castella: "Ya lo hago", pron: "YA u FAIG", categoria: "Comunicación en Obra" },
   { catala: "Estic d'acord", castella: "Estoy de acuerdo", pron: "es-TIK da-KORD", categoria: "Comunicación en Obra" },
-  { catala: "No estic d'acord", castella: "No estoy de acuerdo", pron: "no es-TIK da-KORD", categoria: "Comunicación en Obra" }
+  { catala: "No estic d'acord", castella: "No estoy de acuerdo", pron: "no es-TIK da-KORD", categoria: "Comunicación en Obra" },
+
+  // RESIDUS I CAMIONS (VIC / OSONA)
+  { catala: "Camió compactador de residus", castella: "Camión compactador de residuos", pron: "ka-MIÓ kom-pak-ta-DOR de re-ZI-dus", categoria: "Residus i Camions (Vic/Osona)", nota: "Término oficial en contratas de Vic" },
+  { catala: "Camió de la brossa", castella: "Camión de la basura (coloquial)", pron: "ka-MIÓ de la BROS-sa", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Recollida porta a porta (PaP)", castella: "Recogida puerta a puerta", pron: "re-ko-LYI-da POR-ta a POR-ta", categoria: "Residus i Camions (Vic/Osona)", nota: "Modelo predominante en la comarca de Osona" },
+  { catala: "Cubell xipat d'orgànica", castella: "Cubo con chip de orgánica", pron: "ku-BELY shi-PAT dor-GA-ni-ka", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Tremuja de càrrega i pala", castella: "Tolva de carga y pala prensadora", pron: "tre-MU-ja de KAR-re-ga i PA-la", categoria: "Residus i Camions (Vic/Osona)", nota: "Punto crítico de atrapamiento" },
+  { catala: "Polsador de parada d'emergència (bolet)", castella: "Pulsador de parada de emergencia (seta)", pron: "pol-sa-DOR de pa-RA-da de-mer-JEN-si-a (bo-LET)", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Estrep posterior amb sensor", castella: "Estribo trasero con sensor de presencia", pron: "es-TREP pos-te-RIOR am sen-SOR", categoria: "Residus i Camions (Vic/Osona)", nota: "Corta velocidad a >30 km/h según UNE-EN 1501" },
+  { catala: "Maniobra de marxa enrere", castella: "Maniobra de marcha atrás", pron: "ma-ni-OB-ra de MAR-sha en-RE-re", categoria: "Residus i Camions (Vic/Osona)", nota: "Causa principal de atropello grave" },
+  { catala: "Avisador acústic i càmera de visió", castella: "Avisador acústico y cámara de visión", pron: "a-vi-za-DOR a-KUS-tik i KA-me-ra de vi-ZIÓ", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Fracció orgànica (FORM)", castella: "Fracción orgánica (restos de comida)", pron: "frak-SIÓ or-GA-ni-ka", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Fracció rebuig / resta", castella: "Fracción resto (no reciclable)", pron: "frak-SIÓ re-BUIG / RES-ta", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Envasos lleugers", castella: "Envases ligeros (plásticos, latas)", pron: "en-VA-zos lyeu-JERS", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Paper i cartró", castella: "Papel y cartón", pron: "pa-PER i kar-TRO", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Vidre", castella: "Vidrio", pron: "BI-dre", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Deixalleria municipal de Vic", castella: "Punto limpio municipal de Vic", pron: "de-sha-lye-RI-a mu-ni-si-PAL de BIK", categoria: "Residus i Camions (Vic/Osona)", nota: "Centro de reciclaje y residuos especiales" },
+  { catala: "Deixalleria mòbil", castella: "Punto limpio móvil", pron: "de-sha-lye-RI-a MO-bil", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Brossaire / Peó de recollida", castella: "Basurero / Peón de recogida", pron: "bros-SAI-re / pe-Ó de re-ko-LYI-da", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Xofer / Conductor del camió", castella: "Chófer / Conductor del camión", pron: "sho-FER / kon-duk-TOR del ka-MIÓ", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Granota d'alta visibilitat Classe 3", castella: "Mono/mameluco de alta visibilidad Clase 3", pron: "gra-NO-ta dal-ta vi-zi-bi-li-TAT KLAS-se 3", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Guants contra punxades i talls", castella: "Guantes contra pinchazos y cortes (EN 388)", pron: "GWANTS KON-tra pun-SHA-des i TALYS", categoria: "Residus i Camions (Vic/Osona)", nota: "Vital contra jeringuillas en bolsas" },
+  { catala: "Contenidor soterrat", castella: "Contenedor soterrado", pron: "kon-te-ni-DOR so-ter-RAT", categoria: "Residus i Camions (Vic/Osona)" },
+  { catala: "Contenidor de càrrega bilateral", castella: "Contenedor de carga bilateral", pron: "kon-te-ni-DOR de KAR-re-ga bi-la-te-RAL", categoria: "Residus i Camions (Vic/Osona)" },
+
+  // SANEJAMENT I EDAR (OSONA)
+  { catala: "Estació Depuradora d'Aigües Residuals (EDAR)", castella: "Estación Depuradora de Aguas Residuales (EDAR)", pron: "es-ta-SIÓ de-pu-ra-DO-ra dai-GU-es re-zi-DWALS", categoria: "Sanejament i EDAR", nota: "EDAR de Vic y depuradoras comarcales" },
+  { catala: "Reixa de desbast mecànic", castella: "Reja de desbaste mecánico", pron: "REI-sha de dez-BAST me-KA-nik", categoria: "Sanejament i EDAR" },
+  { catala: "Tamís rotatiu", castella: "Tamiz rotativo", pron: "ta-MIS ro-ta-TIU", categoria: "Sanejament i EDAR" },
+  { catala: "Decantador primari i secundari", castella: "Decantador primario y secundario", pron: "de-kan-ta-DOR pri-MA-ri i se-kun-DA-ri", categoria: "Sanejament i EDAR" },
+  { catala: "Reactor biològic de fangs activats", castella: "Reactor biológico de lodos activados", pron: "re-ak-TOR bi-o-LO-jik de FANGS ak-ti-VATS", categoria: "Sanejament i EDAR" },
+  { catala: "Digestor anaerobi de fangs", castella: "Digestor anaerobio de lodos", pron: "di-zhes-TOR a-na-e-RO-bi de FANGS", categoria: "Sanejament i EDAR", nota: "Zona con alto riesgo de explosión ATEX (metano)" },
+  { catala: "Centrífuga de deshidratació de fangs", castella: "Centrífuga de deshidratación de lodos", pron: "sen-TRI-fu-ga de dez-i-dra-ta-SIÓ de FANGS", categoria: "Sanejament i EDAR" },
+  { catala: "Pou de bombeig d'aigües fecals", castella: "Pozo de bombeo de aguas fecales", pron: "PU de bom-BEIG dai-GU-es fe-KALS", categoria: "Sanejament i EDAR", nota: "Espacio confinado con riesgo de H₂S" },
+  { catala: "Clavegueram municipal", castella: "Alcantarillado municipal", pron: "kla-ve-gue-RAM mu-ni-si-PAL", categoria: "Sanejament i EDAR" },
+  { catala: "Sulfur d'hidrogen / Àcid sulfhídric (H₂S)", castella: "Sulfuro de hidrógeno / Ácido sulfhídrico", pron: "sul-FUR di-dro-JEN / A-sid sulf-HI-drik", categoria: "Sanejament i EDAR", nota: "Olor a huevos podridos; bloquea el olfato a >50 ppm" },
+  { catala: "Atmosfera pobra d'oxigen (< 19,5%)", castella: "Atmósfera deficiente de oxígeno (< 19,5%)", pron: "at-mos-FE-ra PO-bra dok-SI-zhen", categoria: "Sanejament i EDAR" },
+  { catala: "Botes d'aigua de seguretat S5", castella: "Botas de agua de seguridad S5", pron: "BO-tes dai-GUA de se-gu-re-TAT ES-SINK", categoria: "Sanejament i EDAR", nota: "Impermeables con puntera y plantilla antiperforación" },
+  { catala: "Guants de nitril amb certificació vírica", castella: "Guantes de nitrilo contra virus (EN 374-5)", pron: "GWANTS de ni-TRIL am ser-ti-fi-ka-SIÓ VI-ri-ka", categoria: "Sanejament i EDAR" },
+  { catala: "Bacteri de la Leptospira (orina de rata)", castella: "Bacteria de Leptospira (orina de rata)", pron: "bak-TE-ri de la lep-toz-PI-ra", categoria: "Sanejament i EDAR" },
+  { catala: "Virus de l'Hepatitis A", castella: "Virus de la Hepatitis A", pron: "VI-rus de lep-a-TI-tis A", categoria: "Sanejament i EDAR" },
+  { catala: "Equip de respiració autònom (ERA)", castella: "Equipo de respiración autónomo (ERA)", pron: "e-KIP de res-pi-ra-SIÓ au-TO-nom", categoria: "Sanejament i EDAR" },
+  { catala: "Trípode de rescat amb tornalet", castella: "Trípode de rescate con torno", pron: "TRI-po-de de res-KAT am tor-na-LET", categoria: "Sanejament i EDAR" },
+
+  // INDÚSTRIA CÀRNIA I AGROALIMENTÀRIA (VIC / OSONA)
+  { catala: "Escorxador industrial", castella: "Matadero industrial", pron: "es-kor-sha-DOR in-dus-tri-AL", categoria: "Indústria Càrnia (Osona)", nota: "Sector industrial número 1 en la comarca de Osona" },
+  { catala: "Sala de desfer / Sala de despecejament", castella: "Sala de despiece", pron: "SA-la de dez-FER / dez-pe-se-zha-MENT", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Fàbrica d'embotits", castella: "Fábrica de embutidos", pron: "FA-bri-ka dem-bo-TITS", categoria: "Indústria Càrnia (Osona)", nota: "Típica industria tradicional de Vic" },
+  { catala: "Terra relliscós / Paviment antilliscant", castella: "Suelo resbaladizo / Pavimento antideslizante", pron: "TER-ra re-lyi-SKOS / pa-vi-MENT an-ti-lyis-KANT", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Ganivet de degollament", castella: "Cuchillo de degüello", pron: "ga-ni-VET de de-go-lya-MENT", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Guant de malla metàl·lica", castella: "Guante de malla metálica (cota de malla)", pron: "GWANT de MA-lya me-TA-li-ka", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Davantal de protecció de cuir o cota", castella: "Delantal de protección de cuero o cota", pron: "da-van-TAL de pro-tek-SIÓ de KUIR", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Cambra frigorífica (ambient fred)", castella: "Cámara frigorífica (ambiente frío)", pron: "KAM-bra fri-go-RI-fi-ka", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Neteja i desinfecció amb aigua a pressió", castella: "Limpieza y desinfección con hidrolimpiadora", pron: "ne-TE-zha i dez-in-fek-SIÓ am ai-GUA a pre-SIÓ", categoria: "Indústria Càrnia (Osona)" },
+  { catala: "Bassa de purins (gasos amoníac i metà)", castella: "Balsa de purines (gases amoníaco y metano)", pron: "BAS-sa de pu-RINS", categoria: "Indústria Càrnia (Osona)" },
+
+  // GESTIÓ TÈCNICA I ICSSL
+  { catala: "Institut Català de Seguretat i Salut Laboral (ICSSL)", castella: "Instituto Catalán de Seguridad y Salud Laboral", pron: "in-sti-TUT ka-ta-LA de se-gu-re-TAT i sa-LUT la-bo-RAL", categoria: "Gestió i ICSSL", nota: "Organismo técnico oficial de la Generalitat" },
+  { catala: "Consell Comarcal d'Osona", castella: "Consejo Comarcal de Osona", pron: "kon-SELY ko-mar-KAL do-ZO-na", categoria: "Gestió i ICSSL", nota: "Entidad supramunicipal en Vic" },
+  { catala: "Mancomunitat La Plana", castella: "Mancomunidad La Plana", pron: "man-ko-mu-ni-TAT la PLA-na", categoria: "Gestió i ICSSL", nota: "Gestora pública de residuos y servicios comarcales" },
+  { catala: "Ajuntament de Vic", castella: "Ayuntamiento de Vic", pron: "a-zhun-ta-MENT de BIK", categoria: "Gestió i ICSSL" },
+  { catala: "Plec de prescripcions tècniques (PPT)", castella: "Pliego de prescripciones técnicas", pron: "PLEK de prez-krip-si-ONS TEK-ni-kes", categoria: "Gestió i ICSSL", nota: "Documento que fija los requisitos de seguridad en contratas" },
+  { catala: "Plec de clàusules administratives (PCAP)", castella: "Pliego de cláusulas administrativas", pron: "PLEK de KLAW-zu-les ad-mi-nis-tra-TI-ves", categoria: "Gestió i ICSSL" },
+  { catala: "Coordinació d'Activitats Empresarials (CAE)", castella: "Coordinación de Actividades Empresariales (CAE)", pron: "ko-or-di-na-SIÓ dak-ti-vi-TATS em-pre-za-ri-ALS", categoria: "Gestió i ICSSL" },
+  { catala: "Xerrada de seguretat de 5 minuts", castella: "Charla de seguridad de 5 minutos (Toolbox talk)", pron: "sher-RA-da de se-gu-re-TAT de sink mi-NUTS", categoria: "Gestió i ICSSL" },
+  { catala: "Full d'autorització de treball (FAT)", castella: "Hoja de permiso de trabajo especial", pron: "FULY daw-to-rit-za-SIÓ de tre-BALY", categoria: "Gestió i ICSSL" },
+  { catala: "Comitè de Seguretat i Salut (CSS)", castella: "Comité de Seguridad y Salud", pron: "ko-mi-TE de se-gu-re-TAT i sa-LUT", categoria: "Gestió i ICSSL" },
+  { catala: "Delegat o Delegada de Prevenció", castella: "Delegado o Delegada de Prevención", pron: "de-le-GAT o de-le-GA-da de pre-ven-SIÓ", categoria: "Gestió i ICSSL" },
+
+  // FRASES PER A LA XERRADA DE SEGURETAT (5 MINUTS)
+  { catala: "Bon dia a tothom! Avui farem la xerrada de seguretat abans de sortir.", castella: "¡Buenos días a todos! Hoy haremos la charla de seguridad antes de salir.", pron: "BON DIA a to-TOM! a-VUI fa-REM la sher-RA-da de se-gu-re-TAT a-BANS de sor-TIR.", categoria: "Frases de Seguretat" },
+  { catala: "Reviseu que tothom porti la granota d'alta visibilitat de classe 3.", castella: "Revisad que todos lleven el mono de alta visibilidad clase 3.", pron: "re-vi-ZEU ke to-TOM POR-ti la gra-NO-ta dal-ta vi-zi-bi-li-TAT de KLAS-se 3.", categoria: "Frases de Seguretat" },
+  { catala: "Està totalment prohibit viatjar a l'estrep a més de 30 km/h o fent marxa enrere.", castella: "Está totalmente prohibido viajar en el estribo a más de 30 km/h o marcha atrás.", pron: "es-TA to-tal-MENT pro-i-BIT vi-ad-ZHAR a les-TREP a MES de 30 per HO-ra o FENT MAR-sha en-RE-re.", categoria: "Frases de Seguretat" },
+  { catala: "Si heu de baixar a un pou, primer mesurem gasos amb el detector portàtil.", castella: "Si tenéis que bajar a un pozo, primero medimos gases con el detector portátil.", pron: "SI EU de bai-SHAR a un PU, pri-MER me-zu-REM GA-zos am el dek-TOR por-TA-til.", categoria: "Frases de Seguretat" },
+  { catala: "No fiqueu mai les mans a la tremuja amb la premsa compactadora en marxa.", castella: "No metáis nunca las manos en la tolva con la prensa compactadora en marcha.", pron: "NO fi-KEU MAI les MANS a la tre-MU-zha am la PREM-sa kom-pak-ta-DO-ra en MAR-sha.", categoria: "Frases de Seguretat" },
+  { catala: "Qualsevol anomalia mecànica al camió, s'ha d'avisar immediatament al cap d'equip.", castella: "Cualquier anomalía mecánica en el camión se debe avisar inmediatamente al jefe de equipo.", pron: "kwal-se-VOL a-no-ma-LI-a me-KA-ni-ka al ka-MIÓ sa da-vi-ZAR im-me-di-a-ta-MENT al KAP de-KIP.", categoria: "Frases de Seguretat" },
+  { catala: "Recordeu que teniu dret a aturar la feina si detecteu un risc greu i imminent.", castella: "Recordad que tenéis derecho a parar el trabajo si detectáis un riesgo grave e inminente.", pron: "re-kor-DEU ke te-NIU DRET a a-tu-RAR la FEI-na si de-tek-TEU un RISK GREU i im-mi-NENT.", categoria: "Frases de Seguretat" }
 ];
 
 const CATALA_CONCEPTES = [
   {
-    titulo: "Reglas de pronunciación del catalán",
-    contingut: `LA "X" se pronuncia como "SH" en inglés:
-- "Fixa" → "FIKS" (no "fiksa")
-- "Sortida" → "sor-TI-da" (no "sor-ti-da")
+    titulo: "📍 El Context Laboral de Vic i la Comarca d'Osona (Residus, Sanejament i Català)",
+    contingut: `VIC (Capital d'Osona, Catalunya Central) és una de les ciutats amb més forta personalitat catalana i amb un teixit industrial i de serveis públics extraordinari:
 
-LA "J" suena suave, como la "j" francesa:
-- "Jornada" → "jor-NA-da"
+1. LA REALITAT LINGÜÍSTICA A VIC:
+A Vic i tota la comarca d'Osona, el català és la llengua d'ús habitual al carrer, a les empreses municipals, a les reunions de comitès de seguretat i a les concessions públiques. 
+No necessites un català perfecte per començar, però DEMOSTRAR INTERÈS I CONÈIXER EL VOCABULARI TÈCNIC de seguretat et guanya el respecte immediat dels treballadors, dels encarregats i de l'administració.
 
-LA "NY" se pronuncia como "Ñ" en español:
-- "Any" → "ANY" (como "año")
-- "Senyal" → "se-NYAL" (como "señal")
+2. EL MODEL DE RESIDUS A OSONA (PIONER A CATALUNYA):
+Osona és coneguda a tota Europa pel seu sistema de "Recollida Porta a Porta" (PaP) gestionat per la Mancomunitat La Plana i el Consell Comarcal d'Osona.
+- Els operaris no recullen només contenidors grossos al carrer; recullen cubells xipats habitatge per habitatge.
+- Això requereix camions bi-compartimentats, xofers i peons amb molt contacte amb la ciutadania i procediments de seguretat molt estrictes contra sobreesforços ergonòmics i atropellaments en carrers estrets del casc antic de Vic.
 
-LA "L·L" (l geminada) tiene un sonido especial:
-- "Celler" → "se-YER" (no "se-LLER")
-- "Col·laboració" → "ko-lla-bo-ra-SIÓ"
+3. LA POTÈNCIA INDUSTRIAL CÀRNIA I SANEJAMENT:
+A Vic i voltants (Gurb, Les Masies de Voltregà, Manlleu) hi ha la major concentració d'escorxadors i indústria agroalimentària de Catalunya (porcí, embotits tradicionals, Casa Tarradellas, etc.):
+- Totes aquestes indústries disposen de macro-depuradores pròpies (EDAR industrial) que tracten milers de metres cúbics d'aigües amb alt contingut orgànic i greixos.
+- La demanda de Tècnics de PRL i Sanejament que sàpiguen gestionar espais confinats, risc biològic, gasos H₂S i maquinària de tall és CONSTANT i molt ben pagada.
 
-LA "V" y la "B" suenan igual en catalán (como "b" suave):
-- "Vint" → "BINT"
-- "Bé" → "BE"
-
-LA "G" antes de "e" o "i" suena como "J":
-- "Gent" → "JENT"
-- "Girar" → "JI-RAR"
-
-LA "IG" al final se pronuncia como "CH":
-- "Baig" → "BAICH"
-- "Faig" → "FAICH"
-
-ELS/A/LA/LES (artículos):
-- "El treball" = "El trabajo"
-- "La feina" = "El trabajo (femenino)"
-- "Els treballadors" = "Los trabajadores"
-- "Les eines" = "Las herramientas"
-
-HOY = AVUI (no "hoy")
-MAÑANA = DEMÀ
-TRABAJO = TREBALL
-GRACIAS = GRÀCIES
-POR FAVOR = SI US PLAU
-BUENOS DÍAS = BON DÍAS
-ADIOS = ADÉU`
+4. COM APRENDRE CATALÀ DE FRANC (GRATIS):
+El Consorci per a la Normalització Lingüística (CPNL) té oficina pròpia a Vic (Carrer de la Ciutat de Vic). 
+Ofereix cursos gratuïts des del nivell Inicial i Bàsic 1 fins al C1. A més, a la plataforma 'Parla.cat' pots anar practicant des d'Argentina des d'ara mateix.`
   },
   {
-    titulo: "Diferències clau amb el castellà",
-    contingut: `EL CATALÁN NO ES ESPAÑOL CON ACENTO. Es una lengua diferente:
+    titulo: "Regles de pronunciació del català aplicades a la prevenció",
+    contingut: `LA "X" es pronuncia com "SH" en anglès o "CH" suau:
+- "Xerrada" → "SHER-ra-da" (charla de seguridad)
+- "Xarxa" → "SHAR-sha" (red de saneamiento)
+- "Fixa" → "FIKS"
 
-VOSOTROS = VOSALTRES (pero se usa menos, más "vostè" = usted)
-HOY = AVUI
-MAÑANA = DEMÀ
-TRABAJO = TREBALL
-SEGURO = SEGURETAT
-RIESGO = RISC
-PELIGRO = PERILL
-NECESITO = NECESSITO
-GRACIAS = GRÀCIES
-POR FAVOR = SI US PLAU
-BUENOS DÍAS = BON DÍAS
-BUENAS NOCHES = BONA NIT
-HASTA LUEGO = fins ara
-ADELANTO = endavant
-ATRÁS = enrere`
+LA "J" i la "G" (davant e/i) sonen com la "j" francesa o la "ll" argentina forta:
+- "Jornada" → "zhor-NA-da"
+- "Digestor" → "di-zhes-TOR"
+
+LA "NY" és exactament la "Ñ" castellana:
+- "Dany laboral" → "DA-ñy" (daño)
+- "Senyalització" → "se-ñya-lit-za-SIÓ"
+
+LA "L·L" (ela geminada) es pronuncia allargant la l:
+- "Metàl·lica" → "me-TAL-li-ka"
+- "Col·lector" → "kol-lek-TOR"
+
+LA "TG" i "TJ" sonen com "DJ":
+- "Neteja" → "ne-TE-zha" (limpieza)
+- "Bombeig" → "bom-BECH" (bombeo)`
+  },
+  {
+    titulo: "Diferències clau de termes laborals i salarials",
+    contingut: `En el conveni i en el contracte de treball a Catalunya veuràs aquests termes:
+
+FEINA = Trabajo / Tarea
+SOU = Sueldo / Salario
+NÒMINA = Recibo de sueldo
+PLUS DE PENOSITAT I TOXICITAT = Plus de penosidad y toxicidad (20-25%)
+PLUS DE NOCTURNITAT = Plus por trabajar de noche
+HORA EXTRAORDINÀRIA = Hora extra
+DESCANS SETMANAL = Descanso semanal
+BAIXA MÈDICA = Baja por incapacidad temporal (accidente o enfermedad)
+ALTA MÈDICA = Reincorporación tras la baja
+ACOMIADAMENT = Despido
+FINIQUET = Liquidación final de haberes`
   }
 ];
+

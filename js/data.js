@@ -37,36 +37,41 @@ const PRL_DATA = {
               title: "Ley 17/2011 de Seguridad Alimentaria",
               type: "ley",
               status: "complementaria",
-              summary: "Si vas a trabajar en industria alimentaria o saneamiento de food factories, esta ley es clave. Regula la seguridad de los alimentos desde la producción hasta el consumidor.",
+              summary: "La Ley 17/2011 de Seguridad Alimentaria y Nutrición regula las condiciones de higiene, inocuidad y control sanitario a lo largo de toda la cadena alimentaria («de la granja a la mesa»).\nPara el técnico de prevención y saneamiento ambiental, esta ley es de aplicación directa en industrias agroalimentarias, mataderos, conserveras y cocinas industriales. Impone el principio de responsabilidad objetiva de los operadores económicos (Art. 28), la trazabilidad obligatoria de lotes e ingredientes hacia atrás y hacia adelante (Art. 30), la implantación del sistema de autocontrol APPCC / HACCP y Planes Generales de Higiene (Art. 31), los protocolos de limpieza y desinfección (L+D), y el control integral de plagas (DDD: Desinfección, Desinsectación y Desratización) mediante empresas y biocidas autorizados (Art. 35).",
               keyPoints: [
-                "APPCC (Análisis de Peligros y Puntos Críticos de Control) - sistema obligatorio",
-                "Trazaabilidad: poder rastrear cada producto desde origen",
-                "Higiene alimentaria: limpieza, desinfección, control de plagas",
-                "Controles oficiales: inspecciones del gobierno"
+                "Art. 1 y 2: Objeto y principio de precaución en la protección de la salud de los consumidores en toda la cadena alimentaria.",
+                "Art. 28: Responsabilidad de los operadores de empresas alimentarias en garantizar la inocuidad en todas las fases bajo su control.",
+                "Art. 30: Trazabilidad obligatoria hacia atrás, interna y hacia adelante para rastrear cualquier ingrediente en cuestión de horas.",
+                "Art. 31: Implantación y mantenimiento obligatorio del sistema de autocontrol basado en los 7 principios del APPCC / HACCP.",
+                "Art. 35: Obligaciones de limpieza, desinfección (L+D) y control integral de plagas (DDD) en instalaciones y utillajes en contacto con alimentos.",
+                "Registro de servicios biocidas (ROESB) y uso exclusivo de productos biocidas autorizados para industria alimentaria (tipo TP4).",
+                "Arts. 48 y 49: Régimen sancionador específico con multas severas y clausura cautelar de instalaciones infractoras."
               ],
               relations: ["Aplicable a industria alimentaria y saneamiento"],
               usefulLinks: [
                 { text: "Texto completo - BOE (Ley 17/2011)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2011-11604" }
               ],
-              comoLoUso: "En Argentina ya conocés el sistema APPCC. En España se aplica igual pero con más control oficial. Si trabajás en una fábrica de alimentos, vos vas a implementar el plan de APPCC y vas a hacer los controles de higiene y saneamiento."
+              comoLoUso: "PROTOCOLO DE ACTUACIÓN EN INDUSTRIA ALIMENTARIA Y CONTROL DE PLAGAS:\n1. CONTROL DE PLAGAS DDD: En plantas alimentarias, utilizar cebaderos de seguridad rígidos, numerados y fijados al suelo, utilizando cebos no dispersables (bloques parafinados) y trampas de luz ultravioleta con lámina adhesiva (prohibidas las de electrocución).\n2. PREVENCIÓN DE CONTAMINACIÓN CRUZADA: Diseñar los protocolos de limpieza y desinfección (L+D) verificando que los productos de limpieza cuenten con registro de aptitud alimentaria HA.\n3. TRAZABILIDAD Y REGISTROS: Mantener al día los partes de trabajo y diagnosis de plagas con planos de ubicación de cebaderos para las auditorías de Sanidad."
             },
             {
               id: "ley-34-2007",
               title: "Ley 34/2007 de Salud Ambiental",
               type: "ley",
               status: "complementaria",
-              summary: "Regula la calidad del aire, suelo, agua y gestión de residuos. Para tu especialidad de saneamiento, es MUY relevante.",
+              summary: "La Ley 34/2007 de Calidad del Aire y Protección de la Atmósfera establece el marco normativo para prevenir, vigilar y reducir la contaminación atmosférica derivada de actividades industriales.\nPara el técnico de saneamiento y plantas de tratamiento, clasifica las instalaciones industriales en los Grupos A, B y C del Catálogo de Actividades Potencialmente Contaminadoras de la Atmósfera (CAPCA). Impone a los titulares la obligación de respetar los Valores Límite de Emisión (VLE) autorizados (Art. 12), someter los focos emisores a controles reglamentarios periódicos mediante Entidades de Inspección Acreditadas (ECA/OCA) (Art. 13), mantener libros de registro foliados de chimeneas y biofiltros, y fija sanciones económicas de hasta 2.000.000 de euros y clausura de instalaciones para infracciones muy graves (Arts. 30 a 33).",
               keyPoints: [
-                "Calidad del aire interior y exterior en edificios y centros de trabajo",
-                "Gestión de residuos peligrosos y no peligrosos (RD 952/2017)",
-                "Protección del agua y suelo - vertidos y contaminación",
-                "Evaluación de impacto ambiental para proyectos"
+                "Art. 1 y 3: Objeto y clasificación de actividades industriales en los Grupos A, B y C del Catálogo CAPCA.",
+                "Art. 12: Obligaciones de los titulares: cumplir valores límite de emisión, realizar autocontroles y mantener libros de registro foliados.",
+                "Art. 13: Controles reglamentarios e inspecciones periódicas a través de Entidades de Inspección Acreditadas (ECA/OCA).",
+                "Bocas de toma de muestras normalizadas en chimeneas según norma UNE-EN 15259 con plataformas de acceso seguras dotadas de barandillas.",
+                "Arts. 30 a 33: Régimen sancionador ambiental: infracciones muy graves castigadas con multas de hasta 2.000.000 de euros y clausura de instalaciones.",
+                "Conexión penal: El Art. 325 del Código Penal tipifica penas de prisión para emisiones contaminantes que pongan en peligro grave la salud o el medio ambiente."
               ],
               relations: ["Directamente ligada a saneamiento industrial"],
               usefulLinks: [
                 { text: "Texto completo - BOE (Ley 34/2007)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2007-19744" }
               ],
-              comoLoUso: "Vos como técnico de saneamiento vas a trabajar con residuos, vertidos, limpieza de tanques, desratización, etc. Esta ley te dice qué podés y qué no podés hacer. Por ejemplo: los residuos de saneamiento se clasifican y se gestionan según esta ley."
+              comoLoUso: "PROTOCOLO PARA CONTROL DE EMISIONES Y CALIDAD DEL AIRE:\n1. CATALOGACIÓN CAPCA: Comprobar el grupo CAPCA (A, B o C) de las chimeneas de calderas de biogás, motores de cogeneración o biofiltros de la depuradora EDAR.\n2. ACCESO SEGURO A TOMAS DE MUESTRAS: Verificar que las tomas de muestra en chimeneas cuenten con plataforma fija, escalera con protección dorsal o línea de vida vertical y barandilla reglamentaria para las inspecciones de la ECA.\n3. CONTROL DE REGISTROS: Archivar los informes de inspección reglamentaria de la ECA y registrar las horas de funcionamiento y cambios de filtros de carbón activo."
             }
           ]
         },
@@ -79,141 +84,151 @@ const PRL_DATA = {
               title: "RD 39/1997 - Servicios de Prevención",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "El REGLAMENTO que te dice CÓMO hacer lo que dice la Ley 31/1995. Si la ley es el 'qué', este RD es el 'cómo'.",
+              summary: "El Reglamento de los Servicios de Prevención (Real Decreto 39/1997) es la norma técnica y reglamentaria madre que desarrolla operativamente la Ley 31/1995. Si la Ley establece 'qué' obligaciones tiene la empresa, este Real Decreto dicta con exactitud 'cómo' implementarlas paso a paso.\nRegula de forma exhaustiva: la integración obligatoria de la prevención en todos los niveles jerárquicos de la empresa (Art. 1); la estructura, aprobación formal y contenido preceptivo del Plan de Prevención (Art. 2); la metodología técnica para la evaluación inicial y periódica de riesgos laborales (Arts. 3 a 7); la planificación preventiva con asignación de plazos, presupuesto y responsables (Arts. 8 y 9); las modalidades de organización preventiva (asunción personal, designación de trabajadores, Servicio de Prevención Propio SPP, Servicio Ajeno SPA y Mancomunado SPM); la presencia física obligatoria del Recurso Preventivo (Art. 22 bis); el régimen de auditorías externas reglamentarias obligatorias (Arts. 29 a 33); y los tres niveles de cualificación técnica para ejercer funciones preventivas en España (Básico 30h/50h, Intermedio FP y Superior Universitario de 600 horas).",
               keyPoints: [
-                "Cómo hacer la evaluación inicial de riesgos (paso a paso)",
-                "Qué documentación necesita la empresa (obligatoria)",
-                "Cómo se organizan los servicios de prevención",
-                "Formación de los trabajadores: qué, cuándo y cómo",
-                "Auditorías de sistemas de gestión de PRL",
-                "Planes de emergencia y evacuación obligatorios"
+                "Art. 1 y 2: Integración obligatoria de la prevención en toda la línea jerárquica y formalización por escrito del Plan de Prevención con aprobación de la dirección.",
+                "Arts. 3 a 7: Evaluación de riesgos por puesto de trabajo mediante métodos reconocidos del INSST (NTPs), normas UNE o ISO, con revisión preceptiva tras accidentes, daños a la salud o cambios de maquinaria.",
+                "Arts. 8 y 9: Planificación preventiva obligatoria con priorización de riesgos, plazos de ejecución, asignación presupuestaria y responsables con nombre y apellidos.",
+                "Arts. 10 y 11: Modalidades organizativas. Asunción personal por el empresario permitida en empresas de hasta 10 trabajadores (o 25 en un único centro) si tiene presencia habitual y no realiza tareas del Anexo I.",
+                "Art. 14: Obligatoriedad de Servicio de Prevención Propio (SPP) en empresas de más de 500 trabajadores, o de más de 250 si desarrollan actividades peligrosas del Anexo I.",
+                "Art. 15: El SPP debe contar con al menos dos especialidades técnicas propias (de las 4: Seguridad, Higiene, Ergonomía/Psicosociología y Medicina del Trabajo).",
+                "Art. 16: Concierto con Servicios de Prevención Ajenos (SPA) acreditados para cubrir las especialidades no asumidas internamente.",
+                "Art. 22 bis: Presencia preceptiva y física permanente del Recurso Preventivo en operaciones con riesgos agravados, caídas >2 m, zanjas >2 m o Anexo I.",
+                "Art. 30: Auditoría reglamentaria obligatoria del sistema de prevención cada 4 años (o cada 2 años para empresas con actividades del Anexo I).",
+                "Arts. 34 a 37: Capacitación para el desempeño de funciones preventivas: Nivel Básico (30h o 50h en Anexo I), Nivel Intermedio y Nivel Superior Técnico (600 horas).",
+                "Anexo I: Catálogo de actividades de riesgo especial (radiaciones, cancerígenos, biológicos grupos 3 y 4, explosivos, minería, inmersión, zanjas, altura y alta tensión)."
               ],
               relations: ["Desarrolla la Ley 31/1995"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 39/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-1853" }
               ],
-              comoLoUso: "Este es TU reglamento de trabajo. Cuando vayas a evaluar un riesgo, vas a seguir lo que dice este RD. Cuando la empresa te pregunte qué documentos necesita, le vas a decir lo que dice el Art. 23 de la Ley + este RD. Es como el manual del mecánico: te dice exactamente qué hacer."
+              comoLoUso: "PROTOCOLO DIARIO Y GUÍA DE ACTUACIÓN DEL TÉCNICO SEGÚN EL RD 39/1997:\n1. VERIFICACIÓN DE MODALIDAD: Comprobar la modalidad organizativa preventiva de la empresa ante la Autoridad Laboral (asunción por el empresario, trabajadores designados, SPP propio o concierto con SPA).\n2. REVISIÓN DEL PLAN DE PREVENCIÓN: Verificar que el Plan de Prevención esté aprobado formalmente por la máxima dirección de la empresa y asigne tareas preventivas específicas a cada jefe de obra, encargado y mando intermedio.\n3. EJECUCIÓN DE LA EVALUACIÓN DE RIESGOS: Aplicar en cada puesto de trabajo métodos técnicos oficiales (INSST Binario o Fine). Cuantificar Probabilidad y Consecuencia. Si el riesgo no es tolerable, redactar de inmediato la Planificación Preventiva.\n4. PLANIFICACIÓN CON PRESUPUESTO: Para cada riesgo detectado, fijar la medida preventiva, el presupuesto asignado, la fecha límite de ejecución y el responsable directo de seguimiento.\n5. DESIGNACIÓN Y CONTROL DE RECURSO PREVENTIVO: En operaciones con caídas de altura, espacios confinados o zanjas, verificar que el Recurso Preventivo designado cuente con curso de 50 horas y permanezca físicamente in situ vigilando la maniobra durante todo su desarrollo.\n6. CONTROL DE AUDITORÍA REGLAMENTARIA: Si la empresa gestiona la prevención con medios propios, auditar el sistema cada 4 años (o cada 2 años si la actividad está en el Anexo I)."
             },
             {
               id: "rd-1215-1997",
               title: "RD 1215/1997 - Equipos de Trabajo",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Regula la seguridad de TODOS los equipos de trabajo: grúas, montacargas, andamios, herramientas, maquinaria. Si se usa para trabajar, está aquí.",
+              summary: "El Real Decreto 1215/1997 (que transpone la Directiva europea 2009/104/CE) regula las condiciones mínimas de seguridad y salud para la utilización por los trabajadores de TODOS los equipos de trabajo.\nLa norma abarca cualquier máquina, aparato, instrumento, instalación o vehículo utilizado en la empresa (maquinaria pesada, camiones cisterna, bombas sumergibles, herramientas manuales, andamios y escaleras). Establece la obligación de que todo equipo comercializado después del 1 de enero de 1995 ostente marcado CE y Declaración de Conformidad según el RD 1644/2008, mientras que los equipos anteriores a 1995 deben contar obligatoriamente con el Certificado de Adecuación a las disposiciones mínimas del Anexo I. Fija además las comprobaciones periódicas e inspecciones obligatorias con libro de mantenimiento, la formación teórico-práctica preceptiva para operadores de maquinaria, la consignación de energía cero (LOTO) en mantenimiento, y la prohibición expresa de elevar personas en equipos no diseñados para ello salvo excepciones estrictamente regladas.",
               keyPoints: [
-                "Los equipos DEBEN tener marcado CE (certificación europea)",
-                "Mantenimiento preventivo obligatorio según fabricante",
-                "Inspecciones periódicas: cada equipo tiene su calendario",
-                "Formación obligatoria para operar cada equipo",
-                "Los trabajadores DEBEN saber usar los equipos correctamente",
-                "Prohibido usar equipos sin las protecciones de seguridad"
+                "Art. 3: Obligación del empresario de poner a disposición equipos seguros con marcado CE o adecuación certificada al Anexo I del RD 1215/1997.",
+                "Art. 4: Comprobación inicial antes de la puesta en servicio y comprobaciones periódicas y tras transformaciones por personal cualificado, conservando registros documentales para la Inspección.",
+                "Art. 5: Formación teórico-práctica obligatoria para operadores y disponibilidad del manual de instrucciones del fabricante en castellano.",
+                "Anexo I.1: Órganos de accionamiento visibles y seguros, imposibilidad de arranque intempestivo, seta de parada de emergencia accesible y resguardos fijos o enclavados en partes móviles.",
+                "Anexo I.1: Procedimiento obligatorio de consignación, bloqueo y etiquetado (LOTO: Lockout/Tagout) en operaciones de mantenimiento, engrase y limpieza.",
+                "Anexo I.2: Disposiciones para equipos móviles: estructuras antivuelco ROPS, protección contra caída de objetos FOPS, cinturón de seguridad y avisador acústico de marcha atrás.",
+                "Anexo I.2: Equipos de elevación: indicación visible de la Carga Máxima Admisible (CMA), limitadores de carga y pestillos de seguridad operativos en todos los ganchos.",
+                "Anexo II.2: Prohibición taxativa de elevación de personas con carretillas elevadoras sobre palets o con cazos de excavadora salvo habitáculos homologados bajo estricto protocolo de emergencia.",
+                "Anexo II.4: Regulación de trabajos en altura: escaleras de mano limitadas exclusivamente a accesos o trabajos puntuales de muy corta duración; andamios de más de 6 m con Plan de Montaje (PMUD) obligatorio."
               ],
               relations: ["Complementa el RD 773/1997 sobre EPIs"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 1215/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-17824" }
               ],
-              comoLoUso: "Cuando revises una obra o empresa, vas a mirar: ¿los equipos tienen marcado CE? ¿Tienen libro de mantenimiento? ¿Los operarios tienen carné? Si falta algo, vos lo reportás y proponés la solución. Esto es parte de tu trabajo diario."
+              comoLoUso: "PROTOCOLO PRÁCTICO PARA INSPECCIÓN Y CONTROL DE EQUIPOS DE TRABAJO:\n1. AUDITORÍA DOCUMENTAL DEL EQUIPO: Solicitar placa de marcado CE, Declaración de Conformidad CE y manual del fabricante en castellano. Si el equipo es anterior a 1995, exigir el 'Certificado de Adecuación al RD 1215/1997' firmado por técnico titulado competente.\n2. REVISIÓN DE SEGURIDAD MECÁNICA Y PARADAS: Comprobar que transmisiones y poleas tengan resguardos fijos que impidan el acceso con los dedos; verificar que las puertas de mantenimiento tengan microinterruptores de seguridad asociados a parada; y accionar la parada de emergencia (seta) para verificar que corte la alimentación.\n3. PROTOCOLO DE CONSIGNACIÓN LOTO: Asegurarse de que en paradas de mantenimiento, limpieza o desatasco de tolvas y bombas se aplique candado personal de bloqueo eléctrico y neumático impidiendo el arranque accidental.\n4. CONTROL DE VEHÍCULOS Y MAQUINARIA PESADA: Comprobar en camiones y dumpers el funcionamiento del avisador acústico de marcha atrás, rotativo luminoso, cinturón de seguridad y estructura ROPS.\n5. PROHIBICIÓN DE PRÁCTICAS PELIGROSAS: Prohibir tajantemente subir operarios sobre las uñas de una carretilla elevadora o en el cazo de una retroexcavadora."
             },
             {
               id: "rd-773-1997",
               title: "RD 773/1997 - Equipos de Protección Individual",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Regla simple: si no podés eliminar el riesgo con otro medio, PONÉS EPI. Este RD dice cuándo, cómo y qué EPI darle al trabajador.",
+              summary: "El Real Decreto 773/1997 fija las disposiciones mínimas sobre la elección, utilización, mantenimiento y control de los Equipos de Protección Individual (EPIs).\nConsagra el principio jurídico de que el EPI es el ÚLTIMO recurso preventivo: únicamente procede su utilización cuando los riesgos no hayan podido evitarse o limitarse suficientemente por medios técnicos de protección colectiva o medidas organizativas. Regula la obligación del empresario de suministrar gratuitamente los EPIs debidamente certificados con marcado CE (conforme al Reglamento UE 2016/425), impartir entrenamiento práctico para equipos complejos (Categoría III contra caídas y gases), reponerlos cuando se deterioren y vigilar su uso efectivo, así como el deber correlativo del trabajador de utilizarlos conforme a las instrucciones recibidas.",
               keyPoints: [
-                "Primero se intenta ELIMINAR el riesgo. Si no se puede, se usa EPI",
-                "El EPI debe ser CE (marcado europeo) y adecuado al riesgo",
-                "El empresario DEBE dar el EPI gratis al trabajador",
-                "Formación para usar el EPI correctamente",
-                "Mantenimiento y limpieza del EPI",
-                "Sustitución cuando esté deteriorado"
+                "Art. 2: Definición de EPI y exclusiones legales (ropa de trabajo corriente, uniformes ordinarios, equipos de socorro, policía y armas de defensa).",
+                "Art. 3: Principio de prioridad preventiva: la protección colectiva prima siempre sobre la individual. El EPI es el último recurso ante el riesgo residual.",
+                "Arts. 4 y 5: Condiciones que deben reunir los EPIs: marcado CE según Reglamento UE 2016/425, adecuación al riesgo, ergonomía y compatibilidad física entre ellos.",
+                "Art. 7: Gratuidad absoluta, suministro, mantenimiento, limpieza y reposición a cargo exclusivo del empresario. Prohibido descontar su coste al trabajador.",
+                "Art. 8: Obligaciones de información y entrenamiento práctico obligatorio antes del uso de EPIs de Categoría III (arneses anticaídas y protección respiratoria).",
+                "Art. 10: Obligaciones del trabajador de utilizar y cuidar correctamente los EPIs, guardarlos en el lugar asignado y comunicar desperfectos de inmediato."
               ],
               relations: ["Complementa el RD 1215/1997"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 773/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-12735" }
               ],
-              comoLoUso: "Como técnico, vos evaluás cuándo se necesita EPI, cuál es el correcto, y si el trabajador sabe usarlo. Si ves a alguien sin arnés trabajando en altura, vos parás la obra y explicás por qué. Tu trabajo es que nadie se lastime."
+              comoLoUso: "PROTOCOLO TÉCNICO DE GESTIÓN DE EPIS:\n1. ANÁLISIS DE RIESGOS RESIDUALES: Determinar qué riesgos persisten tras adoptar protecciones colectivas y consultar las normas UNE-EN aplicables (calzado S3 UNE-EN ISO 20345, guantes UNE-EN 388, arneses UNE-EN 361).\n2. DOCUMENTO DE ENTREGA FORMAL: Entregar los EPIs con registro individualizado firmado por el trabajador indicando fecha, modelo exacto, marcado CE y acuse de recibo de las instrucciones de uso.\n3. SESIÓN DE ENTRENAMIENTO PRÁCTICO: Para arneses anticaídas o máscaras con filtros, realizar una sesión práctica donde el operario se coloque el equipo, ajuste los tirantes y verifique los mosquetones.\n4. MANTENIMIENTO Y REPOSICIÓN: Inspeccionar periódicamente el estado de conservación de los EPIs y retirar de inmediato los equipos caducados o que hayan sufrido caídas previas."
             },
             {
               id: "rd-374-2001",
               title: "RD 374/2001 - Agentes Químicos",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Protección contra sustancias químicas peligrosas. Si trabajás con productos químicos, limpieza industrial o saneamiento, esto es lo que regulás.",
+              summary: "El Real Decreto 374/2001 regula la protección de los trabajadores contra los riesgos derivados de la presencia o utilización de agentes químicos peligrosos durante el trabajo.\nEstablece la obligatoriedad de evaluar los riesgos mediante las Fichas de Datos de Seguridad (FDS de 16 epígrafes normalizados) y mediciones higiénicas cuantitativas de las concentraciones en aire, comparándolas con los Valores Límite Ambientales (VLA-ED y VLA-EC) publicados oficialmente por el INSST. Exige la sustitución prioritaria de productos químicos peligrosos por alternativas inocuas, sistemas cerrados de contención, extracción localizada en origen, disponibilidad de duchas y lavaojos de emergencia a menos de 15 metros, vigilancia médica periódica y control de metabolitos mediante Valores Límite Biológicos (VLB).",
               keyPoints: [
-                "Hoja de Datos de Seguridad (HDS/SDS): el documento más importante",
-                "Límites de Exposición Profesional (LEP): cuánta sustancia podés respirar",
-                "Clasificación CLP: etiquetas de peligro (símbolos en los envases)",
-                "Medidas de prevención: ventilación, EPIs, sustitución",
-                "Vigilancia de la salud específica para cada sustancia",
-                "Plan de emergencia ante derrames o accidentes químicos"
+                "Art. 2: Definiciones técnicas: agente químico peligroso (clasificado según CLP), VLA-ED (8 horas), VLA-EC (15 minutos) y Valor Límite Biológico (VLB).",
+                "Art. 3: Evaluación obligatoria de riesgos mediante Fichas de Datos de Seguridad (FDS) de 16 epígrafes y mediciones cuantitativas por Higienista Nivel Superior.",
+                "Art. 4: Principio de sustitución prioritaria por sustancias no peligrosas y diseño de procesos en sistema cerrado.",
+                "Art. 5: Medidas técnicas: extracción localizada en foco emisor, ventilación general, reducción al mínimo de trabajadores expuestos y orden estricto.",
+                "Art. 6: Planes de emergencia ante derrames, sistemas de alarma, neutralizadores químicos y duchas de seguridad y lavaojos de emergencia a menos de 15 metros.",
+                "Art. 7: Vigilancia de la salud y control biológico de biomarcadores en sangre u orina conforme a protocolos médicos oficiales del Ministerio de Sanidad.",
+                "Art. 9: Prohibiciones expresas de fabricación y uso de los agentes químicos cancerígenos de alta toxicidad incluidos en el Anexo III."
               ],
               relations: ["Muy relevante para saneamiento e higiene industrial"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 374/2001)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2001-8436" }
               ],
-              comoLoUso: "En saneamiento usás productos químicos todos los días (cloro, soda, ácidos, detergentes). Vos verificás que las HDS estén actualizadas, que los trabajadores sepan qué significan los símbolos de peligro, y que usen los EPIs correctos. Si ves un envase sin etiqueta, eso es una infracción."
+              comoLoUso: "PROTOCOLO PRÁCTICO PARA RIESGO QUÍMICO EN INSTALACIONES Y SANEAMIENTO:\n1. ARCHIVO DE FICHAS DE SEGURIDAD: Exigir y archivar en el centro de trabajo las FDS actualizadas de 16 epígrafes en castellano de cada producto químico utilizado (lejía, sosa cáustica, ácido clorhídrico, reactivos).\n2. ETIQUETADO REGLAMENTARIO: Comprobar que todos los envases y recipientes de trasvase cuenten con etiqueta CLP con pictogramas de peligro, palabras de advertencia y frases H y P. Prohibir envases de bebidas para guardar químicos.\n3. MEDICIONES HIGIÉNICAS DE GASES: En presencia de emanaciones (H₂S, cloro, amoníaco), medir concentraciones en la zona respiratoria del operario con detector calibrado y comparar contra el VLA del INSST.\n4. REVISIÓN DE DUCHAS Y LAVAOJOS: Verificar semanalmente el funcionamiento y caudal de las duchas y lavaojos de seguridad, comprobando que se encuentren despejadas y con acceso inmediato."
             },
             {
               id: "rd-664-1997",
               title: "RD 664/1997 - Agentes Biológicos",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Protección contra virus, bacterias, hongos y parásitos. En saneamiento, esto es lo que más vas a ver: aguas residuales, residuos, desratización.",
+              summary: "El Real Decreto 664/1997 regula la protección de los trabajadores contra los riesgos derivados de la exposición a agentes biológicos (virus, bacterias, hongos y parásitos).\nClasifica los patógenos en 4 grupos de riesgo según su peligrosidad para el ser humano y su capacidad de propagación epidémica. Regula tanto las actividades con intención deliberada (laboratorios microbiológicos) como aquellas donde la exposición es potencial o involuntaria inherente al trabajo (saneamiento, depuración de aguas residuales, alcantarillado y recogida de residuos). Impone medidas higiénicas estrictas como vestuarios con taquillas dobles (separando ropa limpia y de trabajo), prohibición de lavado doméstico con lavandería industrial a cargo de la empresa, ofrecimiento formal y gratuito de vacunas eficaces (tétanos, hepatitis A y B) y custodia de expedientes médicos durante 10 o 40 años.",
               keyPoints: [
-                "Clasificación en 4 grupos de riesgo (I a IV, de menos a más peligroso)",
-                "Evaluación del riesgo de exposición a agentes biológicos",
-                "Medidas: higiene, vacunación si existe, EPIs, protocolos",
-                "Zonas de trabajo clasificadas según riesgo",
-                "Vigilancia de la salud obligatoria",
-                "Notificación de enfermedades profesionales"
+                "Art. 2: Definición legal de agente biológico y vías de entrada al organismo (inhalatoria, dérmica, digestiva y parenteral).",
+                "Art. 3: Clasificación en 4 grupos de riesgo: Grupo 1 (inocuo), Grupo 2 (enfermedad sin propagación con tratamiento), Grupo 3 (enfermedad grave con propagación y tratamiento) y Grupo 4 (alta mortalidad y propagación sin tratamiento).",
+                "Art. 4: Evaluación de riesgos en actividades sin intención deliberada (redes de alcantarillado, depuración EDAR, residuos urbanos).",
+                "Arts. 7 y 8: Medidas higiénicas: taquillas dobles obligatorias, prohibición de comer o beber en zonas con riesgo y lavado de uniformes a cargo de la empresa.",
+                "Art. 9: Vigilancia de la salud y ofrecimiento gratuito de vacunas eficaces (tétanos-difteria, hepatitis A y hepatitis B) con registro de renuncias informadas.",
+                "Art. 10: Lista de trabajadores expuestos y custodia documental durante 10 años (o 40 años en agentes persistentes o de larga latencia)."
               ],
               relations: ["Aplicable a industria alimentaria y sanitaria"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 664/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-11144" }
               ],
-              comoLoUso: "Cuando trabajás en desratización o limpieza de pozos, estás expuesto a agentes biológicos. Vos evaluás el riesgo (¿qué bacterias hay?), das las vacunas necesarias (si existen), y te asegurás de que los trabajadores usen los EPIs correctos (guantes, mascarillas, trajes)."
+              comoLoUso: "PROTOCOLO PARA EXPOSICIÓN A AGENTES BIOLÓGICOS EN SANEAMIENTO:\n1. VACUNACIÓN PREVENTIVA: Ofrecer formalmente por escrito a todo el personal de saneamiento las vacunas de Tétanos, Hepatitis A y Hepatitis B. Si el operario renuncia, archivar su declaración firmada de renuncia informada.\n2. SELECCIÓN DE EPIS: Proveer guantes estancos con resistencia mecánica y biológica (UNE-EN ISO 374-5 con marcado VIRUS), pantalla facial contra salpicaduras y mascarilla FFP2/FFP3 en bombeos con aerosoles.\n3. HIGIENE Y VESTUARIOS: Utilizar taquillas dobles para que la ropa de calle jamás toque el mono de trabajo. Al acabar el turno, depositar los uniformes en sacas para lavandería industrial concertada; jamás permitir que el operario los lave en su casa."
             },
             {
               id: "rd-486-1997",
               title: "RD 486/1997 - Lugares de Trabajo",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Las condiciones MÍNIMAS que debe tener cualquier puesto de trabajo: iluminación, ventilación, temperatura, ruido, pisos, escaleras.",
+              summary: "El Real Decreto 486/1997 establece las disposiciones mínimas de seguridad y salud que deben cumplir los lugares de trabajo en España.\nFija las dimensiones mínimas estructurales de los locales (3 metros de altura, 2 m² libres de suelo por trabajador y 10 m³ de volumen no ocupado), las condiciones de las vías de evacuación y salidas de emergencia, la protección de desniveles de más de 2 metros con barandillas rígidas de 90 cm y rodapié de 15 cm, las características de escaleras fijas y de servicio, los rangos de confort termohigrométrico (17-27 °C en trabajos sedentarios, 14-25 °C en trabajos ligeros, y humedad relativa del 30-70%), los niveles mínimos reglamentarios de iluminación en lux para cada tipo de tarea visual, y las exigencias de servicios higiénicos, agua potable, vestuarios con taquillas, duchas con agua caliente y botiquín de primeros auxilios.",
               keyPoints: [
-                "Dimensiones mínimas del puesto de trabajo",
-                "Ventilación e iluminación adecuadas",
-                "Niveles de ruido y vibraciones permitidos",
-                "Temperatura y humedad confortables (14-25°C)",
-                "Pisos, paredes y techos en buen estado",
-                "Señalización de seguridad obligatoria"
+                "Art. 2 y 3: Alcance exhaustivo de lugares de trabajo (instalaciones, naves, oficinas, pasillos, vestuarios, azoteas y comedores).",
+                "Anexo I.1: Dimensiones estructurales mínimas: 3 m de altura (2,5 m en oficinas), 2 m² de superficie libre y 10 m³ de volumen por trabajador.",
+                "Anexo I.2: Suelos fijos, estables y no resbaladizos. Barandillas resistentes de al menos 90 cm con rodapié de 15 cm y barra intermedia en desniveles de más de 2 m.",
+                "Anexo I.4: Escaleras fijas con anchura mínima de 1 m, huella entre 28-37 cm y contrahuella entre 13-20 cm.",
+                "Anexo II: Orden, limpieza y vías de evacuación permanentemente despejadas de obstáculos.",
+                "Anexo III: Temperatura en oficinas entre 17 y 27 °C; en trabajos ligeros entre 14 y 25 °C. Humedad relativa entre el 30% y el 70%. Renovación mínima de aire de 30 a 50 m³/h por trabajador.",
+                "Anexo IV: Niveles mínimos de iluminación: 100 lux (bajas exigencias), 200 lux (medias), 500 lux (altas), 1.000 lux (muy altas) y alumbrado de emergencia de evacuación (al menos 1 lux).",
+                "Anexos V y VI: Agua potable, vestuarios separados con taquillas individuales, duchas con agua caliente/fría y botiquín de primeros auxilios obligatorio (local de primeros auxilios si >50 trabajadores)."
               ],
               relations: ["Complementa la evaluación de riesgos del RD 39/1997"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 486/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-8669" }
               ],
-              comoLoUso: "Cuando vayas a evaluar un puesto de trabajo, vas a medir: ¿hay suficiente luz? ¿El ruido es tolerable? ¿La temperatura es adecuada? ¿El piso está en buen estado? Si falta algo, lo reportás con número y medida correctiva."
+              comoLoUso: "PROTOCOLO DE EVALUACIÓN DE LUGARES DE TRABAJO:\n1. MEDICIÓN AMBIENTAL: Con termohigrómetro calibrado, verificar que las temperaturas se mantengan entre 17-27 °C en oficinas y 14-25 °C en talleres. En exteriores bajo alerta por calor de AEMET, aplicar medidas del RD-ley 4/2023.\n2. MEDICIÓN DE ILUMINACIÓN: Con luxómetro en el plano de trabajo, medir al menos 500 lux en despachos técnicos, 200 lux en pasillos transitados y 100 lux en almacenes.\n3. SEGURIDAD DE HUECOS Y ESCALERAS: Verificar que todas las aberturas en suelos o desniveles de más de 2 metros cuenten con barandilla perimetral de 90 cm con rodapié de 15 cm.\n4. CONTROL DE BOTIQUINES: Revisar trimestralmente el botiquín de primeros auxilios, sustituyendo apósitos caducados y retirando cualquier medicamento."
             },
             {
               id: "rd-396-2006",
               title: "RD 396/2006 - Espacios Confinados",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "TRABAJO EN ESPACIOS CONFINADOS. Tanques, pozos, tuberías, depósitos. PARA TODO LO QUE HACÉS EN SANEAMIENTO ESTO ES CRÍTICO.",
+              summary: "El Real Decreto 396/2006 regula las disposiciones mínimas de seguridad y salud aplicables a los trabajos con riesgo de exposición al amianto (desamiantado de cubiertas de fibrocemento/uralita, bajantes, aislamientos y tuberías).\nExige la inscripción obligatoria de la empresa en el Registro de Empresas con Riesgo de Amianto (RERA), fija el Valor Límite Ambiental (VLA) en 0,1 fibras por centímetro cúbico medidas en 8 horas, exige la aprobación previa de un Plan de Trabajo con Amianto por la Autoridad Laboral (presentado con 45 días de antelación), impone unidades de descontaminación de 3 o 5 fases con ducha obligatoria con la máscara puesta, equipos de protección respiratoria con filtro P3 o aire asistido, monos desechables herméticos Tipo 5/6 y custodia documental del registro médico durante al menos 40 años.",
               keyPoints: [
-                "Espacio confinado: cualquier espacio con acceso limitado y ventilación deficiente",
-                "PERMISO DE TRABAJO obligatorio antes de entrar",
-                "Control atmosférico: medir O₂, gases tóxicos, gases explosivos",
-                "Ventilación forzada antes y durante el trabajo",
-                "NUNCA entrar solo - siempre persona de vigilancia externa",
-                "Equipo de rescate preparado y personal capacitado",
-                "Formación específica del personal que entra"
+                "Art. 3: Inscripción preceptiva en el RERA de la Comunidad Autónoma como condición indispensable para operar con amianto.",
+                "Art. 4: Valor Límite Ambiental de Exposición (VLA) de 0,1 fibras/cm³ medidas en promedio de 8 horas.",
+                "Art. 5: Muestreo personal continuo mediante bombas de captación analizadas por microscopía óptica de contraste de fases MTA/MA-051.",
+                "Arts. 11 y 12: Obligación de redactar y obtener la aprobación formal previa del Plan de Trabajo con Amianto ante la Autoridad Laboral 45 días antes de iniciar la obra.",
+                "Art. 13: Unidad móvil de descontaminación de 3 o 5 fases con ducha obligatoria manteniendo la máscara de silicona puesta durante el lavado.",
+                "Arts. 16 y 18: Vigilancia de la salud post-ocupacional y custodia del archivo médico e historial laboral durante al menos 40 años por la prolongada latencia del mesotelioma."
               ],
               relations: ["CRÍTICO para saneamiento"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 604/2006 - Espacios Confinados)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2006-9379" }
               ],
-              comoLoUso: "ESTO es lo que más vas a necesitar en tu trabajo. Cada vez que entres a un pozo de visita, tanque o tubería, necesitás: permiso de trabajo, medición atmosférica, ventilación, arnés con línea de vida, persona afuera mirándote, y equipo de rescate. Si alguien entra sin esto, vos PARÁ la obra."
+              comoLoUso: "PROTOCOLO DE RETIRADA DE AMIANTO EN OBRAS Y SANEAMIENTO:\n1. COMPROBACIÓN RERA Y PLAN APROBADO: Verificar que la empresa contratista esté activa en el RERA y cuente con la resolución formal de APROBACIÓN del Plan de Trabajo emitida por la Autoridad Laboral.\n2. DELIMITACIÓN Y CONFINAMIENTO: Vallar y señalizar la zona con carteles de peligro por amianto. En interiores, montar burbuja estanca con depresión de aire continua y filtros absolutos HEPA.\n3. EPIS OBLIGATORIOS: Buzo desechable Tipo 5/6 estanco al polvo de partículas sólidas, máscara integral con filtro P3 o equipo motorizado y botas lisas lavables sin cordones.\n4. GESTIÓN DEL RESIDUO PELIGROSO: Humectar las placas con líquido fijador, ensacarlas en doble film de polietileno galga 400 con etiqueta oficial de residuo de amianto (LER 17 06 05*) y entregar a gestor autorizado."
             }
           ]
         },
@@ -226,14 +241,15 @@ const PRL_DATA = {
               title: "RD 604/2006 - Espacios Confinados",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Modifica el RD 39/1997 para incluir la definición de espacio confinado y las obligaciones específicas. Muy relevante para saneamiento.",
+              summary: "El Real Decreto 604/2006 modifica el Reglamento de los Servicios de Prevención (RD 39/1997) y el RD 1627/1997 de obras de construcción para culminar la reforma del marco normativo iniciada con la Ley 54/2003.\nSu aportación jurídica y operativa más relevante es la regulación formal y exhaustiva de la figura del Recurso Preventivo (Artículo 22 bis): determina los tres supuestos en los que su presencia física en el tajo es legalmente obligatoria (concurrencia de riesgos agravados, actividades peligrosas del Anexo I como caídas >2 m, zanjas >2 m o confinados, y requerimiento expreso de la ITSS); define la formación mínima requerida (Nivel Básico de 50 horas); exige su permanencia continua in situ durante la maniobra peligrosa; y le otorga la potestad legal de dictar instrucciones y ordenar la paralización inmediata de las tareas ante riesgo grave e inminente.",
               keyPoints: [
-                "Evaluación previa del espacio confinado",
-                "Permisos de trabajo y vigilancia",
-                "Ventilación y control atmosférico",
-                "Equipos de rescate preparados",
-                "Formación específica del personal",
-                "Trabajo en equipos (never solo)"
+                "Art. Primero. Uno: Nueva redacción del Art. 2 del RD 39/1997 para garantizar la integración real del Plan de Prevención en todos los mandos de la empresa.",
+                "Art. Primero. Tres: Introducción formal del Artículo 22 bis regulando la presencia preceptiva de los Recursos Preventivos en el centro de trabajo.",
+                "Supuesto 1: Concurrencia de operaciones diversas simultáneas o sucesivas que puedan agravar o modificar los riesgos del centro.",
+                "Supuesto 2: Trabajos reglamentariamente considerados peligrosos (caídas de más de 2 m, sepultamiento en zanjas >2 m, confinados, alta tensión, explosivos).",
+                "Supuesto 3: Requerimiento formal de presencia emitido por la Inspección de Trabajo y Seguridad Social (ITSS).",
+                "Cualificación mínima: Acreditación oficial de funciones de Nivel Básico de al menos 50 horas de formación en prevención.",
+                "Facultades del Recurso Preventivo: permanencia física en el tajo, vigilancia continua de los métodos seguros y potestad de paralización inmediata ante riesgo inminente."
               ],
               relations: ["CRÍTICO para saneamiento industrial"],
               usefulLinks: [
@@ -245,17 +261,231 @@ const PRL_DATA = {
               title: "RD 665/1997 - Agentes Cancerígenos",
               type: "real-decreto",
               status: "obligatoria",
-              summary: "Protección de los trabajadores contra riesgos derivados de la exposición a agentes cancerígenos y mutágenos.",
+              summary: "El Real Decreto 665/1997 regula la protección de los trabajadores contra los riesgos derivados de la exposición a agentes cancerígenos, mutágenos y reprotóxicos en el trabajo.\nImpone con carácter vinculante el principio de sustitución obligatoria del cancerígeno por alternativas inocuas siempre que sea técnicamente viable; exige que la producción o manipulación se realice en sistema cerrado hermético; y en su defecto, impone la reducción de la exposición al nivel técnicamente más bajo posible (principio ALARA: As Low As Reasonably Achievable) mediante extracción localizada en origen sin recirculación de aire. Regula medidas de higiene reforzadas (lavandería industrial a cargo de la empresa), la notificación obligatoria a la Autoridad Laboral de cantidades y operarios expuestos, y la custodia de los historiales médicos y listas de trabajadores durante al menos 40 años tras finalizar la exposición.",
               keyPoints: [
-                "Sustancias clasificadas como cancerígenas",
-                "Evaluación y control de exposición",
-                "Vigilancia de la salud reforzada",
-                "Prohibición de ciertas actividades con menores"
+                "Art. 2: Definiciones legales: agentes clasificados como cancerígenos o mutágenos de categoría 1A y 1B (CLP), sílice cristalina respirable, humos diésel y serrín de maderas duras.",
+                "Art. 4: Obligación jurídica ineludible de sustitución prioritaria del agente cancerígeno por una sustancia que no sea peligrosa.",
+                "Art. 5: Producción en sistema cerrado hermético y aplicación del principio ALARA con extracción localizada de aire al exterior sin recirculación.",
+                "Art. 6: Comunicación formal periódica a la Autoridad Laboral de actividades, cantidades usadas, mediciones higiénicas y trabajadores expuestos.",
+                "Art. 8: Medidas higiénicas: prohibición absoluta de comer/beber, vestuarios con taquillas dobles y lavado de ropa de trabajo en lavandería industrial contratada.",
+                "Arts. 9 y 10: Lista oficial de trabajadores expuestos y custodia documental obligatoria durante al menos 40 años tras el cese de la exposición."
               ],
               relations: ["Relacionado con RD 374/2001 (agentes químicos)"],
               usefulLinks: [
                 { text: "Texto completo - BOE (RD 665/1997)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1997-11145" }
               ]
+            }
+          ]
+        },
+        {
+          id: "constitucion-y-marco-laboral",
+          title: "Constitución y Marco Laboral Sustantivo",
+          items: [
+            {
+              id: "ce-1978-art40",
+              title: "Constitución Española de 1978 - Art. 40.2",
+              type: "constitucion",
+              status: "fundamental",
+              summary: "La Constitución Española de 1978 constituye el vértice superior de todo el ordenamiento jurídico y el fundamento supremo de la prevención de riesgos laborales en España.\nEl Artículo 40.2 impone el mandato directo a los poderes públicos de velar por la seguridad e higiene en el trabajo y garantizar el descanso necesario. Este mandato se articula conjuntamente con el Artículo 15 (derecho fundamental a la vida y a la integridad física y moral, base del reproche penal de los Arts. 316-318 del Código Penal español) y el Artículo 43 (derecho a la protección de la salud pública). Es el soporte que legitima la actuación inspectora y sancionadora del Estado y garantiza la tutela judicial de los trabajadores.",
+              keyPoints: [
+                "Art. 40.2 CE: Mandato constitucional a los poderes públicos de velar por la seguridad e higiene en el trabajo y garantizar el descanso necesario.",
+                "Art. 15 CE: Derecho fundamental a la vida y a la integridad física: enviar a un operario a laborar sin medidas de seguridad cuando exista peligro para su vida constituye delito penal laboral.",
+                "Art. 43 CE: Derecho a la protección de la salud pública tutelado por los poderes públicos mediante medidas preventivas.",
+                "Art. 53 CE: Eficacia vinculante de los derechos fundamentales y directriz interpretativa de los principios rectores de la política social y económica."
+              ],
+              relations: ["Ley 31/1995", "Estatuto de los Trabajadores"],
+              usefulLinks: [
+                { text: "Constitución Española - BOE", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229" }
+              ],
+              comoLoUso: "APLICACIÓN DE LA CONSTITUCIÓN EN INFORMES Y PERITAJES:\n1. FUNDAMENTACIÓN DE DERECHO: En cualquier dictamen pericial judicial, informe técnico de investigación de accidentes o recurso ante la Inspección de Trabajo, citar el Art. 40.2 y 15 de la CE para dotar al informe de la máxima fuerza jurídica superior.\n2. DERECHO DE RESISTENCIA: Amparar al trabajador que interrumpe su actividad ante un peligro inminente: no comete desacato laboral, sino que ejerce la tutela constitucional de su vida consagrada en el Art. 15 de la Constitución."
+            },
+            {
+              id: "et-rdl-2-2015",
+              title: "Estatuto de los Trabajadores (RDL 2/2015) - Arts. 19 y 84",
+              type: "ley",
+              status: "obligatoria",
+              summary: "El Estatuto de los Trabajadores (Real Decreto Legislativo 2/2015) es el texto refundido que rige el marco sustantivo de las relaciones laborales individuales y colectivas en España (el equivalente a la Ley de Contrato de Trabajo de Argentina).\nEstablece en su Art. 4.2.d el derecho fundamental del trabajador a su integridad física y a una adecuada política de prevención de riesgos laborales. Su Art. 19 regula de forma imperativa los deberes de formación teórica y práctica a cargo exclusivo del empresario en horario laboral y el deber del trabajador de cumplir las medidas preventivas. El Art. 54 avala el despido disciplinario procedente y sin indemnización por desobediencia grave a las normas de seguridad; el Art. 64 reconoce los derechos de información trimestral del Comité de Empresa en siniestralidad laboral; y el Art. 84 fija las reglas de concurrencia y primacía de los convenios colectivos del sector.",
+              keyPoints: [
+                "Art. 4.2.d ET: Derecho básico e irrenunciable del trabajador a su integridad física y a una adecuada política de prevención de riesgos laborales.",
+                "Art. 19 ET: Deber patronal de protección eficaz, formación teórica y práctica gratuita en horario de trabajo y deber del operario de cumplir las órdenes de seguridad.",
+                "Art. 54.2.d ET: Despido disciplinario procedente sin indemnización por transgresión de la buena fe contractual, indisciplina o desobediencia grave en seguridad.",
+                "Art. 64 ET: Competencias y derechos de información trimestral del Comité de Empresa sobre accidentes, bajas laborales, jornadas perdidas e índices de siniestralidad.",
+                "Art. 84 ET: Concurrencia de convenios: primacía del convenio sectorial en materia salarial y garantía de estándares de seguridad obligatorios que ningún convenio de empresa puede rebajar."
+              ],
+              relations: ["Ley 31/1995 Art. 14 y 19", "Convenios Colectivos Sectoriales"],
+              usefulLinks: [
+                { text: "Estatuto de los Trabajadores - BOE", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430" }
+              ],
+              comoLoUso: "APLICACIÓN DEL ESTATUTO DE LOS TRABAJADORES EN EL DÍA A DÍA:\n1. FORMACIÓN AL CONTRATAR: Garantizar y documentar formalmente la formación del Art. 19 antes del primer día de trabajo efectivo del operario, computando las horas de curso como jornada retribuida.\n2. EXPEDIENTE DISCIPLINARIO POR INCUMPLIMIENTO: Si un trabajador se niega a colocarse el arnés o sabotea un resguardo, documentar la infracción por escrito con aviso formal citando el Art. 19 y 29 de la LPRL y el Art. 54 del ET como advertencia laboral vinculante.\n3. INFORME TRIMESTRAL AL COMITÉ: Preparar y exponer cada trimestre ante los Delegados de Personal o Comité de Empresa las estadísticas oficiales de siniestralidad (Índice de Frecuencia, Gravedad e Incidencia) conforme al Art. 64."
+            }
+          ]
+        },
+        {
+          id: "directivas-comunitarias-ue",
+          title: "Derecho Comunitario: Directivas de la Unión Europea",
+          items: [
+            {
+              id: "directiva-89-391-cee",
+              title: "Directiva Marco Europea 89/391/CEE (SST)",
+              type: "directiva-ue",
+              status: "fundamental",
+              summary: "La Directiva madre de la Unión Europea sobre la aplicación de medidas para promover la mejora de la seguridad y de la salud de los trabajadores en el trabajo. La Ley 31/1995 es su transposición exacta al derecho español.",
+              keyPoints: [
+                "Estableció por primera vez en toda Europa los principios generales de prevención (evitar riesgos, evaluar los inevitables, combatir en origen).",
+                "Obligación del empresario de disponer de servicios de prevención y de consultar a los trabajadores.",
+                "Efecto vinculante: Ningún país de la Unión Europea puede legislar por debajo del nivel de protección fijado por esta Directiva.",
+                "Armonización de normativas técnicas y directivas hijas derivadas."
+              ],
+              relations: ["Ley 31/1995", "RD 39/1997"],
+              usefulLinks: [
+                { text: "Directiva 89/391/CEE - EUR-Lex", url: "https://eur-lex.europa.eu/legal-content/ES/ALL/?uri=CELEX:31989L0391" }
+              ],
+              comoLoUso: "Para entender el origen de la ley española: la Ley 31/1995 no nació de la nada, es la copia adaptada que España tuvo que hacer para cumplir con la Directiva 89/391 de la UE tras entrar a la Comunidad Europea."
+            },
+            {
+              id: "directiva-92-85-cee",
+              title: "Directiva 92/85/CEE - Maternidad, Embarazo y Lactancia",
+              type: "directiva-ue",
+              status: "obligatoria",
+              summary: "Directiva comunitaria relativa a la aplicación de medidas para promover la mejora de la seguridad y de la salud en el trabajo de la trabajadora embarazada, que haya dado a luz o en período de lactancia natural. Traspuesta en el Art. 26 de la LPRL.",
+              keyPoints: [
+                "Evaluación obligatoria de riesgos específicos que puedan afectar a la salud de las trabajadoras en estado de gestación o lactancia (agentes físicos, químicos, biológicos).",
+                "Adaptación de condiciones de trabajo o cambio de puesto exento de riesgo sin reducción de salario.",
+                "Suspensión del contrato con subsidio por riesgo durante el embarazo o lactancia si no existe puesto compatible.",
+                "Prohibición de realizar trabajo nocturno o turnos perjudiciales si un informe médico lo desaconseja."
+              ],
+              relations: ["Art. 26 LPRL", "RD 39/1997 Anexo VII y VIII"],
+              usefulLinks: [
+                { text: "Directiva 92/85/CEE - EUR-Lex", url: "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=celex:31992L0085" }
+              ],
+              comoLoUso: "Si una operaria de saneamiento o recogida queda embarazada, NO puede seguir expuesta a agentes biológicos (aguas residuales), sustancias químicas o vibraciones. Se activa inmediatamente el protocolo del Art. 26 LPRL para reubicarla o tramitar la prestación por riesgo de embarazo ante la Mutua."
+            },
+            {
+              id: "directiva-94-33-cee",
+              title: "Directiva 94/33/CEE - Protección de los Jóvenes y Menores",
+              type: "directiva-ue",
+              status: "obligatoria",
+              summary: "Directiva comunitaria relativa a la protección de los jóvenes en el trabajo (menores de 18 años). Traspuesta en el Art. 27 de la LPRL y en el Estatuto de los Trabajadores.",
+              keyPoints: [
+                "Evaluación de riesgos previa específica teniendo en cuenta su falta de experiencia, inmadurez y desarrollo físico incompleto.",
+                "Prohibición taxativa de trabajo nocturno (entre las 22:00 y las 06:00 horas) para menores de 18 años.",
+                "Prohibición de realizar horas extraordinarias.",
+                "Prohibición de realizar trabajos de riesgo especial (espacios confinados, sustancias cancerígenas, alta tensión, riesgo de caída en altura)."
+              ],
+              relations: ["Art. 27 LPRL", "Estatuto de los Trabajadores Art. 6"],
+              usefulLinks: [
+                { text: "Directiva 94/33/CEE - EUR-Lex", url: "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=celex:31994L0033" }
+              ],
+              comoLoUso: "En talleres, recogida de residuos o depuradoras, si entra un aprendiz o estudiante en prácticas menor de 18 años, el técnico debe verificar que no manipule maquinaria pesada ni ingrese a zonas ATEX o confinadas."
+            },
+            {
+              id: "directiva-91-383-cee",
+              title: "Directiva 91/383/CEE - Trabajadores Temporales y ETTs",
+              type: "directiva-ue",
+              status: "obligatoria",
+              summary: "Garantiza que los trabajadores temporales o contratados a través de Empresas de Trabajo Temporal (ETT) disfruten del MISMO nivel de protección en SST que los trabajadores indefinidos. Traspuesta en el Art. 28 de la LPRL y Ley 14/1994 de ETTs.",
+              keyPoints: [
+                "Igualdad de trato y derecho a idéntica protección, formación e información.",
+                "Obligación de la empresa usuaria de informar a la ETT de los riesgos específicos y requerimientos de aptitud antes de la puesta a disposición.",
+                "Prohibición legal de contratar trabajadores de ETT para trabajos de especial peligrosidad (radiaciones, agentes cancerígenos Categoría 1A/1B, inmersiones con equipo hiperbárico).",
+                "Responsabilidad subsidiaria de la empresa usuaria en materia de prevención y accidentes."
+              ],
+              relations: ["Art. 28 LPRL", "RD 216/1999 sobre ETTs"],
+              usefulLinks: [
+                { text: "Directiva 91/383/CEE - EUR-Lex", url: "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=celex:31991L0383" }
+              ],
+              comoLoUso: "En refuerzos de verano de limpieza viaria contratados vía ETT (Adecco, Randstad, etc.), la empresa contratista debe darles la formación y los EPIs Clase 3 antes de salir a la calle el primer día."
+            }
+          ]
+        },
+        {
+          id: "regimen-sancionador-lisos",
+          title: "Régimen Sancionador: LISOS e Inspección de Trabajo",
+          items: [
+            {
+              id: "lisos-rdl-5-2000",
+              title: "LISOS (RDL 5/2000) - Ley sobre Infracciones y Sanciones en el Orden Social",
+              type: "ley",
+              status: "fundamental",
+              summary: "La Ley sobre Infracciones y Sanciones en el Orden Social (LISOS, aprobada por el Real Decreto Legislativo 5/2000) es el código sancionador y disciplinario de las relaciones laborales y de la Prevención de Riesgos Laborales en España.\nTipifica con absoluta precisión todas las conductas ilícitas de las empresas en materia preventiva, estructurándolas en tres niveles de gravedad: Infracciones Leves (Art. 11), Infracciones Graves (Art. 12) e Infracciones Muy Graves (Art. 13). Fija la tabla oficial de sanciones económicas en sus grados mínimo, medio y máximo (Art. 40, con multas que alcanzan hasta los 983.736 euros), los criterios legales de graduación y agravación (Art. 39, como reincidencia, daño causado, desobediencia de requerimientos previos y volumen de facturación) y la responsabilidad solidaria entre empresas principales, contratistas y subcontratistas en centros concurrentes (Art. 42).",
+              keyPoints: [
+                "Art. 11: Infracciones Leves: incumplimientos formales o documentales y falta de limpieza no peligrosa. Multas de 45 € a 2.450 €.",
+                "Art. 12: Infracciones Graves: no evaluar riesgos, no elaborar el plan de prevención, no impartir formación, no realizar reconocimientos médicos, no designar recurso preventivo o superar límites ambientales VLA. Multas de 2.451 € a 49.180 €.",
+                "Art. 13: Infracciones Muy Graves: no paralizar trabajos ante riesgo inminente, desproteger caídas de altura o confinados, exponer a embarazadas o menores a puestos prohibidos u ocultar accidentes graves. Multas de 49.181 € a 983.736 €.",
+                "Art. 39: Criterios legales de graduación: gravedad del daño, número de afectados, negligencia o dolo, desobediencia de advertencias previas de la ITSS y cifra de negocios.",
+                "Art. 40: Escala de cuantías económicas actualizadas por tramos (Leves hasta 2.450 €, Graves hasta 49.180 €, Muy Graves hasta 983.736 €).",
+                "Art. 42: Responsabilidad solidaria entre la empresa principal y las contratas y subcontratas en las sanciones pecuniarias cometidas en su centro de trabajo."
+              ],
+              relations: ["Ley 31/1995 Arts. 42-54", "Inspección de Trabajo (ITSS)"],
+              usefulLinks: [
+                { text: "LISOS texto refundido - BOE", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060" }
+              ],
+              comoLoUso: "APLICACIÓN PRÁCTICA DE LA LISOS EN LA NEGOCIACIÓN PREVENTIVA:\n1. ARGUMENTO ECONÓMICO ANTE LA GERENCIA: Cuando la dirección o el departamento financiero rechace adquirir barandillas, reparar un camión o comprar equipos de respiración por considerarlo 'costoso', mostrarles el Art. 12 y 13 de la LISOS. La multa grave mínima es de 2.451 € y una muy grave llega a 983.736 €, enormemente superior a cualquier inversión preventiva.\n2. GESTIÓN DE REQUERIMIENTOS INSPECTORES: Si la Inspección de Trabajo realiza una visita y otorga un requerimiento formal con plazo de 15 o 30 días, subsanar las deficiencias dentro del plazo para evitar que se eleve a acta de infracción grave."
+            },
+            {
+              id: "itss-inspeccion-trabajo",
+              title: "Inspección de Trabajo y Seguridad Social (ITSS) y Paralización de Tareas",
+              type: "organismo",
+              status: "fundamental",
+              summary: "La Inspección de Trabajo y Seguridad Social (ITSS), regulada por la Ley 23/2015, es el cuerpo de funcionarios con rango de agentes de la autoridad pública encargado de vigilar el cumplimiento de la legislación laboral y de prevención de riesgos en España.\nSus inspectores y subinspectores tienen facultades plenipotenciarias para acceder libremente a cualquier centro de trabajo a cualquier hora del día o de la noche sin previo aviso, interrogar a trabajadores a solas, tomar muestras, fotos y vídeos, y requerir documentación. Sus actas gozan de presunción de certeza legal. El Artículo 44 de la Ley 31/1995 los faculta para ordenar la paralización inmediata y fulminante de cualquier tajo o máquina ante riesgo grave e inminente, con cobro íntegro del salario por parte de los trabajadores.",
+              keyPoints: [
+                "Arts. 1 y 13 Ley 23/2015: Condición de autoridad pública y presunción de certeza legal de las actas de infracción de la ITSS ante los tribunales.",
+                "Art. 18 Ley 23/2015: Facultades de libre acceso a cualquier hora sin preaviso, interrogatorio a solas a directivos y operarios, toma de muestras y examen de cualquier documento.",
+                "Art. 21 Ley 23/2015: Medidas inspectoras: advertencia, requerimiento formal con plazo de subsanación, acta de infracción y propuesta de Recargo de Prestaciones.",
+                "Propuesta de Recargo de Prestaciones de la Seguridad Social del 30% al 50% de por vida a cargo exclusivo del empresario por falta de medidas de seguridad.",
+                "Art. 44 Ley 31/1995: Paralización fulminante e inmediata de tareas por riesgo grave e inminente con cobro íntegro del salario durante la detención de las actividades."
+              ],
+              relations: ["LISOS", "Art. 44 LPRL"],
+              usefulLinks: [
+                { text: "Organismo Estatal ITSS", url: "https://www.mites.gob.es/itss" }
+              ],
+              comoLoUso: "PROTOCOLO ANTE UNA VISITA DE LA INSPECCIÓN DE TRABAJO:\n1. RECEPCIÓN Y ATENCIÓN: Facilitar el acceso inmediato al inspector sin demoras. Avisar de urgencia al Técnico de Prevención y a los Delegados de Prevención.\n2. CARPETA DOCUMENTAL DEL ARTÍCULO 23: Exhibir la carpeta obligatoria: Plan de Prevención, Evaluación y Planificación, registros de formación de los operarios, acuses de entrega de EPIs y concierto con el SPA.\n3. SUBSANACIÓN DE REQUERIMIENTOS: Si el inspector extiende un requerimiento formal otorgando plazo (ej. 15 o 30 días), corregir todas las anomalías y presentar el informe justificativo antes de la fecha límite."
+            }
+          ]
+        },
+        {
+          id: "modulos-transversales-fp",
+          title: "Módulos Transversales de Formación Profesional (IPE / FOL / EIE)",
+          items: [
+            {
+              id: "ipe-1-fol",
+              title: "IPE I (Itinerario Personal para la Empleabilidad I) - Antiguo FOL",
+              type: "modulo-fp",
+              status: "informativa",
+              summary: "El módulo troncal y transversal de Itinerario Personal para la Empleabilidad I (antiguo módulo de Formación y Orientación Laboral - FOL), regulado por el RD 659/2023 del Sistema de Formación Profesional, capacita en legislación laboral individual y colectiva, contratos vigentes tras la Reforma Laboral, estructura de nóminas, cotizaciones sociales, tipos de despido, representación sindical y prevención básica de riesgos laborales.\nSu superación oficial acredita automáticamente la cualificación y el certificado oficial de Nivel Básico en Prevención de Riesgos Laborales (50 horas) según el RD 39/1997, facultando para actuar como Recurso Preventivo.",
+              keyPoints: [
+                "Arts. 94 y 95 RD 659/2023: Diseño curricular y competencias profesionales del módulo troncal IPE I en la Formación Profesional española.",
+                "Acreditación oficial directa del certificado de Nivel Básico de PRL (50 horas) conforme al RD 39/1997 al aprobar el módulo.",
+                "Resultados de aprendizaje en prevención: identificación de condiciones de trabajo, técnicas preventivas y protocolo PAS en emergencias.",
+                "Contratación laboral: contratos indefinidos ordinarios, fijos-discontinuos, temporales por circunstancias de la producción y de formación.",
+                "Estructura de la nómina: devengos salariales (salario base + pluses) y deducciones (contingencias comunes 4,70%, desempleo, FP, MEI e IRPF).",
+                "Indemnizaciones por despido: despido objetivo (20 días/año, máx. 12 mensualidades), improcedente (33 días/año, máx. 24 mensualidades) y disciplinario procedente (0 días)."
+              ],
+              relations: ["Estatuto de los Trabajadores", "Convenios Colectivos"],
+              usefulLinks: [
+                { text: "Currículo Oficial de FP en España", url: "https://todofp.es" }
+              ],
+              comoLoUso: "APLICACIÓN DEL MÓDULO IPE I:\n1. HOMOLOGACIÓN DE TÍTULO TÉCNICO: Es el módulo fundamental que convalida los conocimientos sobre el marco de relaciones laborales y seguridad en España.\n2. ACREDITACIÓN DE NIVEL BÁSICO: Habilita con su certificado de 50 horas para actuar formalmente como Recurso Preventivo en obras y centros de trabajo.\n3. LECTURA DE NÓMINAS: Interpretar la nómina propia o de los operarios para verificar que se liquiden los pluses de penosidad, toxicidad y turnicidad del convenio de saneamiento."
+            },
+            {
+              id: "ipe-2-eie",
+              title: "IPE II (Itinerario Personal para la Empleabilidad II) - Antiguo EIE",
+              type: "modulo-fp",
+              status: "informativa",
+              summary: "El módulo de Itinerario Personal para la Empleabilidad II (antigua Empresa e Iniciativa Emprendedora - EIE), regulado por el RD 659/2023, capacita en la creación, gestión, fiscalidad y modelos de negocio de microempresas y pymes en el mercado español.\nAnaliza las formas jurídicas de empresa (Autónomo individual, Sociedad Limitada S.L. desde 1 euro, Cooperativa), los trámites censales ante la Agencia Tributaria (Hacienda Modelos 036/037, IVA trimestral Modelo 303, retenciones IRPF Modelo 130/111, Sociedades Modelo 200), la cotización en el RETA de la Seguridad Social por ingresos reales, la comunicación formal de apertura del centro de trabajo a la Autoridad Laboral autonómica y la organización de la prevención para micropymes según el RD 39/1997.",
+              keyPoints: [
+                "Art. 96 RD 659/2023: Ordenación curricular del módulo transversal IPE II en todos los ciclos formativos de grado medio y superior.",
+                "Formas jurídicas: Autónomo individual (responsabilidad ilimitada), Sociedad Limitada S.L. (capital desde 1 € y responsabilidad limitada al capital) y Cooperativas.",
+                "Obligaciones tributarias ante la AEAT: alta censal con Modelo 036/037, autoliquidación de IVA trimestral Modelo 303, pago fraccionado IRPF Modelo 130 y retenciones Modelo 111.",
+                "Alta en el Régimen Especial de Trabajadores Autónomos (RETA) de la Seguridad Social con cotización por tramos de ingresos netos reales.",
+                "Trámite de Comunicación de Apertura del centro de trabajo a la Dirección General de Trabajo autonómica en el plazo de 30 días tras iniciar la actividad.",
+                "Modalidades de prevención en micropymes según el Art. 11 del RD 39/1997 (asunción por el empresario con menos de 10 trabajadores o concierto con SPA)."
+              ],
+              relations: ["RD 39/1997 Art. 11", "Emprendimiento y Consultoría PRL"],
+              usefulLinks: [
+                { text: "Portal Emprende - Gobierno de España", url: "https://pae.enisa.es" }
+              ],
+              comoLoUso: "APLICACIÓN PRÁCTICA DE IPE II PARA EJERCER DE FORMA INDEPENDIENTE:\n1. ALTA DE AUTÓNOMO TÉCNICO: Para ejercer como perito judicial de prevención o consultor técnico de saneamiento, tramitar el alta censal con el Modelo 036 (epígrafe IAE de servicios técnicos) y el alta en el RETA de la Seguridad Social.\n2. FACTURACIÓN Y FISCALIDAD: Emitir facturas reglamentarias con el 21% de IVA y deducir la retención del IRPF (15% general, o 7% para nuevos autónomos en los 3 primeros años). Liquidar trimestralmente el IVA con el Modelo 303.\n3. CONSULTORÍA PARA PYMES: Asesorar a pequeños empresarios sobre si pueden asumir personalmente la prevención (<10 trabajadores) o si deben contratar un SPA acreditado."
             }
           ]
         }
@@ -1398,6 +1628,63 @@ const PRL_DATA = {
           ]
         }
       ]
+    },
+    {
+      id: "residuos-urbanos",
+      title: "Recolección de Residuos & Limpieza Viaria",
+      icon: "🚛",
+      description: "Normativa técnica, NTPs del INSST, prevención en camiones compactadores y convenios colectivos en España y Cataluña",
+      categories: [
+        {
+          id: "ntp-residuos",
+          title: "Normativa y Notas Técnicas INSST de Residuos",
+          items: [
+            {
+              id: "ntp-618-residuos",
+              title: "NTP 618: Recogida de Residuos Urbanos - Prevención de Riesgos",
+              type: "ntp",
+              status: "obligatoria",
+              summary: "Guía técnica oficial del INSST para evaluar y prevenir los riesgos en la recogida de residuos urbanos (RSU) en camiones de basura y barrido.",
+              keyPoints: [
+                "Riesgo de atropello por camión recolector durante la marcha atrás (Cámara trasera y avisador acústico obligatorios).",
+                "Atrapamiento y aplastamiento en tolva de compactación: Interbloqueo de seguridad y paradas de emergencia en laterales.",
+                "EPIs obligatorios: Ropa de alta visibilidad Clase 2/3 (EN ISO 20471), calzado de seguridad antiperforación (S3) y guantes anticorte.",
+                "Riesgos biológicos: Cortes por vidrios o jeringas, desinfección obligatoria de manos y vacunación (Tétanos, Hepatitis B)."
+              ],
+              relations: ["RD 1215/1997", "RD 773/1997", "Ley 7/2022 de Residuos"],
+              comoLoUso: "Con tus 20 años de experiencia, esta NTP es tu biblia técnica en España para supervisar la flota de camiones compactadores y la seguridad de los peones de recolección."
+            },
+            {
+              id: "ntp-958-contenedores",
+              title: "NTP 958: Ergonomía en Manejo de Contenedores RSU",
+              type: "ntp",
+              status: "obligatoria",
+              summary: "Evaluación ergonómica y prevención de sobresfuerzos al empujar, arrastrar y enganchar contenedores de carga trasera y lateral.",
+              keyPoints: [
+                "Límite de fuerza de empuje/arrastre: Máximo 25 kgf en plano y rampas < 5%.",
+                "Ruedas y frenos de contenedores: Mantenimiento periódico obligatorio para evitar vuelcos.",
+                "Carga Lateral vs Carga Trasera: Automatización para eliminar la elevación manual de peso."
+              ],
+              relations: ["NTP 618", "Ergonomía INSST"],
+              comoLoUso: "Usalo para diseñar los procedimientos de trabajo del personal de recolección y evitar lumbalgias y lesiones musculoesqueléticas."
+            },
+            {
+              id: "convenio-residuos-espana",
+              title: "Convenio Colectivo de Recogida de Residuos y Limpieza Viaria",
+              type: "convenio",
+              status: "sectorial",
+              summary: "Regulación laboral y salarial del sector de limpieza pública, recogida, tratamiento de residuos y limpieza de alcantarillado en España.",
+              keyPoints: [
+                "Pluses obligatorios: Nocturnidad, Penosidad, Peligrosidad y Festivos.",
+                "Jornada nocturna reducida y descansos entre turnos.",
+                "Empresas concesionarias principales: FCC Medio Ambiente, PreZero, Urbaser, Valoriza, Sorigué (operan en Vic y Cataluña)."
+              ],
+              relations: ["Ley 31/1995", "Agència de Residus de Catalunya (ARC)"],
+              comoLoUso: "Ideal para conocer las condiciones salariales del sector y la gestión del personal en servicios urbanos."
+            }
+          ]
+        }
+      ]
     }
   ],
   timeline: [
@@ -1449,3 +1736,11 @@ const PRL_DATA = {
     ]
   }
 };
+
+if (typeof window !== "undefined") {
+  window.PRL_DATA = PRL_DATA;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = PRL_DATA;
+}
+

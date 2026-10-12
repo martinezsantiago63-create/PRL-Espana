@@ -1,288 +1,165 @@
 const CUADERNILLO = {
-  titulo: "Cuadernillo de Estudio PRL en España",
-  subtitulo: "Guía de campo para técnico de saneamiento — Argentina → España",
+  titulo: "MANUAL Y CUADERNILLO DE ESTUDIO PRL ESPAÑA",
+  subtitulo: "Guía de campo para Técnico de Prevención de Riesgos Laborales — Argentina → España",
+  autor: "Técnico en Higiene y Seguridad Laboral",
+  version: "Edición Impresa Completa 2026",
   secciones: [
     {
-      titulo: "1. Marco Normativo Español — Lo que tenés que saber",
+      titulo: "Capítulo 1: Marco Normativo Español — La Ley 31/1995 de PRL",
       icono: "📜",
-      contenido: `LA LEY 31/1995 es tu biblia. Es la Ley de Prevención de Riesgos Laborales. Estudiá estos artículos:
+      contenido: `LA LEY 31/1995 es la norma marco de la Prevención de Riesgos Laborales en España.
 
-ART. 14 — Derecho a la protección. Todo trabajador tiene derecho a que le protejan su vida y salud.
-ART. 15 — Los 10 principios preventivos. Memorizalos: evitar riesgos, evaluar los que no se pueden evitar, combatir en origen, adaptar el trabajo a la persona, etc.
-ART. 16 — Evaluación de riesgos. OBLIGATORIA para toda empresa. El técnico de PRL la hace.
-ART. 19 — Formación obligatoria. Mínimo 10 horas para trabajadores nuevos.
-ART. 21 — Riesgo grave e inminente. El trabajador puede PARAR el trabajo si hay peligro mortal.
-ART. 29 — Plan de prevención. Documento que toda empresa DEBE tener.
-ART. 35 — Delegados de Prevención. Los trabajadores eligen a sus representantes.
-ART. 38 — Comité de Seguridad y Salud. Reunión trimestral obligatoria.`,
-      notasEspacio: true
+ARTÍCULOS FUNDAMENTALES QUE DEBES MEMORIZAR:
+- ART. 14 — Derecho a la protección: Todo trabajador tiene derecho a una protección eficaz en materia de seguridad y salud en el trabajo. La empresa tiene el deber correlativo de protección.
+- ART. 15 — Los 9 Principios de la Acción Preventiva:
+  1. Evitar los riesgos.
+  2. Evaluar los riesgos que no se puedan evitar.
+  3. Combatir los riesgos en su origen.
+  4. Adaptar el trabajo a la persona (puestos de trabajo, equipos, métodos).
+  5. Tener en cuenta la evolución de la técnica.
+  6. Sustituir lo peligroso por lo que entrañe poco o ningún peligro.
+  7. Planificar la prevención en un conjunto coherente.
+  8. Adoptar medidas que antepongan la protección colectiva a la individual.
+  9. Dar las debidas instrucciones a los trabajadores.
+- ART. 16 — Evaluación de riesgos y Planificación de la Actividad Preventiva.
+- ART. 19 — Formación de los trabajadores (mínimo 10h obligatorias dentro de la jornada laboral).
+- ART. 21 — Riesgo grave e inminente: El trabajador o sus representantes pueden paralizar la actividad sin represalias.
+- ART. 29 — Obligaciones de los trabajadores en materia de prevención.
+- ART. 35 — Delegados de Prevención y Comité de Seguridad y Salud.`,
+      ejercicios: [
+        {
+          pregunta: "1.1. Según el Art. 15 de la Ley 31/1995, ¿qué principio de acción preventiva prima sobre los demás?",
+          opciones: ["a) La entrega inmediata de EPIs a cada trabajador.", "b) Anteponer la protección colectiva a la individual.", "c) La sanción de actos inseguros sin aviso previo."],
+          respuestaCorrecta: "b",
+          explicacion: "El principio 8 del Art. 15 establece expresamente anteponer la protección colectiva (ej. barandillas, redes, extracción de aire) a la individual (EPIs)."
+        },
+        {
+          pregunta: "1.2. ¿Qué artículo autoriza la paralización inmediata del trabajo ante un peligro inminente?",
+          opciones: ["a) Artículo 14", "b) Artículo 21", "c) Artículo 35"],
+          respuestaCorrecta: "b",
+          explicacion: "El Art. 21 regula el Riesgo Grave e Inminente, permitiendo detener la actividad sin que la empresa pueda sancionar al trabajador."
+        }
+      ]
     },
     {
-      titulo: "2. Reales Decretos Clave — Memorizá estos números",
+      titulo: "Capítulo 2: Reales Decretos Fundamentales (RDs)",
       icono: "⚖️",
-      contenido: `RD 39/1997 — Servicios de Prevención (quién puede hacer prevención)
-RD 1215/1997 — Uso de equipos de trabajo (máquinas, herramientas)
-RD 773/1997 — Uso de EPIs (EQUIPO DE PROTECCIÓN INDIVIDUAL)
-RD 486/1997 — Señalización de seguridad
-RD 604/2006 — ESPACIOS CONFINADOS (el más importante para saneamiento)
-RD 374/2001 — Agentes químicos peligrosos
-RD 216/2004 — ATEX (atmósferas explosivas)
-RD 1299/2006 — Riesgos higiénicos (ruido, vibraciones, temperaturas)
-RD 393/2007 — SPAI (planes de autoprotección)
-RD 299/2006 — Actualización equipos de trabajo
-RD 1620/2011 — Olas de calor
-RD 840/2003 — Trabajos con riesgo eléctrico
-RD 217/2004 — Trabajo en altura
-RD 849/1986 — Vertidos al dominio público hidráulico
+      contenido: `RECONOCIMIENTO Y APLICACIÓN DE REALES DECRETOS CLAVE:
 
-MULTAS: Leves hasta 3.000€ | Graves hasta 150.000€ | Muy graves hasta 300.000€`,
-      notasEspacio: true
+- RD 39/1997 — Reglamento de los Servicios de Prevención (SPP, SPA, Servicio Mancomunado).
+- RD 486/1997 — Disposiciones mínimas de seguridad y salud en los LUGARES DE TRABAJO.
+- RD 1215/1997 — Utilización por los trabajadores de los EQUIPOS DE TRABAJO (Máquinas y herramientas).
+- RD 773/1997 — Utilización por los trabajadores de EQUIPOS DE PROTECCIÓN INDIVIDUAL (EPIs).
+- RD 485/1997 — SEÑALIZACIÓN de seguridad y salud en el trabajo.
+- RD 374/2001 — Protección frente a los riesgos relacionados con AGENTES QUÍMICOS.
+- RD 604/2006 y Guía INSST — Trabajos en ESPACIOS CONFINADOS.
+- RD 217/2004 — TRABAJOS EN ALTURA y uso de andamios.
+- RD 1299/2006 — Cuadro de ENFERMEDADES PROFESIONALES en la Seguridad Social.
+
+RÉGIMEN DE SANCIONES DE LA INSPECCIÓN DE TRABAJO (ITSS):
+- Leves: 40 € a 2.045 €
+- Graves: 2.046 € a 40.985 €
+- Muy Graves: 40.986 € a 819.780 €`,
+      ejercicios: [
+        {
+          pregunta: "2.1. ¿Qué Real Decreto regula las condiciones y marcado CE obligatorio de los EPIs?",
+          opciones: ["a) RD 1215/1997", "b) RD 773/1997", "c) RD 486/1997"],
+          respuestaCorrecta: "b",
+          explicacion: "El RD 773/1997 es la norma de referencia sobre el uso y mantenimiento de los EPIs en el centro de trabajo."
+        }
+      ]
     },
     {
-      titulo: "3. Espacios Confinados — Tu día a día en saneamiento",
+      titulo: "Capítulo 3: Protocolo en Espacios Confinados y Saneamiento",
       icono: "⚠️",
-      contenido: `ANTES DE ENTRAR A CUALQUIER POZO O ESPACIO CONFINADO:
+      contenido: `PASOS INNEGOCIABLES EN POZOS, ALCANTARILLAS Y ARQUETAS:
 
-PASO 1: Medí la atmósfera
-- O₂: mínimo 19.5%, máximo 23.5%
-- H₂S: máximo 10 ppm
-- CO: máximo 50 ppm
-- LEL (metano): máximo 10% del LEL
-- CO₂: máximo 5.000 ppm
+1. MEDICIÓN ATMOSFÉRICA PREVIA (Con detector de 4 gases calibrated):
+   - Oxígeno (O₂): 19,5% a 23,5%. (Bajo 19,5% = asfixia por deficiencia).
+   - Sulfuro de Hidrógeno (H₂S): Máximo 5 ppm (VLA-ED). A 100 ppm anula el nervio olfativo.
+   - Monóxido de Carbono (CO): Máximo 20 ppm.
+   - Metano / Gases Inflamables (LEL): Máximo 10% del Límite Inferior de Explosividad.
 
-PASO 2: Ventilá forzadamente mínimo 15 minutos
+2. VENTILACIÓN FORZADA CONTINUADA:
+   - Soplado o extracción limpia durante al menos 15 minutos antes de la entrada.
 
-PASO 3: Sacá los residuos/gases acumulados
-
-PASO 4: Tené el equipo de rescate listo AFUERA
-
-PASO 5: Llevá detector de gases encendido
-
-REGLA DE ORO: NUNCA ENTRÉS SOLO. SIEMPRE con 1 persona de fuera.
-
-Si ves a alguien desmayado adentro: NO ENTRES. Llamá al 112.
-El 80% de las muertes son personas que entraron a rescatar.`,
-      notasEspacio: true
+3. RECURSO PREVENTIVO Y RESCATE EN EXTERIOR:
+   - Jamás ingresar sin vigilante exterior equipado con trípode, enclavamiento y arnés conectado al trabajador.
+   - Si se produce un desmayo: ¡NUNCA ENTRAR A CIEGAS! Llamar al 112 inmediatamente.`,
+      ejercicios: [
+        {
+          pregunta: "3.1. ¿Cuál es el rango seguro de concentración de Oxígeno para autorizar el ingreso a un pozo?",
+          opciones: ["a) 15% a 18%", "b) 19.5% a 23.5%", "c) 25% a 30%"],
+          respuestaCorrecta: "b",
+          explicacion: "Valores inferiores al 19.5% generan asfixia inmediata, mientras que valores superiores a 23.5% generan riesgo extremo de incendio o explosión."
+        }
+      ]
     },
     {
-      titulo: "4. Agentes Químicos — Lo que no podés ignorar",
-      icono: "🧪",
-      contenido: `H₂S (Sulfuro de hidrógeno):
-- Huele a huevos podridos a bajas concentraciones
-- A 100+ ppm ANULA EL OLFATO (no lo sentís más)
-- A 300+ ppm mata en minutos
-- SIEMPRE medí con detector
+      titulo: "Capítulo 4: Métodos de Evaluación INSST (Fine, NTP 330, VLA)",
+      icono: "📊",
+      contenido: `MÉTODOS OFICIALES DE EVALUACIÓN DE RIESGO:
 
-CLORO (Cl₂):
-- Gas verde-amarillento, olor fuerte
-- A 10 ppm irrita
-- A 100+ ppm puede matar
-- NUNCA mezclar lejía con ácido (produce cloro)
+- MÉTODO FINE: Grado de Peligrosidad (GP) = Consecuencias × Exposición × Probabilidad.
+  * GP > 325: Riesgo Alto / Suspensión Inmediata.
+  * 85 < GP ≤ 325: Riesgo Medio / Corrección Urgente.
+  * GP ≤ 85: Riesgo Bajo / Control Periódico.
 
-METANO (CH₄):
-- Incoloro, inodoro, inflamable
-- A 5% en aire EXPLOTA
-- Desplaza el oxígeno (te asfixiás sin darte cuenta)
+- NTP 330 INSST: Nivel de Riesgo (NR) = Nivel de Deficiencia × Nivel de Exposición × Nivel de Consecuencias.
 
-REGLA: Si no medís, estás adivinando. Y adivinar en saneamiento mata.
-
-FICHA DE DATOS DE SEGURIDAD (FDS):
-- SIEMPRE pedí la FDS antes de usar cualquier producto
-- Tiene: peligros, primeros auxilios, almacenamiento, disposición final
-- Si no tenés la FDS, no uses el producto`,
-      notasEspacio: true
+- LÍMITES VLA (Agentes Químicos):
+  * VLA-ED: Exposición Diaria en jornada de 8h.
+  * VLA-EC: Corta Exposición en período de 15 minutos.`,
+      ejercicios: [
+        {
+          pregunta: "4.1. En el método Fine, si el Grado de Peligrosidad (GP) da un resultado de 400, ¿cuál es la acción requerida?",
+          opciones: ["a) Planificar mejoras a un año.", "b) Corrección urgente en menos de un mes.", "c) Detención inmediata de la actividad."],
+          respuestaCorrecta: "c",
+          explicacion: "Todo valor de GP superior a 325 exige corrección inmediata e interrupción de la tarea riesgosa."
+        }
+      ]
     },
     {
-      titulo: "5. Equipos de Protección — Tu última línea de defensa",
-      icono: "🛡️",
-      contenido: `EPIs OBLIGATORIOS en saneamiento:
-
-CASCO: Siempre. Caídas de objetos, golpes con estructuras.
-CALZADO DE SEGURIDAD: Con punta de acero y suela antideslizante.
-GUANTES: Según riesgo (químicos, corte, calor).
-GAFAS DE SEGURIDAD: Siempre que haya riesgo de salpicaduras o partículas.
-PROTECCIÓN AUDITIVA: Si hay ruido >85 dB (sirenas, maquinaria).
-DETECTOR DE GASES: SIEMPRE en espacios confinados.
-ARNÉS: Si trabajás a >2 metros de altura.
-
-EN ESPACIOS CONFINADOS ADICIONAL:
-- Traje completo impermeable
-- Máscara con filtro o autónoma (SCBA)
-- Equipo de rescate con eslinga
-- Comunicación por radio
-
-REGLA: Un EPI que no usás es un EPI que no existe.`,
-      notasEspacio: true
-    },
-    {
-      titulo: "6. Argentina vs España — Diferencias clave",
+      titulo: "Capítulo 5: Comparativa e Equivalencias Argentina (AR) vs España (ES)",
       icono: "🔄",
-      contenido: `PREVENCIÓN:
-AR: ART (Aseguradora de Riesgos del Trabajo) supervisa
-ES: Autoridad laboral + Inspección de Trabajo (más estricto)
+      contenido: `GLOSARIO Y EQUIVALENCIAS DIRECTAS ENTRE AMBOS PAÍSES:
 
-RESPONSABILIDAD:
-AR: Civil y administrativa (la ART responde)
-ES: Civil + Penal + Administrativa ACUMULABLES (responde el empresario)
-
-TÍTULO PROFESIONAL:
-AR: Matrícula del Consejo Profesional (obligatorio)
-ES: Registro ante CC.AA. (obligatorio, NO hay colegio profesional)
-
-FISCALIZACIÓN:
-AR: ART + Superintendencia de Riesgos del Trabajo
-ES: Inspección de Trabajo (pueden parar la obra INMEDIATAMENTE)
-
-SANCIONES:
-AR: Multas de la ART
-ES: Hasta 300.000€ por infracción muy grave + responsabilidad penal
-
-FORMACIÓN:
-AR: Capacitación obligatoria (24h/año según convenio)
-ES: Formación obligatoria (mínimo 10h para nuevos, renovación cada 3 años)`,
-      notasEspacio: true
+- SRT (Argentina)  ➜  INSST / ITSS (España)
+- ART (Argentina)  ➜  Mutua Colaboradora de la Seguridad Social (España)
+- Ley 24.557 (Argentina)  ➜  Ley 31/1995 de PRL (España)
+- EPP (Argentina)  ➜  EPI (Equipo de Protección Individual) (España)
+- Matafuegos (Argentina)  ➜  Extintores de Incendio (España)
+- Relevamiento de Riesgos (Argentina)  ➜  Evaluación de Riesgos Laborales (España)
+- Matrícula Profesional (Argentina)  ➜  Acreditación de Técnico Superior en Prevención (España)`,
+      ejercicios: [
+        {
+          pregunta: "5.1. ¿Cómo se denomina en España al equivalente a la ART de Argentina?",
+          opciones: ["a) Aseguradora de Riesgos", "b) Mutua Colaboradora de la Seguridad Social", "c) Sindicato de Trabajadores"],
+          respuestaCorrecta: "b",
+          explicacion: "Las Mutuas en España colaboran con la Seguridad Social en la gestión de accidentes de trabajo y enfermedades profesionales."
+        }
+      ]
     },
     {
-      titulo: "7. Cataluña — Normativa específica",
-      icono: "🏴",
-      contenido: `LEY 5/2007 — Ley de prevención de riesgos laborales de Cataluña
-DECRET 183/2006 — Coordinación de actividades preventivas en obras
-DECRET 62/2010 — Organización de servicios de prevención
-RESOLUCIÓ 1730/2018 — Baremos de formación de técnicos
-
-REGISTRO PROFESIONAL:
-- Se registra ante el ICSST (Institut Català de Seguretat i Salut en el Treball)
-- Formulario online en la web del ICSST
-- Necesitás: título homologado + DNI/NIE + solicitud
-- En 2-4 semanas tenés el certificado
-
-HOMOLOGACIÓN DE TÍTULOS EXTRANJEROS:
-1. Pedí cita en el Ministerio de Educación
-2. Presentá: título apostillado + traducción jurada + DNI/NIE
-3. Esperá 6-12 meses
-4. Mientras tanto, podés trabajar con homologación provisional
-
-IDIOMA:
-- No es obligatorio el catalán para sector privado
-- MUY recomendado para communicate con compañeros
-- Programa Parla: cursos gratuitos de catalán`,
-      notasEspacio: true
-    },
-    {
-      titulo: "8. Convenio Colectivo — Tus derechos laborales",
-      icono: "💰",
-      contenido: `SALARIO MÍNIMO (varía por categoría y convenio):
-- Técnico de PRL en saneamiento: 28.000€ - 42.000€ brutos/año según experiencia
-- Auxiliar: 20.000€ - 28.000€ brutos/año
-
-JORNADA:
-- Máximo 40 horas/semana en cómputo anual
-- 1.800 horas/año como máximo
-
-VACACIONES:
-- Mínimo 30 días naturales al año (22 días laborables)
-
-PAGAS EXTRAS:
-- 2 pagas extras: junio y diciembre
-- Cada una = 1/12 del salario anual
-
-PERMISOS RETRIBUIDOS:
-- Matrimonio: 15 días
-- Nacimiento de hijo: 3 días
-- Hospitalización familiar: 2 días
-- Fallecimiento familiar: 2-4 días
-- Mudanza: 1 día
-
-HORAS EXTRAS:
-- Máximo 80/año
-- 1ª hora: +75% | 2ª hora en adelante: +100%
-
-TRABAJO NOCTURNO (22:00-06:00): +30%
-TRABAJO EN FESTIVOS: +75%
-
-FORMACIÓN: La empresa DEBE dar 20 horas/año de formación`,
-      notasEspacio: true
-    },
-    {
-      titulo: "9. Permisos de Trabajo — Checklist para cada tarea",
+      titulo: "Capítulo 6: Solucionario y Respuestas del Cuadernillo",
       icono: "✅",
-      contenido: `ANTES DE CADA TAREA, VERIFICÁ:
+      contenido: `CLAVE DE RESPUESTAS A LOS EJERCICIOS DEL MANUAL:
 
-□ Permisos de trabajo firmados
-□ Evaluación de riesgos actualizada para esa tarea
-□ EPIs en buen estado
-□ Detector de gases calibrado y encendido (espacios confinados)
-□ Plan de emergencia actualizado
-□ Comunicación con el encargado de obra
-□ Señalización del área de trabajo
-□ Equipo de rescate disponible (espacios confinados)
-□ Ventilación adecuada (espacios confinados)
-□ Documentación de productos químicos (FDS)
+- Capítulo 1 (Ley 31/1995):
+  * 1.1: Opción b (Protección colectiva sobre individual).
+  * 1.2: Opción b (Art. 21 - Riesgo Grave e Inminente).
 
-SI ALGO FALTA, NO EMPIECES EL TRABAJO.
-Recordá: tu derecho a parar el trabajo si hay peligro grave e inminente (Art. 21 Ley 31/1995).`,
-      notasEspacio: true
-    },
-    {
-      titulo: "10. Vocabulario Catalán para Obra — Las 30 más usadas",
-      icono: "🗣️",
-      contenido: `SEGUENT I HIGIENE LABORAL = Seguridad y Salud en el Trabajo
-PREVENCIÓ DE RISCOS LABORALS = Prevención de Riesgos Laborals
-ESPAI CONFINAT = Espacio confinado
-POU DE BOMBAMENT = Pozo de bombeo
-POU DE VISITA = Pozo de visita
-TAPA DE POU = Tapa de pozo
-COL·LECTOR = Colector
-XARXA DE SANEJAMENT = Red de saneamiento
-FITXA DE DADES DE SEGURETAT (FDS) = Ficha de datos de seguridad
-DETECTOR DE GASOS = Detector de gases
-CAL POSAR-SE L'EPI = Hay que ponerse el EPI
-NO ES POT TREBALLAR SENSE PERMÍS = No se puede trabajar sin permiso
-ATURAR EL TREBALL PER PERILL GREU = Detener el trabajo por peligro grave
-TRUCAR AL 112 = Llamar al 112
-BON DIA, COMPANY! = ¡Buenos días, compañero!
-NO HO ENTENC = No lo entiendo
-SOC TÈCNIC DE SANEJAMENT = Soy técnico de saneamiento
-ESTIC D'ACORD = Estoy de acuerdo
-AIgua RESIDUAL = Agua residual
-FOSSA SÈPTICA = Fosa séptica (¡espacio confinado!)
-ESTACIÓ DE BOMBAMENT = Estación de bombeo
-LLOT = Lodo
-DESGUÀS = Desagüe
-OBRA CIVIL = Obra civil
-CAL REVISAR L'EQUIPAMENT = Hay que revisar el equipamiento
-AIXÒ ÉS PERILLOS! = ¡Esto es peligroso!
-SORTIDA D'EMERGÈNCIA = Salida de emergencia
-ON ÉS EL CAP D'OBRA? = ¿Dónde está el jefe de obra?
-NECESSITO AJUDA = Necesito ayuda
-TREBALLO EN PREVENCIÓ DE RISCOS = Trabajo en prevención de riesgos`,
-      notasEspacio: true
-    },
-    {
-      titulo: "11. Emergencias — Protocolo rápido",
-      icono: "🚨",
-      contenido: `SI HAY ACCIDENTE:
-1. Llamá al 112 INMEDIATAMENTE
-2. Asegurá la zona (señalización)
-3. NO movas a la víctima si sospechás lesión de columna
-4. Si hay incendio: evacuá y usá extintor SOLO si es seguro
-5. Si hay gas: ventilá y NO enciendas luces ni chispas
-6. Comunicá al encargado de obra
-7. Redactá parte de accidente
+- Capítulo 2 (Reales Decretos):
+  * 2.1: Opción b (RD 773/1997 de EPIs).
 
-SI HAY FUGA DE QUÍMICOS:
-1. Ventilá el área
-2. Usá EPI completo (máscara, guantes, traje)
-3. Cerrá la fuente si es seguro
-4. Llamá al 112
-5. No dejes que entren personas sin EPI
+- Capítulo 3 (Espacios Confinados):
+  * 3.1: Opción b (19.5% a 23.5% de Oxígeno).
 
-SI HAY RIESGO GRAVE E INMINENTE:
-1. Pará el trabajo (Art. 21 Ley 31/1995)
-2. Comunicá al encargado
-3. Si la empresa no actúa, podés denunciar a Inspección de Trabajo
-4. Tus datos están protegidos (no te pueden sancionar)`,
-      notasEspacio: true
+- Capítulo 4 (Métodos INSST):
+  * 4.1: Opción c (Detención inmediata si GP > 325).
+
+- Capítulo 5 (AR vs ES):
+  * 5.1: Opción b (Mutua Colaboradora de la Seguridad Social).`
     }
   ]
 };
