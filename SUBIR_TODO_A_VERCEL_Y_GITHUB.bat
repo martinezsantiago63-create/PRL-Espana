@@ -5,17 +5,22 @@ echo ======================================================================
 echo    SUBIENDO PLATAFORMA COMPLETA A GITHUB Y VERCEL (PRL + CATALA)
 echo ======================================================================
 echo.
+
+echo 1. Comprobando y enviando cambios a GitHub...
 cd /d "%~dp0"
-echo 1. Comprobando archivos y cambios...
 git add -A
-git commit -m "Actualizacion completa con estilos, podcasts y catalan integrado"
-echo.
-echo 2. Enviando todos los archivos a GitHub (para que Vercel actualice)...
+git commit -m "Actualizacion de plataforma PRL"
 git push origin main
 echo.
+
+echo 2. Desplegando plataforma completa en Vercel...
+cd /d "%~dp0.."
+call npx vercel --prod --yes
+echo.
+
 echo ======================================================================
 echo    SUBIDA COMPLETADA CON EXITO!
-echo    Vercel actualizara la web en 15-20 segundos automaticamente.
+echo    GitHub y Vercel (https://appestudiosprlespa-a.vercel.app) estan actualizados.
 echo ======================================================================
 echo.
 pause
